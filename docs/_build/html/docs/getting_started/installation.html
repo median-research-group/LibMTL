@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installation &mdash; LibMTL  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Quick Start" href="quick_start.html" />
+    <link rel="prev" title="Introduction" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> LibMTL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#user-installation">User Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-pypi">Using PyPi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-source-code">Using Source Code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/mtl.html">What is Multi-Task Learning?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/framework.html">Overall Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/benchmark.html">Run a Benckmark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../develop/dataset.html">Apply to a New Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../develop/arch.html">Customize an Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../develop/weighting.html">Customize a Weighting Strategy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/loss/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.loss</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/utils/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.utils</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/model/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.model</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/config/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.config</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/metrics/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.metrics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/weighting/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.weighting</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/architecture/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.architecture</span></code></a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">LibMTL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Installation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/getting_started/installation.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+<p>To install <code class="docutils literal notranslate"><span class="pre">LibMTL</span></code>, you need to setup the following libraries:</p>
+<ul class="simple">
+<li><p>Python &gt;= 3.7</p></li>
+<li><p>PyTorch &gt;= 1.8.0</p></li>
+<li><p>torchvision &gt;= 0.9.0</p></li>
+<li><p>numpy &gt;= 1.20</p></li>
+</ul>
+</div>
+<div class="section" id="user-installation">
+<h2>User Installation<a class="headerlink" href="#user-installation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="using-pypi">
+<h3>Using PyPi<a class="headerlink" href="#using-pypi" title="Permalink to this headline">¶</a></h3>
+<p>The simplest way to install <code class="docutils literal notranslate"><span class="pre">LibMTL</span></code> is using <code class="docutils literal notranslate"><span class="pre">pip</span></code>.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install -U LibMTL
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-source-code">
+<h3>Using Source Code<a class="headerlink" href="#using-source-code" title="Permalink to this headline">¶</a></h3>
+<p>If you prefer, you can clone the source code from the GitHub and run the setup.py file.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/median-research-group/LibMTL.git
+<span class="nb">cd</span> LibMTL
+python setup.py install
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="introduction.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="quick_start.html" class="btn btn-neutral float-right" title="Quick Start" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Baijiong Lin and Yu Zhang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

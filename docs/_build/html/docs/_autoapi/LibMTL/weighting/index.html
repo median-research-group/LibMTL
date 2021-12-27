@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LibMTL.weighting &mdash; LibMTL  documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="LibMTL.loss" href="../loss/index.html" />
+    <link rel="prev" title="LibMTL.model" href="../model/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> LibMTL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/quick_start.html">Quick Start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_guide/mtl.html">What is Multi-Task Learning?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_guide/framework.html">Overall Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_guide/benchmark.html">Run a Benckmark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../develop/dataset.html">Apply to a New Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../develop/arch.html">Customize an Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../develop/weighting.html">Customize a Weighting Strategy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../loss/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.loss</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.utils</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../model/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.model</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.config</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.metrics</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.weighting</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#LibMTL.weighting.AbsWeighting">AbsWeighting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.weighting.AbsWeighting.init_param">init_param</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.weighting.AbsWeighting.backward">backward</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#LibMTL.weighting.EW">EW</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.weighting.EW.backward">backward</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#LibMTL.weighting.GradNorm">GradNorm</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.weighting.GradNorm.init_param">init_param</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.weighting.GradNorm.backward">backward</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#LibMTL.weighting.MGDA">MGDA</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.weighting.MGDA.backward">backward</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#LibMTL.weighting.UW">UW</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.weighting.UW.init_param">init_param</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.weighting.UW.backward">backward</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#LibMTL.weighting.DWA">DWA</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.weighting.DWA.backward">backward</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#LibMTL.weighting.GLS">GLS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.weighting.GLS.backward">backward</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#LibMTL.weighting.GradDrop">GradDrop</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.weighting.GradDrop.backward">backward</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#LibMTL.weighting.PCGrad">PCGrad</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.weighting.PCGrad.backward">backward</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#LibMTL.weighting.GradVac">GradVac</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.weighting.GradVac.backward">backward</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#LibMTL.weighting.IMTL">IMTL</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.weighting.IMTL.init_param">init_param</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.weighting.IMTL.backward">backward</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#LibMTL.weighting.CAGrad">CAGrad</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.weighting.CAGrad.backward">backward</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#LibMTL.weighting.RLW">RLW</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.weighting.RLW.backward">backward</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.architecture</span></code></a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">LibMTL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL</span></code></a> &raquo;</li>
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.weighting</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/docs/_autoapi/LibMTL/weighting/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="module-LibMTL.weighting">
+<span id="libmtl-weighting"></span><h1><a class="reference internal" href="#module-LibMTL.weighting" title="LibMTL.weighting"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.weighting</span></code></a><a class="headerlink" href="#module-LibMTL.weighting" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="LibMTL.weighting.AbsWeighting">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AbsWeighting</span></span><a class="reference internal" href="../../../../_modules/LibMTL/weighting/abstract_weighting.html#AbsWeighting"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LibMTL.weighting.AbsWeighting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></p>
+<p>An abstract class for weighting strategies.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.weighting.AbsWeighting.init_param">
+<span class="sig-name descname"><span class="pre">init_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.weighting.AbsWeighting.init_param" title="Permalink to this definition">¶</a></dt>
+<dd><p>Define and initialize some trainable parameters required by specific weighting methods.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.weighting.AbsWeighting.backward">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">losses</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.weighting.AbsWeighting.backward" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>losses</strong> (<em>list</em>) – A list of loss of each task.</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – A dictionary of hyperparameters of weighting methods.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LibMTL.weighting.EW">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">EW</span></span><a class="reference internal" href="../../../../_modules/LibMTL/weighting/EW.html#EW"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LibMTL.weighting.EW" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="abstract_weighting/index.html#LibMTL.weighting.abstract_weighting.AbsWeighting" title="LibMTL.weighting.abstract_weighting.AbsWeighting"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LibMTL.weighting.abstract_weighting.AbsWeighting</span></code></a></p>
+<p>Equally Weighting (EW).</p>
+<p>The loss weight for each task is always <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">/</span> <span class="pre">T</span></code> in every iteration, where <code class="docutils literal notranslate"><span class="pre">T</span></code> means the number of tasks.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.weighting.EW.backward">
+<span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">losses</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.weighting.EW.backward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LibMTL.weighting.GradNorm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GradNorm</span></span><a class="reference internal" href="../../../../_modules/LibMTL/weighting/GradNorm.html#GradNorm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LibMTL.weighting.GradNorm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="abstract_weighting/index.html#LibMTL.weighting.abstract_weighting.AbsWeighting" title="LibMTL.weighting.abstract_weighting.AbsWeighting"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LibMTL.weighting.abstract_weighting.AbsWeighting</span></code></a></p>
+<p>Gradient Normalization (GradNorm).</p>
+<p>This method is proposed in <a class="reference external" href="http://proceedings.mlr.press/v80/chen18a/chen18a.pdf">GradNorm: Gradient Normalization for Adaptive Loss Balancing in Deep Multitask Networks (ICML 2018)</a> and implemented by us.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>alpha</strong> (<em>float</em><em>, </em><em>default=1.5</em>) – The strength of the restoring force which pulls tasks back to a common training rate.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.weighting.GradNorm.init_param">
+<span class="sig-name descname"><span class="pre">init_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.weighting.GradNorm.init_param" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.weighting.GradNorm.backward">
+<span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">losses</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.weighting.GradNorm.backward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LibMTL.weighting.MGDA">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MGDA</span></span><a class="reference internal" href="../../../../_modules/LibMTL/weighting/MGDA.html#MGDA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LibMTL.weighting.MGDA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="abstract_weighting/index.html#LibMTL.weighting.abstract_weighting.AbsWeighting" title="LibMTL.weighting.abstract_weighting.AbsWeighting"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LibMTL.weighting.abstract_weighting.AbsWeighting</span></code></a></p>
+<p>Multiple Gradient Descent Algorithm (MGDA).</p>
+<p>This method is proposed in <a class="reference external" href="https://papers.nips.cc/paper/2018/hash/432aca3a1e345e339f35a30c8f65edce-Abstract.html">Multi-Task Learning as Multi-Objective Optimization (NeurIPS 2018)</a> and implemented by modifying from the <a class="reference external" href="https://github.com/isl-org/MultiObjectiveOptimization">official PyTorch implementation</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>mgda_gn</strong> (<em>{'none'</em><em>, </em><em>'l2'</em><em>, </em><em>'loss'</em><em>, </em><em>'loss+'}</em><em>, </em><em>default='none'</em>) – The type of gradient normalization.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.weighting.MGDA.backward">
+<span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">losses</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.weighting.MGDA.backward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LibMTL.weighting.UW">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">UW</span></span><a class="headerlink" href="#LibMTL.weighting.UW" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="abstract_weighting/index.html#LibMTL.weighting.abstract_weighting.AbsWeighting" title="LibMTL.weighting.abstract_weighting.AbsWeighting"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LibMTL.weighting.abstract_weighting.AbsWeighting</span></code></a></p>
+<p>Uncertainty Weights (UW).</p>
+<p>This method is proposed in <a class="reference external" href="https://openaccess.thecvf.com/content_cvpr_2018/papers/Kendall_Multi-Task_Learning_Using_CVPR_2018_paper.pdf">Multi-Task Learning Using Uncertainty to Weigh Losses for Scene Geometry and Semantics (CVPR 2018)</a> and implemented by us.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.weighting.UW.init_param">
+<span class="sig-name descname"><span class="pre">init_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.weighting.UW.init_param" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.weighting.UW.backward">
+<span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">losses</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.weighting.UW.backward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LibMTL.weighting.DWA">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DWA</span></span><a class="headerlink" href="#LibMTL.weighting.DWA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="abstract_weighting/index.html#LibMTL.weighting.abstract_weighting.AbsWeighting" title="LibMTL.weighting.abstract_weighting.AbsWeighting"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LibMTL.weighting.abstract_weighting.AbsWeighting</span></code></a></p>
+<p>Dynamic Weight Average (DWA).</p>
+<p>This method is proposed in <a class="reference external" href="https://openaccess.thecvf.com/content_CVPR_2019/papers/Liu_End-To-End_Multi-Task_Learning_With_Attention_CVPR_2019_paper.pdf">End-To-End Multi-Task Learning With Attention (CVPR 2019)</a> and implemented by modifying from the <a class="reference external" href="https://github.com/lorenmt/mtan">official PyTorch implementation</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>T</strong> (<em>float</em><em>, </em><em>default=2.0</em>) – The softmax temperature.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.weighting.DWA.backward">
+<span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">losses</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.weighting.DWA.backward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LibMTL.weighting.GLS">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GLS</span></span><a class="reference internal" href="../../../../_modules/LibMTL/weighting/GLS.html#GLS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LibMTL.weighting.GLS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="abstract_weighting/index.html#LibMTL.weighting.abstract_weighting.AbsWeighting" title="LibMTL.weighting.abstract_weighting.AbsWeighting"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LibMTL.weighting.abstract_weighting.AbsWeighting</span></code></a></p>
+<p>Geometric Loss Strategy (GLS).</p>
+<p>This method is proposed in <a class="reference external" href="https://openaccess.thecvf.com/content_CVPRW_2019/papers/WAD/Chennupati_MultiNet_Multi-Stream_Feature_Aggregation_and_Geometric_Loss_Strategy_for_Multi-Task_CVPRW_2019_paper.pdf">MultiNet++: Multi-Stream Feature Aggregation and Geometric Loss Strategy for Multi-Task Learning (CVPR 2019 workshop)</a> and implemented by us.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.weighting.GLS.backward">
+<span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">losses</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.weighting.GLS.backward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LibMTL.weighting.GradDrop">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GradDrop</span></span><a class="reference internal" href="../../../../_modules/LibMTL/weighting/GradDrop.html#GradDrop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LibMTL.weighting.GradDrop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="abstract_weighting/index.html#LibMTL.weighting.abstract_weighting.AbsWeighting" title="LibMTL.weighting.abstract_weighting.AbsWeighting"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LibMTL.weighting.abstract_weighting.AbsWeighting</span></code></a></p>
+<p>Gradient Sign Dropout (GradDrop).</p>
+<p>This method is proposed in <a class="reference external" href="https://papers.nips.cc/paper/2020/hash/16002f7a455a94aa4e91cc34ebdb9f2d-Abstract.html">Just Pick a Sign: Optimizing Deep Multitask Models with Gradient Sign Dropout (NeurIPS 2020)</a> and implemented by us.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>leak</strong> (<em>float</em><em>, </em><em>default=0.0</em>) – The leak parameter for the weighting matrix.</p>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>GradDrop is not supported with parameter gradients, i.e., <code class="docutils literal notranslate"><span class="pre">rep_grad</span></code> must be <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.weighting.GradDrop.backward">
+<span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">losses</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.weighting.GradDrop.backward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LibMTL.weighting.PCGrad">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PCGrad</span></span><a class="reference internal" href="../../../../_modules/LibMTL/weighting/PCGrad.html#PCGrad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LibMTL.weighting.PCGrad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="abstract_weighting/index.html#LibMTL.weighting.abstract_weighting.AbsWeighting" title="LibMTL.weighting.abstract_weighting.AbsWeighting"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LibMTL.weighting.abstract_weighting.AbsWeighting</span></code></a></p>
+<p>Project Conflicting Gradients (PCGrad).</p>
+<p>This method is proposed in <a class="reference external" href="https://papers.nips.cc/paper/2020/hash/3fe78a8acf5fda99de95303940a2420c-Abstract.html">Gradient Surgery for Multi-Task Learning (NeurIPS 2020)</a> and implemented by us.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>PCGrad is not supported with representation gradients, i.e., <code class="docutils literal notranslate"><span class="pre">rep_grad</span></code> must be <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.weighting.PCGrad.backward">
+<span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">losses</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.weighting.PCGrad.backward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LibMTL.weighting.GradVac">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GradVac</span></span><a class="reference internal" href="../../../../_modules/LibMTL/weighting/GradVac.html#GradVac"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LibMTL.weighting.GradVac" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="abstract_weighting/index.html#LibMTL.weighting.abstract_weighting.AbsWeighting" title="LibMTL.weighting.abstract_weighting.AbsWeighting"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LibMTL.weighting.abstract_weighting.AbsWeighting</span></code></a></p>
+<p>Gradient Vaccine (GradVac).</p>
+<p>This method is proposed in <a class="reference external" href="https://openreview.net/forum?id=F1vEjWK-lH_">Gradient Vaccine: Investigating and Improving Multi-task Optimization in Massively Multilingual Models (ICLR 2021 Spotlight)</a> and implemented by us.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>beta</strong> (<em>float</em><em>, </em><em>default=0.5</em>) – The exponential moving average (EMA) decay parameter.</p>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>GradVac is not supported with representation gradients, i.e., <code class="docutils literal notranslate"><span class="pre">rep_grad</span></code> must be <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.weighting.GradVac.backward">
+<span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">losses</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.weighting.GradVac.backward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LibMTL.weighting.IMTL">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">IMTL</span></span><a class="reference internal" href="../../../../_modules/LibMTL/weighting/IMTL.html#IMTL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LibMTL.weighting.IMTL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="abstract_weighting/index.html#LibMTL.weighting.abstract_weighting.AbsWeighting" title="LibMTL.weighting.abstract_weighting.AbsWeighting"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LibMTL.weighting.abstract_weighting.AbsWeighting</span></code></a></p>
+<p>Impartial Multi-task Learning (IMTL).</p>
+<p>This method is proposed in <a class="reference external" href="https://openreview.net/forum?id=IMPnRXEWpvr">Towards Impartial Multi-task Learning (ICLR 2021)</a> and implemented by us.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.weighting.IMTL.init_param">
+<span class="sig-name descname"><span class="pre">init_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.weighting.IMTL.init_param" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.weighting.IMTL.backward">
+<span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">losses</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.weighting.IMTL.backward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LibMTL.weighting.CAGrad">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CAGrad</span></span><a class="reference internal" href="../../../../_modules/LibMTL/weighting/CAGrad.html#CAGrad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LibMTL.weighting.CAGrad" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="abstract_weighting/index.html#LibMTL.weighting.abstract_weighting.AbsWeighting" title="LibMTL.weighting.abstract_weighting.AbsWeighting"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LibMTL.weighting.abstract_weighting.AbsWeighting</span></code></a></p>
+<p>Conflict-Averse Gradient descent (CAGrad).</p>
+<p>This method is proposed in <a class="reference external" href="https://openreview.net/forum?id=_61Qh8tULj_">Conflict-Averse Gradient Descent for Multi-task learning (NeurIPS 2021)</a> and implemented by modifying from the <a class="reference external" href="https://github.com/Cranial-XIX/CAGrad">official PyTorch implementation</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>calpha</strong> (<em>float</em><em>, </em><em>default=0.5</em>) – A hyperparameter that controls the convergence rate.</p></li>
+<li><p><strong>rescale</strong> (<em>{0</em><em>, </em><em>1</em><em>, </em><em>2}</em><em>, </em><em>default=1</em>) – The type of gradient rescale.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>CAGrad is not supported with representation gradients, i.e., <code class="docutils literal notranslate"><span class="pre">rep_grad</span></code> must be <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.weighting.CAGrad.backward">
+<span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">losses</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.weighting.CAGrad.backward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LibMTL.weighting.RLW">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RLW</span></span><a class="headerlink" href="#LibMTL.weighting.RLW" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="abstract_weighting/index.html#LibMTL.weighting.abstract_weighting.AbsWeighting" title="LibMTL.weighting.abstract_weighting.AbsWeighting"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LibMTL.weighting.abstract_weighting.AbsWeighting</span></code></a></p>
+<p>Random Loss Weighting (RLW).</p>
+<p>This method is proposed in <a class="reference external" href="https://arxiv.org/abs/2111.10603">A Closer Look at Loss Weighting in Multi-Task Learning (arXiv:2111.10603)</a> and implemented by us.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dist</strong> (<em>{'Uniform'</em><em>, </em><em>'Normal'</em><em>, </em><em>'Dirichlet'</em><em>, </em><em>'Bernoulli'</em><em>, </em><em>'constrained_Bernoulli'}</em><em>, </em><em>default='Normal'</em>) – The type of distribution where the loss weigghts are sampled from.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.weighting.RLW.backward">
+<span class="sig-name descname"><span class="pre">backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">losses</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.weighting.RLW.backward" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>losses</strong> (<em>list</em>) – A list of loss of each task.</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – A dictionary of hyperparameters of weighting methods.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../model/index.html" class="btn btn-neutral float-left" title="LibMTL.model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../loss/index.html" class="btn btn-neutral float-right" title="LibMTL.loss" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Baijiong Lin and Yu Zhang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

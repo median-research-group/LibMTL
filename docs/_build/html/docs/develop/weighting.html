@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customize a Weighting Strategy &mdash; LibMTL  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="LibMTL" href="../_autoapi/LibMTL/index.html" />
+    <link rel="prev" title="Customize an Architecture" href="arch.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> LibMTL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/quick_start.html">Quick Start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/mtl.html">What is Multi-Task Learning?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/framework.html">Overall Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/benchmark.html">Run a Benckmark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="dataset.html">Apply to a New Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="arch.html">Customize an Architecture</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Customize a Weighting Strategy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#create-a-new-weighting-class">Create a New Weighting Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rewrite-corresponding-methods">Rewrite Corresponding Methods</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/loss/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.loss</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/utils/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.utils</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/model/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.model</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/config/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.config</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/metrics/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.metrics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/weighting/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.weighting</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/architecture/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.architecture</span></code></a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">LibMTL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Customize a Weighting Strategy</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/develop/weighting.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="customize-a-weighting-strategy">
+<h1>Customize a Weighting Strategy<a class="headerlink" href="#customize-a-weighting-strategy" title="Permalink to this headline">¶</a></h1>
+<p>Here we would like to introduce how to customize a new weighting strategy with the support of <code class="docutils literal notranslate"><span class="pre">LibMTL</span></code>.</p>
+<div class="section" id="create-a-new-weighting-class">
+<h2>Create a New Weighting Class<a class="headerlink" href="#create-a-new-weighting-class" title="Permalink to this headline">¶</a></h2>
+<p>Firstly, you need to create a new weighting class by inheriting class <a class="reference internal" href="../_autoapi/LibMTL/weighting/index.html#LibMTL.weighting.AbsWeighting" title="LibMTL.weighting.AbsWeighting"><code class="xref py py-class docutils literal notranslate"><span class="pre">LibMTL.weighting.AbsWeighting</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">LibMTL.weighting</span> <span class="kn">import</span> <span class="n">AbsWeighting</span>
+
+<span class="k">class</span> <span class="nc">NewWeighting</span><span class="p">(</span><span class="n">AbsWeighting</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">NewWeighting</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="rewrite-corresponding-methods">
+<h2>Rewrite Corresponding Methods<a class="headerlink" href="#rewrite-corresponding-methods" title="Permalink to this headline">¶</a></h2>
+<p>There are four important function in <a class="reference internal" href="../_autoapi/LibMTL/weighting/index.html#LibMTL.weighting.AbsWeighting" title="LibMTL.weighting.AbsWeighting"><code class="xref py py-class docutils literal notranslate"><span class="pre">LibMTL.weighting.AbsWeighting</span></code></a>. We will introduce them in detail as follows.</p>
+<ul class="simple">
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">backward()</span></code>: The main function of a weighting strategy its input and output format can be found in <a class="reference internal" href="../_autoapi/LibMTL/weighting/index.html#LibMTL.weighting.AbsWeighting.backward" title="LibMTL.weighting.AbsWeighting.backward"><code class="xref py py-func docutils literal notranslate"><span class="pre">LibMTL.weighting.AbsWeighting.backward()</span></code></a>. To rewrite this function, you need to consider the case of <code class="docutils literal notranslate"><span class="pre">multi-input</span></code> and <code class="docutils literal notranslate"><span class="pre">multi-label</span></code> (refer to <a class="reference external" href="../user_guide/mtl.html#network-architecture">here</a>) and the case of <code class="docutils literal notranslate"><span class="pre">rep-grad</span></code> and <code class="docutils literal notranslate"><span class="pre">param-grad</span></code> (refer to <a class="reference external" href="../user_guide/mtl.html#weighting-strategy">here</a>) if you would like to combine your weighting method with more architectures or apply your method to more datasets.</p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">init_param()</span></code>: This function is used to define and initialize some trainable parameters. It does nothing by default and can be rewritten if necessary.</p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">_get_grads()</span></code>: This function is used to return the gradients of representations or shared parameters (covering the case of <code class="docutils literal notranslate"><span class="pre">rep-grad</span></code> and <code class="docutils literal notranslate"><span class="pre">param-grad</span></code>).</p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">_backward_new_grads()</span></code>: This function is used to reset the gradients and make a backward (covering the case of <code class="docutils literal notranslate"><span class="pre">rep-grad</span></code> and <code class="docutils literal notranslate"><span class="pre">param-grad</span></code>).</p></li>
+</ul>
+<p>The <code class="xref py py-func docutils literal notranslate"><span class="pre">_get_grads()</span></code> and <code class="xref py py-func docutils literal notranslate"><span class="pre">_backward_new_grads()</span></code> functions are very useful to rewrite the <code class="xref py py-func docutils literal notranslate"><span class="pre">backward()</span></code> function and you can find more details about them in <a class="reference external" href="../../_modules/LibMTL/weighting/abstract_weighting.html#AbsWeighting">here</a>.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="arch.html" class="btn btn-neutral float-left" title="Customize an Architecture" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../_autoapi/LibMTL/index.html" class="btn btn-neutral float-right" title="LibMTL" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Baijiong Lin and Yu Zhang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

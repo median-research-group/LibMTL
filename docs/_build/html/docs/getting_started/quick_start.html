@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quick Start &mdash; LibMTL  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="What is Multi-Task Learning?" href="../user_guide/mtl.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> LibMTL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#download-dataset">Download Dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-a-model">Run a Model</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/mtl.html">What is Multi-Task Learning?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/framework.html">Overall Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/benchmark.html">Run a Benckmark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../develop/dataset.html">Apply to a New Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../develop/arch.html">Customize an Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../develop/weighting.html">Customize a Weighting Strategy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/loss/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.loss</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/utils/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.utils</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/model/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.model</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/config/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.config</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/metrics/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.metrics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/weighting/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.weighting</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/architecture/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.architecture</span></code></a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">LibMTL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Quick Start</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/getting_started/quick_start.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="quick-start">
+<h1>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h1>
+<p>We use NYUv2 dataset as an example to show how to use <code class="docutils literal notranslate"><span class="pre">LibMTL</span></code>. More details and results are provided here.</p>
+<div class="section" id="download-dataset">
+<h2>Download Dataset<a class="headerlink" href="#download-dataset" title="Permalink to this headline">¶</a></h2>
+<p>The NYUv2 dataset we used is pre-processed by <a class="reference external" href="https://github.com/lorenmt/mtan">mtan</a>. You can download this dataset <a class="reference external" href="https://www.dropbox.com/sh/86nssgwm6hm3vkb/AACrnUQ4GxpdrBbLjb6n-mWNa?dl=0">here</a>. The directory structure is as follows:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>*/nyuv2/
+├── train
+│   ├── depth
+│   ├── image
+│   ├── label
+│   └── normal
+└── val
+    ├── depth
+    ├── image
+    ├── label
+    └── normal
+</pre></div>
+</div>
+<p>The NYUv2 dataset is a multi-label dataset, which includes three tasks: 13-class semantic segmentation, depth estimation, and surface normal prediction. <code class="docutils literal notranslate"><span class="pre">image</span></code> contains the input images and <code class="docutils literal notranslate"><span class="pre">label</span></code>, <code class="docutils literal notranslate"><span class="pre">depth</span></code>, <code class="docutils literal notranslate"><span class="pre">normal</span></code> contains the labels for three tasks, respectively. We train the MTL model with the data in <code class="docutils literal notranslate"><span class="pre">train</span></code> and evaluate on <code class="docutils literal notranslate"><span class="pre">val</span></code>.</p>
+</div>
+<div class="section" id="run-a-model">
+<h2>Run a Model<a class="headerlink" href="#run-a-model" title="Permalink to this headline">¶</a></h2>
+<p>The complete training code of NYUv2 dataset are provided <a class="reference external" href="https://github.com/median-research-group/LibMTL/examples/nyu">here</a>. The file <code class="docutils literal notranslate"><span class="pre">train_nyu.py</span></code> is the main file of training on NYUv2 dataset.</p>
+<p>You can find the command-line arguments by running the following command.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python train_nyu.py -h
+</pre></div>
+</div>
+<p>For instance, running the following command will start training a MTL model with EW and HPS on NYUv2 dataset.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python train_nyu.py --weighting EW --arch HPS --dataset_path */nyuv2 --gpu_id <span class="m">0</span> --scheduler step
+</pre></div>
+</div>
+<p>If everything works fine, you will see the following outputs which includes the training configurations and the number of model parameters:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">========================================</span>
+<span class="n">General</span> <span class="n">Configuration</span><span class="p">:</span>
+	<span class="n">Wighting</span><span class="p">:</span> <span class="n">EW</span>
+	<span class="n">Architecture</span><span class="p">:</span> <span class="n">HPS</span>
+	<span class="n">Rep_Grad</span><span class="p">:</span> <span class="kc">False</span>
+	<span class="n">Multi_Input</span><span class="p">:</span> <span class="kc">False</span>
+	<span class="n">Seed</span><span class="p">:</span> <span class="mi">0</span>
+	<span class="n">Device</span><span class="p">:</span> <span class="n">cuda</span><span class="p">:</span><span class="mi">0</span>
+<span class="n">Optimizer</span> <span class="n">Configuration</span><span class="p">:</span>
+	<span class="n">optim</span><span class="p">:</span> <span class="n">adam</span>
+	<span class="n">lr</span><span class="p">:</span> <span class="mf">0.0001</span>
+	<span class="n">weight_decay</span><span class="p">:</span> <span class="mf">1e-05</span>
+<span class="n">Scheduler</span> <span class="n">Configuration</span><span class="p">:</span>
+	<span class="n">scheduler</span><span class="p">:</span> <span class="n">step</span>
+	<span class="n">step_size</span><span class="p">:</span> <span class="mi">100</span>
+	<span class="n">gamma</span><span class="p">:</span> <span class="mf">0.5</span>
+<span class="o">========================================</span>
+<span class="n">Total</span> <span class="n">Params</span><span class="p">:</span> <span class="mi">71888721</span>
+<span class="n">Trainable</span> <span class="n">Params</span><span class="p">:</span> <span class="mi">71888721</span>
+<span class="n">Non</span><span class="o">-</span><span class="n">trainable</span> <span class="n">Params</span><span class="p">:</span> <span class="mi">0</span>
+<span class="o">========================================</span>
+</pre></div>
+</div>
+<p>Next, the results will be printed in following format:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">LOG</span> <span class="n">FORMAT</span> <span class="o">|</span> <span class="n">segmentation_LOSS</span> <span class="n">mIoU</span> <span class="n">pixAcc</span> <span class="o">|</span> <span class="n">depth_LOSS</span> <span class="n">abs_err</span> <span class="n">rel_err</span> <span class="o">|</span> <span class="n">normal_LOSS</span> <span class="n">mean</span> <span class="n">median</span> <span class="o">&lt;</span><span class="mf">11.25</span> <span class="o">&lt;</span><span class="mf">22.5</span> <span class="o">&lt;</span><span class="mi">30</span> <span class="o">|</span> <span class="n">TIME</span>
+<span class="n">Epoch</span><span class="p">:</span> <span class="mi">0000</span> <span class="o">|</span> <span class="n">TRAIN</span><span class="p">:</span> <span class="mf">1.4417</span> <span class="mf">0.2494</span> <span class="mf">0.5717</span> <span class="o">|</span> <span class="mf">1.4941</span> <span class="mf">1.4941</span> <span class="mf">0.5002</span> <span class="o">|</span> <span class="mf">0.3383</span> <span class="mf">43.1593</span> <span class="mf">38.2601</span> <span class="mf">0.0913</span> <span class="mf">0.2639</span> <span class="mf">0.3793</span> <span class="o">|</span> <span class="n">Time</span><span class="p">:</span> <span class="mf">81.6612</span> <span class="o">|</span> <span class="n">TEST</span><span class="p">:</span> <span class="mf">1.0898</span> <span class="mf">0.3589</span> <span class="mf">0.6676</span> <span class="o">|</span> <span class="mf">0.7027</span> <span class="mf">0.7027</span> <span class="mf">0.2615</span> <span class="o">|</span> <span class="mf">0.2143</span> <span class="mf">32.8732</span> <span class="mf">29.4323</span> <span class="mf">0.1734</span> <span class="mf">0.3878</span> <span class="mf">0.5090</span> <span class="o">|</span> <span class="n">Time</span><span class="p">:</span> <span class="mf">11.9699</span>
+<span class="n">Epoch</span><span class="p">:</span> <span class="mi">0001</span> <span class="o">|</span> <span class="n">TRAIN</span><span class="p">:</span> <span class="mf">0.8958</span> <span class="mf">0.4194</span> <span class="mf">0.7201</span> <span class="o">|</span> <span class="mf">0.7011</span> <span class="mf">0.7011</span> <span class="mf">0.2448</span> <span class="o">|</span> <span class="mf">0.1993</span> <span class="mf">31.5235</span> <span class="mf">27.8404</span> <span class="mf">0.1826</span> <span class="mf">0.4060</span> <span class="mf">0.5361</span> <span class="o">|</span> <span class="n">Time</span><span class="p">:</span> <span class="mf">82.2399</span> <span class="o">|</span> <span class="n">TEST</span><span class="p">:</span> <span class="mf">0.9980</span> <span class="mf">0.4189</span> <span class="mf">0.6868</span> <span class="o">|</span> <span class="mf">0.6274</span> <span class="mf">0.6274</span> <span class="mf">0.2347</span> <span class="o">|</span> <span class="mf">0.1991</span> <span class="mf">31.0144</span> <span class="mf">26.5077</span> <span class="mf">0.2065</span> <span class="mf">0.4332</span> <span class="mf">0.5551</span> <span class="o">|</span> <span class="n">Time</span><span class="p">:</span> <span class="mf">12.0278</span>
+</pre></div>
+</div>
+<p>If the training process ends, the best result on <code class="docutils literal notranslate"><span class="pre">val</span></code> will be printed as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Best</span> <span class="n">Result</span><span class="p">:</span> <span class="n">Epoch</span> <span class="mi">65</span><span class="p">,</span> <span class="n">result</span> <span class="p">{</span><span class="s1">&#39;segmentation&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5377492904663086</span><span class="p">,</span> <span class="mf">0.7544658184051514</span><span class="p">],</span> <span class="s1">&#39;depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.38453552363844823</span><span class="p">,</span> <span class="mf">0.1605487049810748</span><span class="p">],</span> <span class="s1">&#39;normal&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">23.573742</span><span class="p">,</span> <span class="mf">17.04381</span><span class="p">,</span> <span class="mf">0.35038458555943763</span><span class="p">,</span> <span class="mf">0.609274380451927</span><span class="p">,</span> <span class="mf">0.7207172795833373</span><span class="p">]}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../user_guide/mtl.html" class="btn btn-neutral float-right" title="What is Multi-Task Learning?" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Baijiong Lin and Yu Zhang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

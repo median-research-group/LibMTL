@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LibMTL.utils &mdash; LibMTL  documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="LibMTL.config" href="../config/index.html" />
+    <link rel="prev" title="LibMTL.loss" href="../loss/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> LibMTL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/quick_start.html">Quick Start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_guide/mtl.html">What is Multi-Task Learning?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_guide/framework.html">Overall Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_guide/benchmark.html">Run a Benckmark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../develop/dataset.html">Apply to a New Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../develop/arch.html">Customize an Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../develop/weighting.html">Customize a Weighting Strategy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../loss/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.loss</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.utils</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#LibMTL.utils.set_random_seed">set_random_seed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#LibMTL.utils.set_device">set_device</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#LibMTL.utils.count_parameters">count_parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#LibMTL.utils.count_improvement">count_improvement</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../model/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.model</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.config</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.metrics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../weighting/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.weighting</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../architecture/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.architecture</span></code></a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">LibMTL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.utils</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/docs/_autoapi/LibMTL/utils/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="module-LibMTL.utils">
+<span id="libmtl-utils"></span><h1><a class="reference internal" href="#module-LibMTL.utils" title="LibMTL.utils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.utils</span></code></a><a class="headerlink" href="#module-LibMTL.utils" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="LibMTL.utils.set_random_seed">
+<span class="sig-name descname"><span class="pre">set_random_seed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/LibMTL/utils.html#set_random_seed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LibMTL.utils.set_random_seed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the random seed for reproducibility.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>seed</strong> (<em>int</em><em>, </em><em>default=0</em>) – The random seed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LibMTL.utils.set_device">
+<span class="sig-name descname"><span class="pre">set_device</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gpu_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/LibMTL/utils.html#set_device"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LibMTL.utils.set_device" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the device where model and data will be allocated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>gpu_id</strong> (<em>str</em><em>, </em><em>default='0'</em>) – The id of gpu.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LibMTL.utils.count_parameters">
+<span class="sig-name descname"><span class="pre">count_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/LibMTL/utils.html#count_parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LibMTL.utils.count_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the number of parameters for a model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>model</strong> (<em>torch.nn.Module</em>) – A neural network module.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="LibMTL.utils.count_improvement">
+<span class="sig-name descname"><span class="pre">count_improvement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_result</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_result</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/LibMTL/utils.html#count_improvement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LibMTL.utils.count_improvement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the improvement between two results,</p>
+<div class="math notranslate nohighlight">
+\[\Delta_{\mathrm{p}}=100\%\times \frac{1}{T}\sum_{t=1}^T
+\frac{1}{M_t}\sum_{m=1}^{M_t}\frac{(-1)^{w_{t,m}}(B_{t,m}-N_{t,m})}{N_{t,m}}.\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_result</strong> (<em>dict</em>) – A dictionary of scores of all metrics of all tasks.</p></li>
+<li><p><strong>new_result</strong> (<em>dict</em>) – The same structure with <code class="docutils literal notranslate"><span class="pre">base_result</span></code>.</p></li>
+<li><p><strong>weight</strong> (<em>dict</em>) – The same structure with <code class="docutils literal notranslate"><span class="pre">base_result</span></code> while each elements is binary integer representing whether higher or lower score is better.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The improvement between <code class="docutils literal notranslate"><span class="pre">new_result</span></code> and <code class="docutils literal notranslate"><span class="pre">base_result</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<p>Examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">base_result</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">96</span><span class="p">,</span> <span class="mi">98</span><span class="p">],</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.2</span><span class="p">]}</span>
+<span class="n">new_result</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">93</span><span class="p">,</span> <span class="mi">99</span><span class="p">],</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">]}</span>
+<span class="n">weight</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">count_improvement</span><span class="p">(</span><span class="n">base_result</span><span class="p">,</span> <span class="n">new_result</span><span class="p">,</span> <span class="n">weight</span><span class="p">))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../loss/index.html" class="btn btn-neutral float-left" title="LibMTL.loss" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../config/index.html" class="btn btn-neutral float-right" title="LibMTL.config" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Baijiong Lin and Yu Zhang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

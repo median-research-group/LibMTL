@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LibMTL.utils &mdash; LibMTL  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> LibMTL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/getting_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/getting_started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/getting_started/quick_start.html">Quick Start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/user_guide/mtl.html">What is Multi-Task Learning?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/user_guide/framework.html">Overall Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/user_guide/benchmark.html">Run a Benckmark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/develop/dataset.html">Apply to a New Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/develop/arch.html">Customize an Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/develop/weighting.html">Customize a Weighting Strategy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/_autoapi/LibMTL/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/_autoapi/LibMTL/loss/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.loss</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/_autoapi/LibMTL/utils/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.utils</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/_autoapi/LibMTL/model/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.model</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/_autoapi/LibMTL/config/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.config</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/_autoapi/LibMTL/metrics/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.metrics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/_autoapi/LibMTL/weighting/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.weighting</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/_autoapi/LibMTL/architecture/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.architecture</span></code></a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">LibMTL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>LibMTL.utils</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for LibMTL.utils</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">random</span><span class="o">,</span> <span class="nn">torch</span><span class="o">,</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+
+<div class="viewcode-block" id="set_random_seed"><a class="viewcode-back" href="../../docs/_autoapi/LibMTL/utils/index.html#LibMTL.utils.set_random_seed">[docs]</a><span class="k">def</span> <span class="nf">set_random_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Set the random seed for reproducibility.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        seed (int, default=0): The random seed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">cudnn</span><span class="o">.</span><span class="n">deterministic</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">torch</span><span class="o">.</span><span class="n">backends</span><span class="o">.</span><span class="n">cudnn</span><span class="o">.</span><span class="n">benchmark</span> <span class="o">=</span> <span class="kc">False</span></div>
+        
+<div class="viewcode-block" id="set_device"><a class="viewcode-back" href="../../docs/_autoapi/LibMTL/utils/index.html#LibMTL.utils.set_device">[docs]</a><span class="k">def</span> <span class="nf">set_device</span><span class="p">(</span><span class="n">gpu_id</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Set the device where model and data will be allocated. </span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        gpu_id (str, default=&#39;0&#39;): The id of gpu.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;CUDA_VISIBLE_DEVICES&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gpu_id</span></div>
+
+<div class="viewcode-block" id="count_parameters"><a class="viewcode-back" href="../../docs/_autoapi/LibMTL/utils/index.html#LibMTL.utils.count_parameters">[docs]</a><span class="k">def</span> <span class="nf">count_parameters</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&#39;&#39;&#39;Calculates the number of parameters for a model.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        model (torch.nn.Module): A neural network module.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">trainable_params</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">non_trainable_params</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">requires_grad</span><span class="p">:</span>
+            <span class="n">trainable_params</span> <span class="o">+=</span> <span class="n">p</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">non_trainable_params</span> <span class="o">+=</span> <span class="n">p</span><span class="o">.</span><span class="n">numel</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="o">*</span><span class="mi">40</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total Params:&#39;</span><span class="p">,</span> <span class="n">trainable_params</span> <span class="o">+</span> <span class="n">non_trainable_params</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Trainable Params:&#39;</span><span class="p">,</span> <span class="n">trainable_params</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Non-trainable Params:&#39;</span><span class="p">,</span> <span class="n">non_trainable_params</span><span class="p">)</span></div>
+        
+<div class="viewcode-block" id="count_improvement"><a class="viewcode-back" href="../../docs/_autoapi/LibMTL/utils/index.html#LibMTL.utils.count_improvement">[docs]</a><span class="k">def</span> <span class="nf">count_improvement</span><span class="p">(</span><span class="n">base_result</span><span class="p">,</span> <span class="n">new_result</span><span class="p">,</span> <span class="n">weight</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Calculate the improvement between two results,</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        \Delta_{\mathrm{p}}=100\%\times \frac{1}{T}\sum_{t=1}^T </span>
+<span class="sd">        \frac{1}{M_t}\sum_{m=1}^{M_t}\frac{(-1)^{w_{t,m}}(B_{t,m}-N_{t,m})}{N_{t,m}}.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        base_result (dict): A dictionary of scores of all metrics of all tasks.</span>
+<span class="sd">        new_result (dict): The same structure with ``base_result``.</span>
+<span class="sd">        weight (dict): The same structure with ``base_result`` while each elements is binary integer representing whether higher or lower score is better.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The improvement between ``new_result`` and ``base_result``.</span>
+
+<span class="sd">    Examples::</span>
+
+<span class="sd">        base_result = {&#39;A&#39;: [96, 98], &#39;B&#39;: [0.2]}</span>
+<span class="sd">        new_result = {&#39;A&#39;: [93, 99], &#39;B&#39;: [0.5]}</span>
+<span class="sd">        weight = {&#39;A&#39;: [1, 0], &#39;B&#39;: [1]}</span>
+
+<span class="sd">        print(count_improvement(base_result, new_result, weight))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">improvement</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">base_result</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+        <span class="n">improvement</span> <span class="o">+=</span> <span class="p">(((</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">weight</span><span class="p">[</span><span class="n">task</span><span class="p">]))</span><span class="o">*</span>\
+                        <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">base_result</span><span class="p">[</span><span class="n">task</span><span class="p">])</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">new_result</span><span class="p">[</span><span class="n">task</span><span class="p">]))</span><span class="o">/</span>\
+                         <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">base_result</span><span class="p">[</span><span class="n">task</span><span class="p">]))</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">improvement</span><span class="o">/</span><span class="n">count</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Baijiong Lin and Yu Zhang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+{% extends "!footer.html" %}
+{% block extrafooter %}
+    <p/><p/>
+    <p style="align-items:center; display:inline-block">Made with &#10084; at <a href="https://robotics.usc.edu/resl/" target="_blank"><img style="height:60px" align="absmiddle" src="{{ pathto('_static/resl_logo.png', 1) }}"></a> and &nbsp;<a href="https://viterbischool.usc.edu/" target="_blank"><img style="height:30px" align="absmiddle" src="{{ pathto('_static/viterbi_logo.png', 1) }}"></a></p>
+    {{ super() }}
+{% endblock %}
