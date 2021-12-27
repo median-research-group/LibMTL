@@ -1,0 +1,14 @@
+Sphinx==4.3.1
+recommonmark==0.7.1
+sphinx-autoapi==1.8.4
+sphinx-autobuild==2021.3.14
+sphinx-markdown-tables==0.0.15
+sphinx-rtd-theme==1.0.0
+sphinxcontrib-applehelp==1.0.2
+sphinxcontrib-bibtex==2.4.1
+sphinxcontrib-devhelp==1.0.2
+sphinxcontrib-htmlhelp==2.0.0
+sphinxcontrib-jsmath==1.0.1
+sphinxcontrib-qthelp==1.0.3
+sphinxcontrib-serializinghtml==1.1.5
+sphinxcontrib-websupport==1.2.3
