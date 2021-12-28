@@ -3,5 +3,5 @@
 
 
 
-
+See the [latest documentation](https://libmtl.readthedocs.io/en/latest/) for getting started instructions and detailed APIs.
 
