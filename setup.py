@@ -5,7 +5,7 @@ with open('README.md', 'r', encoding='utf-8') as f:
 
 setup(
         name='LibMTL',    
-        version='1.0',   
+        version='1.1',   
         description='A PyTorch Library for Multi-Task Learning',   
         author='Baijiong Lin',  
         author_email='linbj@mail.sustech.edu.cn',  
@@ -13,7 +13,15 @@ setup(
         packages=find_packages(),   
         license='MIT',
         platforms=["all"],
-        classifiers=['Programming Language :: Python :: 3.8'],
+        classifiers=['License :: OSI Approved :: MIT License',
+                     'Programming Language :: Python :: 3.7',
+                     'Programming Language :: Python :: 3.8',
+                     'Programming Language :: Python :: 3.9',
+                     'Programming Language :: Python :: 3.10'],
         long_description=long_description,
         long_description_content_type='text/markdown',
+        install_requires=['torch>=1.8.0',
+                          'torchvision>=0.9.0',
+                          'numpy>=1.20']
 )
+
