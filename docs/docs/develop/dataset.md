@@ -113,6 +113,8 @@ nyuv2_train_loader = xx
 
 ```eval_rst
 Thirdly, you need to define the shared encoder and task-specific decoders. ``LibMTL`` provides some common networks like ResNet-based network, please see :class:`LibMTL.model` for details. Also, you can customize the encoder and decoders.
+
+Note that the encoder does not be instantiated while the decoders should be instantiated.
 ```
 
 #### Example 1 (The Office-31 Dataset)
@@ -143,12 +145,11 @@ class Encoder(nn.Module):
         out = self.hidden_layer(out)
         return out
 
-encoder = Encoder()
 decoders = nn.ModuleDict({task: nn.Linear(512, class_num) for task in task_name})
 ```
 
 ```eval_rst
-If the customized encoder is a ResNet-based network and you would like to use :class:`LibMTL.architecture.Cross_stitch`, :class:`LibMTL.architecture.MTAN`, or :class:`LibMTL.architecture.PLE`, please make sure encoder has an attribute named ``resnet_network`` and corresponded to the ResNet network.
+If the customized encoder is a ResNet-based network and you would like to use :class:`LibMTL.architecture.MTAN`, please make sure encoder has an attribute named ``resnet_network`` and corresponded to the ResNet network.
 ```
 
 #### Example 2 (The NYUv2 Dataset)
@@ -158,7 +159,8 @@ from aspp import DeepLabHead
 from LibMTL.model import resnet_dilated
 
 # define encoder and decoders
-encoder = resnet_dilated('resnet50')
+def encoder_class():
+	return resnet_dilated('resnet50')
 num_out_channels = {'segmentation': 13, 'depth': 1, 'normal': 3}
 decoders = nn.ModuleDict({task: DeepLabHead(encoder.feature_dim, 
                                             num_out_channels[task]) for task in list(task_dict.keys())})
@@ -178,7 +180,7 @@ from LibMTL import Trainer
 officeModel = Trainer(task_dict=task_dict, 
                       weighting=weighting_method.__dict__[params.weighting], 
                       architecture=architecture_method.__dict__[params.arch], 
-                      encoder=encoder, 
+                      encoder_class=Encoder, 
                       decoders=decoders,
                       rep_grad=params.rep_grad,
                       multi_input=params.multi_input,
@@ -197,12 +199,12 @@ Also, you can inherit :class:`LibMTL.Trainer` class and rewrite some functions l
 from LibMTL import Trainer
 
 class NYUtrainer(Trainer):
-    def __init__(self, task_dict, weighting, architecture, encoder, 
+    def __init__(self, task_dict, weighting, architecture, encoder_class, 
                  decoders, rep_grad, multi_input, optim_param, scheduler_param, **kwargs):
         super(NYUtrainer, self).__init__(task_dict=task_dict, 
                                         weighting=weighting_method.__dict__[weighting], 
                                         architecture=architecture_method.__dict__[architecture], 
-                                        encoder=encoder, 
+                                        encoder_class=encoder_class, 
                                         decoders=decoders,
                                         rep_grad=rep_grad,
                                         multi_input=multi_input,
@@ -219,7 +221,7 @@ class NYUtrainer(Trainer):
 NYUmodel = NYUtrainer(task_dict=task_dict, 
                       weighting=params.weighting, 
                       architecture=params.arch, 
-                      encoder=encoder, 
+                      encoder_class=encoder_class, 
                       decoders=decoders,
                       rep_grad=params.rep_grad,
                       multi_input=params.multi_input,

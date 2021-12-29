@@ -12,9 +12,9 @@ Firstly, you need to create a new architecture class by inheriting class :class:
 from LibMTL.architecture import AbsArchitecture
 
 class NewArchitecture(AbsArchitecture):
-    def __init__(self, task_name, encoder, decoders, rep_grad, 
+    def __init__(self, task_name, encoder_class, decoders, rep_grad, 
                        multi_input, device, **kwargs):
-        super(NewArchitecture, self).__init__(task_name, encoder, decoders, rep_grad, 
+        super(NewArchitecture, self).__init__(task_name, encoder_class, decoders, rep_grad, 
                                   			  multi_input, device, **kwargs)
 ```
 
