@@ -16,7 +16,7 @@ class UW(AbsWeighting):
         super(UW, self).__init__()
         
     def init_param(self):
-        self.loss_scale = torch.tensor([-0.5]*self.task_num, requires_grad=True, device=self.device)
+        self.loss_scale = nn.Parameter(torch.tensor([-0.5]*self.task_num, device=self.device))
         
     def backward(self, losses, **kwargs):
         loss = (losses/(2*self.loss_scale.exp())+self.loss_scale/2).sum()

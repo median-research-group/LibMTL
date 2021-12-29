@@ -19,7 +19,7 @@ class GradNorm(AbsWeighting):
         super(GradNorm, self).__init__()
         
     def init_param(self):
-        self.loss_scale = torch.tensor([1.0]*self.task_num, requires_grad=True, device=self.device)
+        self.loss_scale = nn.Parameter(torch.tensor([1.0]*self.task_num, device=self.device))
         
     def backward(self, losses, **kwargs):
         alpha = kwargs['alpha']
