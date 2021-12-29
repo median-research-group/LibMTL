@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LibMTL &mdash; LibMTL  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="LibMTL.architecture" href="architecture/index.html" />
+    <link rel="prev" title="Customize a Weighting Strategy" href="../../develop/weighting.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> LibMTL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/quick_start.html">Quick Start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/mtl.html">What is Multi-Task Learning?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/framework.html">Overall Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/benchmark.html">Run a Benckmark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../develop/dataset.html">Apply to a New Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../develop/arch.html">Customize an Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../develop/weighting.html">Customize a Weighting Strategy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="architecture/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.architecture</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.model</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="weighting/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.weighting</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#LibMTL.Trainer">Trainer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.Trainer.process_preds">process_preds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.Trainer.train">train</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.Trainer.test">test</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="loss/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.loss</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.utils</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="model/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.model</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="config/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.config</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="metrics/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.metrics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="weighting/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.weighting</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.architecture</span></code></a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">LibMTL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/docs/_autoapi/LibMTL/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="module-LibMTL">
+<span id="libmtl"></span><h1><a class="reference internal" href="#module-LibMTL" title="LibMTL"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL</span></code></a><a class="headerlink" href="#module-LibMTL" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="LibMTL.Trainer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Trainer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weighting</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">architecture</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoder_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decoders</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rep_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multi_input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optim_param</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scheduler_param</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/LibMTL/trainer.html#Trainer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LibMTL.Trainer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></p>
+<p>A Multi-Task Learning Trainer.</p>
+<p>This is a unified and extensible training framework for multi-task learning.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>task_dict</strong> (<em>dict</em>) – A dictionary of name-information pairs of type (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code>). The sub-dictionary for each task has four entries whose keywords are named <strong>metrics</strong>, <strong>metrics_fn</strong>, <strong>loss_fn</strong>, <strong>weight</strong> and each of them corresponds to a <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code>.
+The list of <strong>metrics</strong> has <code class="docutils literal notranslate"><span class="pre">m</span></code> strings, repersenting the name of <code class="docutils literal notranslate"><span class="pre">m</span></code> metric objectives for this task. The list of <strong>metrics_fn</strong> has two elements, i.e., the updating and score functions, meaning how to update thoes objectives in the training process and get the final scores, respectively. The list of <strong>loss_fn</strong> has <code class="docutils literal notranslate"><span class="pre">m</span></code> loss functions corresponding to each metric objective. The list of <strong>weight</strong> has <code class="docutils literal notranslate"><span class="pre">m</span></code> binary integers corresponding to each metric objective, where <code class="docutils literal notranslate"><span class="pre">1</span></code> means the score higher the performance of this objective better, <code class="docutils literal notranslate"><span class="pre">0</span></code> otherwise.</p></li>
+<li><p><strong>weighting</strong> (<em>class</em>) – A weighting strategy class based on <a class="reference internal" href="weighting/abstract_weighting/index.html#LibMTL.weighting.abstract_weighting.AbsWeighting" title="LibMTL.weighting.abstract_weighting.AbsWeighting"><code class="xref py py-class docutils literal notranslate"><span class="pre">LibMTL.weighting.abstract_weighting.AbsWeighting</span></code></a>.</p></li>
+<li><p><strong>architecture</strong> (<em>class</em>) – An architecture class based on <a class="reference internal" href="architecture/abstract_arch/index.html#LibMTL.architecture.abstract_arch.AbsArchitecture" title="LibMTL.architecture.abstract_arch.AbsArchitecture"><code class="xref py py-class docutils literal notranslate"><span class="pre">LibMTL.architecture.abstract_arch.AbsArchitecture</span></code></a>.</p></li>
+<li><p><strong>encoder_class</strong> (<em>class</em>) – A neural network class.</p></li>
+<li><p><strong>decoders</strong> (<em>dict</em>) – A dictionary of name-decoder pairs of type (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code>).</p></li>
+<li><p><strong>rep_grad</strong> (<em>bool</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, the gradient of the representation for each task can be computed.</p></li>
+<li><p><strong>multi_input</strong> (<em>bool</em>) – Is <code class="docutils literal notranslate"><span class="pre">True</span></code> if each task has its own input data, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p></li>
+<li><p><strong>optim_param</strong> (<em>dict</em>) – A dictionary of configuration for the optimizier.</p></li>
+<li><p><strong>scheduler_param</strong> (<em>dict</em>) – A dictionary of configuration for learning rate scheduler. Setting it as <code class="docutils literal notranslate"><span class="pre">None</span></code> if you do not use a learning rate scheduler.</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – A dictionary of hyperparameters of weighting and architecture methods.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is recommended to use <a class="reference internal" href="config/index.html#LibMTL.config.prepare_args" title="LibMTL.config.prepare_args"><code class="xref py py-func docutils literal notranslate"><span class="pre">LibMTL.config.prepare_args()</span></code></a> to return the dictionaries of <code class="docutils literal notranslate"><span class="pre">optim_param</span></code>, <code class="docutils literal notranslate"><span class="pre">scheduler_param</span></code>, and <code class="docutils literal notranslate"><span class="pre">kwargs</span></code>.</p>
+</div>
+<p>Examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">from</span> <span class="nn">LibMTL</span> <span class="kn">import</span> <span class="n">Trainer</span>
+<span class="kn">from</span> <span class="nn">LibMTL.loss</span> <span class="kn">import</span> <span class="n">CE_loss_fn</span>
+<span class="kn">from</span> <span class="nn">LibMTL.metrics</span> <span class="kn">import</span> <span class="n">acc_update_fun</span><span class="p">,</span> <span class="n">acc_score_fun</span>
+<span class="kn">from</span> <span class="nn">LibMTL.weighting</span> <span class="kn">import</span> <span class="n">EW</span>
+<span class="kn">from</span> <span class="nn">LibMTL.architecture</span> <span class="kn">import</span> <span class="n">HPS</span>
+<span class="kn">from</span> <span class="nn">LibMTL.model</span> <span class="kn">import</span> <span class="n">ResNet18</span>
+<span class="kn">from</span> <span class="nn">LibMTL.config</span> <span class="kn">import</span> <span class="n">prepare_args</span>
+
+<span class="n">task_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;metrics&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Acc&#39;</span><span class="p">],</span>
+                   <span class="s1">&#39;metrics_fn&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">acc_update_fun</span><span class="p">,</span> <span class="n">acc_score_fun</span><span class="p">],</span>
+                   <span class="s1">&#39;loss_fn&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">CE_loss_fn</span><span class="p">],</span>
+                   <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]}}</span>
+
+<span class="n">decoders</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">31</span><span class="p">)}</span>
+
+<span class="c1"># You can use command-line arguments and return configurations by ``prepare_args``.</span>
+<span class="c1"># kwargs, optim_param, scheduler_param = prepare_args(params)</span>
+<span class="n">optim_param</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;optim&#39;</span><span class="p">:</span> <span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="s1">&#39;lr&#39;</span><span class="p">:</span> <span class="mf">1e-3</span><span class="p">,</span> <span class="s1">&#39;weight_decay&#39;</span><span class="p">:</span> <span class="mf">1e-4</span><span class="p">}</span>
+<span class="n">scheduler_param</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;scheduler&#39;</span><span class="p">:</span> <span class="s1">&#39;step&#39;</span><span class="p">}</span>
+<span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;weight_args&#39;</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">&#39;arch_args&#39;</span><span class="p">:</span> <span class="p">{}}</span>
+
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">task_dict</span><span class="o">=</span><span class="n">task_dict</span><span class="p">,</span>
+                  <span class="n">weighting</span><span class="o">=</span><span class="n">EW</span><span class="p">,</span>
+                  <span class="n">architecture</span><span class="o">=</span><span class="n">HPS</span><span class="p">,</span>
+                  <span class="n">encoder_class</span><span class="o">=</span><span class="n">ResNet18</span><span class="p">,</span>
+                  <span class="n">decoders</span><span class="o">=</span><span class="n">decoders</span><span class="p">,</span>
+                  <span class="n">rep_grad</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                  <span class="n">multi_input</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                  <span class="n">optim_param</span><span class="o">=</span><span class="n">optim_param</span><span class="p">,</span>
+                  <span class="n">scheduler_param</span><span class="o">=</span><span class="n">scheduler_param</span><span class="p">,</span>
+                  <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.Trainer.process_preds">
+<span class="sig-name descname"><span class="pre">process_preds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.Trainer.process_preds" title="Permalink to this definition">¶</a></dt>
+<dd><p>The processing of prediction for each task.</p>
+<ul class="simple">
+<li><p>The default is no processing. If necessary, you can redefine this function.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">multi_input</span></code>, <code class="docutils literal notranslate"><span class="pre">task_name</span></code> is valid, and <code class="docutils literal notranslate"><span class="pre">preds</span></code> with type <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code> is the prediction of this task.</p></li>
+<li><p>otherwise, <code class="docutils literal notranslate"><span class="pre">task_name</span></code> is invalid, and <code class="docutils literal notranslate"><span class="pre">preds</span></code> is a <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code> of name-prediction pairs of all tasks.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>preds</strong> (<em>dict</em><em> or </em><em>torch.Tensor</em>) – The prediction of <code class="docutils literal notranslate"><span class="pre">task_name</span></code> or all tasks.</p></li>
+<li><p><strong>task_name</strong> (<em>str</em>) – The string of task name.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.Trainer.train">
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_dataloaders</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_dataloaders</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val_dataloaders</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_weight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.Trainer.train" title="Permalink to this definition">¶</a></dt>
+<dd><p>The training process of multi-task learning.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>train_dataloaders</strong> (<em>dict</em><em> or </em><em>torch.utils.data.DataLoader</em>) – The dataloaders used for training. If <code class="docutils literal notranslate"><span class="pre">multi_input</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>, it is a dictionary of name-dataloader pairs. Otherwise, it is a single dataloader which returns data and a dictionary of name-label pairs in each iteration.</p></li>
+<li><p><strong>test_dataloaders</strong> (<em>dict</em><em> or </em><em>torch.utils.data.DataLoader</em>) – The dataloaders used for validation or test. The same structure with <code class="docutils literal notranslate"><span class="pre">train_dataloaders</span></code>.</p></li>
+<li><p><strong>epochs</strong> (<em>int</em>) – The total training epochs.</p></li>
+<li><p><strong>return_weight</strong> (<em>bool</em>) – if <code class="docutils literal notranslate"><span class="pre">True</span></code>, the loss weights will be returned.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.Trainer.test">
+<span class="sig-name descname"><span class="pre">test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_dataloaders</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epoch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'test'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.Trainer.test" title="Permalink to this definition">¶</a></dt>
+<dd><p>The test process of multi-task learning.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>test_dataloaders</strong> (<em>dict</em><em> or </em><em>torch.utils.data.DataLoader</em>) – If <code class="docutils literal notranslate"><span class="pre">multi_input</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>, it is a dictionary of name-dataloader pairs. Otherwise, it is a single dataloader which returns data and a dictionary of name-label pairs in each iteration.</p></li>
+<li><p><strong>epoch</strong> (<em>int</em><em>, </em><em>default=None</em>) – The current epoch.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="architecture/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.architecture</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="model/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.model</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="weighting/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.weighting</span></code></a></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../develop/weighting.html" class="btn btn-neutral float-left" title="Customize a Weighting Strategy" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="architecture/index.html" class="btn btn-neutral float-right" title="LibMTL.architecture" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Baijiong Lin and Yu Zhang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

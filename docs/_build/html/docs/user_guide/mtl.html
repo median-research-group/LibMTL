@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What is Multi-Task Learning? &mdash; LibMTL  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Overall Framework" href="framework.html" />
+    <link rel="prev" title="Quick Start" href="../getting_started/quick_start.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> LibMTL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/quick_start.html">Quick Start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">What is Multi-Task Learning?</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#network-architecture">Network Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#weighting-strategy">Weighting Strategy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="framework.html">Overall Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmark.html">Run a Benckmark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../develop/dataset.html">Apply to a New Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../develop/arch.html">Customize an Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../develop/weighting.html">Customize a Weighting Strategy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/loss/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.loss</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/utils/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.utils</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/model/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.model</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/config/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.config</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/metrics/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.metrics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/weighting/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.weighting</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/architecture/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.architecture</span></code></a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">LibMTL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>What is Multi-Task Learning?</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/user_guide/mtl.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="what-is-multi-task-learning">
+<h1>What is Multi-Task Learning?<a class="headerlink" href="#what-is-multi-task-learning" title="Permalink to this headline">¶</a></h1>
+<p>Multi-Task Learning (MTL) is an active research field in machine learning. It is a learning paradigm which aims to jointly learn several related tasks to improve their generalization performance by leveraging common knowledge among them. In recent years, many researchers also successfully apply MTL in different fields such as computer vision, natural language processing, reinforcement learning, recommendation system and so on.</p>
+<p>The recent studies of MTL mainly focus on two perspectives, network architecture design, and optimization procedure improvement. We investigate some general and representative methods in <code class="docutils literal notranslate"><span class="pre">LibMTL</span></code>.</p>
+<p>For more relevant introduction, please refer to <span id="id1">[<a class="reference internal" href="#id10" title="Yu Zhang and Qiang Yang. A survey on multi-task learning. IEEE Transactions on Knowledge and Data Engineering, 2021.">1</a>, <a class="reference internal" href="#id11" title="Simon Vandenhende, Stamatios Georgoulis, Wouter Van Gansbeke, Marc Proesmans, Dengxin Dai, and Luc Van Gool. Multi-task learning for dense prediction tasks: a survey. IEEE Transactions on Pattern Analysis and Machine Intelligence, 2021.">2</a>, <a class="reference internal" href="#id7" title="Baijiong Lin, Feiyang Ye, and Yu Zhang. A closer look at loss weighting in multi-task learning. arXiv preprint arXiv:2111.10603, 2021.">3</a>, <a class="reference internal" href="#id12" title="Michael Crawshaw. Multi-task learning with deep neural networks: a survey. arXiv preprint arXiv:2009.09796, 2020.">4</a>]</span>.</p>
+<div class="section" id="network-architecture">
+<h2>Network Architecture<a class="headerlink" href="#network-architecture" title="Permalink to this headline">¶</a></h2>
+<p>In the design of network architecture, the simplest and most popular method is the hard parameter sharing (HPS, <a class="reference internal" href="../_autoapi/LibMTL/architecture/index.html#LibMTL.architecture.HPS" title="LibMTL.architecture.HPS"><code class="xref py py-class docutils literal notranslate"><span class="pre">LibMTL.architecture.HPS</span></code></a>), as shown in <a class="reference internal" href="#my-fig-1"><span class="std std-numref">Fig. 1</span></a>, where a encoder is shared among all tasks and each task has its own specific output decoder. Since most of the parameters are shared among tasks, such pattern easily causes negative sharing when tasks are not enough related. To better deal with task relationships, different MTL architectures have been proposed.  <code class="docutils literal notranslate"><span class="pre">LibMTL</span></code> supports several state-of-the-art architectures, please see <a class="reference internal" href="../_autoapi/LibMTL/architecture/index.html#module-LibMTL.architecture" title="LibMTL.architecture"><code class="xref py py-class docutils literal notranslate"><span class="pre">LibMTL.architecture</span></code></a> for details.</p>
+<p>There are usually two types of MTL problems: multi-label problem and multi-input problem. The multi-label problem, as shown in the left of <a class="reference internal" href="#my-fig-1"><span class="std std-numref">Fig. 1</span></a>, means an input data has multiple labels or all tasks corresponds to a common input. <a class="reference external" href="../benchmark/nyuv2.html">The NYUv2 dataset</a> is related to such problem. While the multi-input problem, as shown in the right of <a class="reference internal" href="#my-fig-1"><span class="std std-numref">Fig. 1</span></a>, indicates each task has its own input data. <a class="reference external" href="../benchmark/office.html">The Office-31 and Office-Home datasets</a> are related to such problem. <code class="docutils literal notranslate"><span class="pre">LibMTL</span></code> has unified these two case in a training framework and you just need to set the command-line argument <code class="docutils literal notranslate"><span class="pre">multi_input</span></code> correctly.</p>
+<div class="figure align-default" id="id13">
+<span id="my-fig-1"></span><a class="reference internal image-reference" href="../../_images/multi_input.png"><img alt="../../_images/multi_input.png" src="../../_images/multi_input.png" style="width: 586.0px; height: 427.0px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">An illustration of multi-label problem (left) and multi-input problem (right). Using hard parameter sharing pattern as an example.</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="weighting-strategy">
+<h2>Weighting Strategy<a class="headerlink" href="#weighting-strategy" title="Permalink to this headline">¶</a></h2>
+<p>Balancing multiple losses is another way to deal with task relationships since the shared parameters are updated by all task losses. Thus, different methods have been proposed to balancing losses or gradients. <code class="docutils literal notranslate"><span class="pre">LibMTL</span></code> supports several state-of-the-art weighting strategies, please see <a class="reference internal" href="../_autoapi/LibMTL/weighting/index.html#module-LibMTL.weighting" title="LibMTL.weighting"><code class="xref py py-class docutils literal notranslate"><span class="pre">LibMTL.weighting</span></code></a> for details.</p>
+<p>Some gradient balancing methods like MGDA (<a class="reference internal" href="../_autoapi/LibMTL/weighting/index.html#LibMTL.weighting.MGDA" title="LibMTL.weighting.MGDA"><code class="xref py py-class docutils literal notranslate"><span class="pre">LibMTL.weighting.MGDA</span></code></a>) need to compute the gradient for each task firstly and then calculate the aggregated gradient by different approaches. To reduce the computational cost, it can use the gradients of the representations after the encoder (abbreviated as rep-grad) to approximate the gradients of shared parameters (abbreviated as param-grad).</p>
+<p>The PyTorch implemention of rep-grad is shown in <a class="reference internal" href="#my-fig-2"><span class="std std-numref">Fig. 2</span></a>. We need to separate the computational graph into two parts by the <code class="docutils literal notranslate"><span class="pre">detach</span></code> operation. <code class="docutils literal notranslate"><span class="pre">LibMTL</span></code> has unified these two case in a training framework and you just need to set the command-line argument <code class="docutils literal notranslate"><span class="pre">rep_grad</span></code> correctly. Besides, the argument <code class="docutils literal notranslate"><span class="pre">rep_grad</span></code> does not conflict with <code class="docutils literal notranslate"><span class="pre">multi_input</span></code>.</p>
+<div class="figure align-default" id="id14">
+<span id="my-fig-2"></span><a class="reference internal image-reference" href="../../_images/rep_grad.png"><img alt="../../_images/rep_grad.png" src="../../_images/rep_grad.png" style="width: 641.0px; height: 478.0px;" /></a>
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">An illustration of how to compute the gradient for representation.</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p id="id2"><dl class="citation">
+<dt class="label" id="id10"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Yu Zhang and Qiang Yang. A survey on multi-task learning. <em>IEEE Transactions on Knowledge and Data Engineering</em>, 2021.</p>
+</dd>
+<dt class="label" id="id11"><span class="brackets"><a class="fn-backref" href="#id1">2</a></span></dt>
+<dd><p>Simon Vandenhende, Stamatios Georgoulis, Wouter Van Gansbeke, Marc Proesmans, Dengxin Dai, and Luc Van Gool. Multi-task learning for dense prediction tasks: a survey. <em>IEEE Transactions on Pattern Analysis and Machine Intelligence</em>, 2021.</p>
+</dd>
+<dt class="label" id="id7"><span class="brackets"><a class="fn-backref" href="#id1">3</a></span></dt>
+<dd><p>Baijiong Lin, Feiyang Ye, and Yu Zhang. A closer look at loss weighting in multi-task learning. <em>arXiv preprint arXiv:2111.10603</em>, 2021.</p>
+</dd>
+<dt class="label" id="id12"><span class="brackets"><a class="fn-backref" href="#id1">4</a></span></dt>
+<dd><p>Michael Crawshaw. Multi-task learning with deep neural networks: a survey. <em>arXiv preprint arXiv:2009.09796</em>, 2020.</p>
+</dd>
+</dl>
+</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../getting_started/quick_start.html" class="btn btn-neutral float-left" title="Quick Start" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="framework.html" class="btn btn-neutral float-right" title="Overall Framework" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Baijiong Lin and Yu Zhang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LibMTL.architecture &mdash; LibMTL  documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="LibMTL.model" href="../model/index.html" />
+    <link rel="prev" title="LibMTL" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> LibMTL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started/quick_start.html">Quick Start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_guide/mtl.html">What is Multi-Task Learning?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_guide/framework.html">Overall Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../user_guide/benchmark.html">Run a Benckmark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../develop/dataset.html">Apply to a New Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../develop/arch.html">Customize an Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../develop/weighting.html">Customize a Weighting Strategy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../loss/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.loss</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.utils</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../model/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.model</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.config</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../metrics/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.metrics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../weighting/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.weighting</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.architecture</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#LibMTL.architecture.AbsArchitecture">AbsArchitecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.architecture.AbsArchitecture.forward">forward</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.architecture.AbsArchitecture.get_share_params">get_share_params</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.architecture.AbsArchitecture.zero_grad_share_params">zero_grad_share_params</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#LibMTL.architecture.HPS">HPS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#LibMTL.architecture.Cross_stitch">Cross_stitch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#LibMTL.architecture.MMoE">MMoE</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.architecture.MMoE.forward">forward</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.architecture.MMoE.get_share_params">get_share_params</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.architecture.MMoE.zero_grad_share_params">zero_grad_share_params</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#LibMTL.architecture.MTAN">MTAN</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.architecture.MTAN.forward">forward</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.architecture.MTAN.get_share_params">get_share_params</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.architecture.MTAN.zero_grad_share_params">zero_grad_share_params</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#LibMTL.architecture.CGC">CGC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.architecture.CGC.forward">forward</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#LibMTL.architecture.PLE">PLE</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.architecture.PLE.forward">forward</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.architecture.PLE.get_share_params">get_share_params</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.architecture.PLE.zero_grad_share_params">zero_grad_share_params</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#LibMTL.architecture.DSelect_k">DSelect_k</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#LibMTL.architecture.DSelect_k.forward">forward</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">LibMTL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL</span></code></a> &raquo;</li>
+      <li><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.architecture</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/docs/_autoapi/LibMTL/architecture/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="module-LibMTL.architecture">
+<span id="libmtl-architecture"></span><h1><a class="reference internal" href="#module-LibMTL.architecture" title="LibMTL.architecture"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.architecture</span></code></a><a class="headerlink" href="#module-LibMTL.architecture" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="LibMTL.architecture.AbsArchitecture">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AbsArchitecture</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoder_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decoders</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rep_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multi_input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/LibMTL/architecture/abstract_arch.html#AbsArchitecture"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LibMTL.architecture.AbsArchitecture" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">torch.nn.Module</span></code></p>
+<p>An abstract class for MTL architectures.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>task_name</strong> (<em>list</em>) – A list of strings for all tasks.</p></li>
+<li><p><strong>encoder_class</strong> (<em>class</em>) – A neural network class.</p></li>
+<li><p><strong>decoders</strong> (<em>dict</em>) – A dictionary of name-decoder pairs of type (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.nn.Module</span></code>).</p></li>
+<li><p><strong>rep_grad</strong> (<em>bool</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, the gradient of the representation for each task can be computed.</p></li>
+<li><p><strong>multi_input</strong> (<em>bool</em>) – Is <code class="docutils literal notranslate"><span class="pre">True</span></code> if each task has its own input data, <code class="docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p></li>
+<li><p><strong>device</strong> (<em>torch.device</em>) – The device where model and data will be allocated.</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – A dictionary of hyperparameters of architecture methods.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.architecture.AbsArchitecture.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.architecture.AbsArchitecture.forward" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputs</strong> (<em>torch.Tensor</em>) – The input data.</p></li>
+<li><p><strong>task_name</strong> (<em>str</em><em>, </em><em>default=None</em>) – The task name corresponding to <code class="docutils literal notranslate"><span class="pre">inputs</span></code> if <code class="docutils literal notranslate"><span class="pre">multi_input</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dictionary of name-prediction pairs of type (<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code>).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.architecture.AbsArchitecture.get_share_params">
+<span class="sig-name descname"><span class="pre">get_share_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.architecture.AbsArchitecture.get_share_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the shared parameters of the model.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.architecture.AbsArchitecture.zero_grad_share_params">
+<span class="sig-name descname"><span class="pre">zero_grad_share_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.architecture.AbsArchitecture.zero_grad_share_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set gradients of the shared parameters to zero.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LibMTL.architecture.HPS">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">HPS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoder_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decoders</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rep_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multi_input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/LibMTL/architecture/HPS.html#HPS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LibMTL.architecture.HPS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="abstract_arch/index.html#LibMTL.architecture.abstract_arch.AbsArchitecture" title="LibMTL.architecture.abstract_arch.AbsArchitecture"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LibMTL.architecture.abstract_arch.AbsArchitecture</span></code></a></p>
+<p>Hrad Parameter Sharing (HPS).</p>
+<p>This method is proposed in <a class="reference external" href="https://dl.acm.org/doi/10.5555/3091529.3091535">Multitask Learning: A Knowledge-Based Source of Inductive Bias (ICML 1993)</a> and implemented by us.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LibMTL.architecture.Cross_stitch">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Cross_stitch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoder_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decoders</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rep_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multi_input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/LibMTL/architecture/Cross_stitch.html#Cross_stitch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LibMTL.architecture.Cross_stitch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="abstract_arch/index.html#LibMTL.architecture.abstract_arch.AbsArchitecture" title="LibMTL.architecture.abstract_arch.AbsArchitecture"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LibMTL.architecture.abstract_arch.AbsArchitecture</span></code></a></p>
+<p>Cross-stitch Networks (Cross_stitch).</p>
+<p>This method is proposed in <a class="reference external" href="https://openaccess.thecvf.com/content_cvpr_2016/papers/Misra_Cross-Stitch_Networks_for_CVPR_2016_paper.pdf">Cross-stitch Networks for Multi-task Learning (CVPR 2016)</a> and implemented by us.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#LibMTL.architecture.Cross_stitch" title="LibMTL.architecture.Cross_stitch"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cross_stitch</span></code></a> does not work with multiple inputs MTL problem, i.e., <code class="docutils literal notranslate"><span class="pre">multi_input</span></code> must be <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p><a class="reference internal" href="#LibMTL.architecture.Cross_stitch" title="LibMTL.architecture.Cross_stitch"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cross_stitch</span></code></a> is only supported with ResNet-based encoder.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LibMTL.architecture.MMoE">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MMoE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoder_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decoders</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rep_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multi_input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/LibMTL/architecture/MMoE.html#MMoE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LibMTL.architecture.MMoE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="abstract_arch/index.html#LibMTL.architecture.abstract_arch.AbsArchitecture" title="LibMTL.architecture.abstract_arch.AbsArchitecture"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LibMTL.architecture.abstract_arch.AbsArchitecture</span></code></a></p>
+<p>Multi-gate Mixture-of-Experts (MMoE).</p>
+<p>This method is proposed in <a class="reference external" href="https://dl.acm.org/doi/10.1145/3219819.3220007">Modeling Task Relationships in Multi-task Learning with Multi-gate Mixture-of-Experts (KDD 2018)</a> and implemented by us.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img_size</strong> (<em>list</em>) – The size of input data. For example, [3, 244, 244] for input images with size 3x224x224.</p></li>
+<li><p><strong>num_experts</strong> (<em>int</em>) – The number of experts shared for all tasks. Each expert is the encoder network.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.architecture.MMoE.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.architecture.MMoE.forward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.architecture.MMoE.get_share_params">
+<span class="sig-name descname"><span class="pre">get_share_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.architecture.MMoE.get_share_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.architecture.MMoE.zero_grad_share_params">
+<span class="sig-name descname"><span class="pre">zero_grad_share_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.architecture.MMoE.zero_grad_share_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LibMTL.architecture.MTAN">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MTAN</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoder_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decoders</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rep_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multi_input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/LibMTL/architecture/MTAN.html#MTAN"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LibMTL.architecture.MTAN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="abstract_arch/index.html#LibMTL.architecture.abstract_arch.AbsArchitecture" title="LibMTL.architecture.abstract_arch.AbsArchitecture"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LibMTL.architecture.abstract_arch.AbsArchitecture</span></code></a></p>
+<p>Multi-Task Attention Network (MTAN).</p>
+<p>This method is proposed in <a class="reference external" href="https://openaccess.thecvf.com/content_CVPR_2019/papers/Liu_End-To-End_Multi-Task_Learning_With_Attention_CVPR_2019_paper.pdf">End-To-End Multi-Task Learning With Attention (CVPR 2019)</a> and implemented by modifying from the <a class="reference external" href="https://github.com/lorenmt/mtan">official PyTorch implementation</a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><a class="reference internal" href="#LibMTL.architecture.MTAN" title="LibMTL.architecture.MTAN"><code class="xref py py-class docutils literal notranslate"><span class="pre">MTAN</span></code></a> is only supported with ResNet-based encoder.</p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.architecture.MTAN.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.architecture.MTAN.forward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.architecture.MTAN.get_share_params">
+<span class="sig-name descname"><span class="pre">get_share_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.architecture.MTAN.get_share_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.architecture.MTAN.zero_grad_share_params">
+<span class="sig-name descname"><span class="pre">zero_grad_share_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.architecture.MTAN.zero_grad_share_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LibMTL.architecture.CGC">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CGC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoder_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decoders</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rep_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multi_input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/LibMTL/architecture/CGC.html#CGC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LibMTL.architecture.CGC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="MMoE/index.html#LibMTL.architecture.MMoE.MMoE" title="LibMTL.architecture.MMoE.MMoE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LibMTL.architecture.MMoE.MMoE</span></code></a></p>
+<p>Customized Gate Control (CGC).</p>
+<p>This method is proposed in <a class="reference external" href="https://dl.acm.org/doi/10.1145/3383313.3412236">Progressive Layered Extraction (PLE): A Novel Multi-Task Learning (MTL) Model for Personalized Recommendations (ACM RecSys 2020 Best Paper)</a> and implemented by us.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img_size</strong> (<em>list</em>) – The size of input data. For example, [3, 244, 244] for input images with size 3x224x224.</p></li>
+<li><p><strong>num_experts</strong> (<em>list</em>) – The numbers of experts shared for all tasks and specific to each task, respectively. Each expert is the encoder network.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.architecture.CGC.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.architecture.CGC.forward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LibMTL.architecture.PLE">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PLE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoder_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decoders</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rep_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multi_input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/LibMTL/architecture/PLE.html#PLE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LibMTL.architecture.PLE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="abstract_arch/index.html#LibMTL.architecture.abstract_arch.AbsArchitecture" title="LibMTL.architecture.abstract_arch.AbsArchitecture"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LibMTL.architecture.abstract_arch.AbsArchitecture</span></code></a></p>
+<p>Progressive Layered Extraction (PLE).</p>
+<p>This method is proposed in <a class="reference external" href="https://dl.acm.org/doi/10.1145/3383313.3412236">Progressive Layered Extraction (PLE): A Novel Multi-Task Learning (MTL) Model for Personalized Recommendations (ACM RecSys 2020 Best Paper)</a> and implemented by us.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img_size</strong> (<em>list</em>) – The size of input data. For example, [3, 244, 244] for input images with size 3x224x224.</p></li>
+<li><p><strong>num_experts</strong> (<em>list</em>) – The numbers of experts shared for all tasks and specific to each task, respectively. Each expert is the encoder network.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#LibMTL.architecture.PLE" title="LibMTL.architecture.PLE"><code class="xref py py-class docutils literal notranslate"><span class="pre">PLE</span></code></a> does not work with multiple inputs MTL problem, i.e., <code class="docutils literal notranslate"><span class="pre">multi_input</span></code> must be <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p><a class="reference internal" href="#LibMTL.architecture.PLE" title="LibMTL.architecture.PLE"><code class="xref py py-class docutils literal notranslate"><span class="pre">PLE</span></code></a> is only supported with ResNet-based encoder.</p></li>
+</ul>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.architecture.PLE.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.architecture.PLE.forward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.architecture.PLE.get_share_params">
+<span class="sig-name descname"><span class="pre">get_share_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.architecture.PLE.get_share_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.architecture.PLE.zero_grad_share_params">
+<span class="sig-name descname"><span class="pre">zero_grad_share_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.architecture.PLE.zero_grad_share_params" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="LibMTL.architecture.DSelect_k">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DSelect_k</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encoder_class</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decoders</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rep_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">multi_input</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/LibMTL/architecture/DSelect_k.html#DSelect_k"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#LibMTL.architecture.DSelect_k" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="MMoE/index.html#LibMTL.architecture.MMoE.MMoE" title="LibMTL.architecture.MMoE.MMoE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LibMTL.architecture.MMoE.MMoE</span></code></a></p>
+<p>DSelect-k.</p>
+<p>This method is proposed in <a class="reference external" href="https://openreview.net/forum?id=tKlYQJLYN8v">DSelect-k: Differentiable Selection in the Mixture of Experts with Applications to Multi-Task Learning (NeurIPS 2021)</a> and implemented by modifying from the <a class="reference external" href="https://github.com/google-research/google-research/tree/master/dselect_k_moe">official TensorFlow implementation</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img_size</strong> (<em>list</em>) – The size of input data. For example, [3, 244, 244] for input images with size 3x224x224.</p></li>
+<li><p><strong>num_experts</strong> (<em>int</em>) – The number of experts shared for all tasks. Each expert is the encoder network.</p></li>
+<li><p><strong>num_nonzeros</strong> (<em>int</em>) – The number of selected experts.</p></li>
+<li><p><strong>kgamma</strong> (<em>float</em><em>, </em><em>default=1.0</em>) – A scaling parameter for the smooth-step function.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="LibMTL.architecture.DSelect_k.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#LibMTL.architecture.DSelect_k.forward" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="LibMTL" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../model/index.html" class="btn btn-neutral float-right" title="LibMTL.model" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Baijiong Lin and Yu Zhang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

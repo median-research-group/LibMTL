@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; LibMTL  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Installation" href="installation.html" />
+    <link rel="prev" title="LibMTL: A PyTorch Library for Multi-Task Learning" href="../../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> LibMTL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#supported-algorithms">Supported Algorithms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#citation">Citation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contributors">Contributors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contact-us">Contact Us</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#acknowledgements">Acknowledgements</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/mtl.html">What is Multi-Task Learning?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/framework.html">Overall Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/benchmark.html">Run a Benckmark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../develop/dataset.html">Apply to a New Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../develop/arch.html">Customize an Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../develop/weighting.html">Customize a Weighting Strategy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/loss/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.loss</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/utils/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.utils</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/model/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.model</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/config/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.config</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/metrics/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.metrics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/weighting/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.weighting</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/architecture/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.architecture</span></code></a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">LibMTL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/getting_started/introduction.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">LibMTL</span></code> is a open-source library built with <a class="reference external" href="https://pytorch.org/">PyTorch</a> for Multi-Task Learning (MTL) research and applications. This library has three characteristics as follows.</p>
+<ul class="simple">
+<li><p><strong>Unified</strong>:  <code class="docutils literal notranslate"><span class="pre">LibMTL</span></code> provides a unified code base to implement and a consistent evaluation procedure including data processing, metric objectives, and hyper-parameters on several representative MTL benchmark datasets, which allows quantitative, fair, and consistent comparisons between different algorithms.</p></li>
+<li><p><strong>Comprehensive</strong>: <code class="docutils literal notranslate"><span class="pre">LibMTL</span></code> supports 84 MTL algorithms combined by 7 architectures and 12 weighting strategies. Meanwhile, <code class="docutils literal notranslate"><span class="pre">LibMTL</span></code> provides a fair comparison on 3 computer vision datasets.</p></li>
+<li><p><strong>Extensible</strong>:  The construction of <code class="docutils literal notranslate"><span class="pre">LibMTL</span></code> follows the modular design principles, which allows users to flexibly and conveniently add customized components or make personalized modifications. Therefore, researchers and applicators can easily and fast develop novel MTL weighting strategies and architectures or apply the existing MTL algorithms to new application scenarios with the support of <code class="docutils literal notranslate"><span class="pre">LibMTL</span></code>.</p></li>
+</ul>
+<div class="section" id="supported-algorithms">
+<h2>Supported Algorithms<a class="headerlink" href="#supported-algorithms" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">LibMTL</span></code> currently supports the following algorithms:</p>
+<ul class="simple">
+<li><p>12 weighting strategies.</p></li>
+</ul>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Weighting Strategy</th>
+<th>Venues</th>
+<th>Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Equally Weighting (EW)</td>
+<td>-</td>
+<td>Implemented by us</td>
+</tr>
+<tr>
+<td>Gradient Normalization (<a href="http://proceedings.mlr.press/v80/chen18a/chen18a.pdf">GradNorm</a>)</td>
+<td>ICML 2018</td>
+<td>Implemented by us</td>
+</tr>
+<tr>
+<td>Uncertainty Weights (<a href="https://openaccess.thecvf.com/content_cvpr_2018/papers/Kendall_Multi-Task_Learning_Using_CVPR_2018_paper.pdf">UW</a>)</td>
+<td>CVPR 2018</td>
+<td>Implemented by us</td>
+</tr>
+<tr>
+<td><a href="https://papers.nips.cc/paper/2018/hash/432aca3a1e345e339f35a30c8f65edce-Abstract.html">MGDA</a></td>
+<td>NeurIPS 2018</td>
+<td>Modified from <a href="https://github.com/isl-org/MultiObjectiveOptimization">official PyTorch implementation</a></td>
+</tr>
+<tr>
+<td>Dynamic Weight Average (<a href="https://openaccess.thecvf.com/content_CVPR_2019/papers/Liu_End-To-End_Multi-Task_Learning_With_Attention_CVPR_2019_paper.pdf">DWA</a>)</td>
+<td>CVPR 2019</td>
+<td>Modified from <a href="https://github.com/lorenmt/mtan">official PyTorch implementation</a></td>
+</tr>
+<tr>
+<td>Geometric Loss Strategy (<a href="https://openaccess.thecvf.com/content_CVPRW_2019/papers/WAD/Chennupati_MultiNet_Multi-Stream_Feature_Aggregation_and_Geometric_Loss_Strategy_for_Multi-Task_CVPRW_2019_paper.pdf">GLS</a>)</td>
+<td>CVPR 2019 workshop</td>
+<td>Implemented by us</td>
+</tr>
+<tr>
+<td>Projecting Conflicting Gradient (<a href="https://papers.nips.cc/paper/2020/hash/3fe78a8acf5fda99de95303940a2420c-Abstract.html">PCGrad</a>)</td>
+<td>NeurIPS 2020</td>
+<td>Implemented by us</td>
+</tr>
+<tr>
+<td>Gradient sign Dropout (<a href="https://papers.nips.cc/paper/2020/hash/16002f7a455a94aa4e91cc34ebdb9f2d-Abstract.html">GradDrop</a>)</td>
+<td>NeurIPS 2020</td>
+<td>Implemented by us</td>
+</tr>
+<tr>
+<td>Impartial Multi-Task Learning (<a href="https://openreview.net/forum?id=IMPnRXEWpvr">IMTL</a>)</td>
+<td>ICLR 2021</td>
+<td>Implemented by us</td>
+</tr>
+<tr>
+<td>Gradient Vaccine (<a href="https://openreview.net/forum?id=F1vEjWK-lH_">GradVac</a>)</td>
+<td>ICLR 2021 Spotlight</td>
+<td>Implemented by us</td>
+</tr>
+<tr>
+<td>Conflict-Averse Gradient descent (<a href="https://openreview.net/forum?id=_61Qh8tULj_">CAGrad</a>)</td>
+<td>NeurIPS 2021</td>
+<td>Modified from <a href="https://github.com/Cranial-XIX/CAGrad">official PyTorch implementation</a></td>
+</tr>
+<tr>
+<td>Random Loss Weighting (<a href="https://arxiv.org/abs/2111.10603">RLW</a>)</td>
+<td>arXiv</td>
+<td>Implemented by us</td>
+</tr>
+</tbody>
+</table><ul class="simple">
+<li><p>7 architectures.</p></li>
+</ul>
+<table border="1" class="docutils">
+<thead>
+<tr>
+<th>Architecture</th>
+<th>Venues</th>
+<th>Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hrad Parameter Sharing (<a href="https://dl.acm.org/doi/10.5555/3091529.3091535">HPS</a>)</td>
+<td>ICML 1993</td>
+<td>Implemented by us</td>
+</tr>
+<tr>
+<td>Cross-stitch Networks (<a href="https://openaccess.thecvf.com/content_cvpr_2016/papers/Misra_Cross-Stitch_Networks_for_CVPR_2016_paper.pdf">Cross_stitch</a>)</td>
+<td>CVPR 2016</td>
+<td>Implemented by us</td>
+</tr>
+<tr>
+<td>Multi-gate Mixture-of-Experts (<a href="https://dl.acm.org/doi/10.1145/3219819.3220007">MMoE</a>)</td>
+<td>KDD 2018</td>
+<td>Implemented by us</td>
+</tr>
+<tr>
+<td>Multi-Task Attention Network (<a href="https://openaccess.thecvf.com/content_CVPR_2019/papers/Liu_End-To-End_Multi-Task_Learning_With_Attention_CVPR_2019_paper.pdf">MTAN</a>)</td>
+<td>CVPR 2019</td>
+<td>Modified from <a href="https://github.com/lorenmt/mtan">official PyTorch implementation</a></td>
+</tr>
+<tr>
+<td>Customized Gate Control (<a href="https://dl.acm.org/doi/10.1145/3383313.3412236">CGC</a>)</td>
+<td>ACM RecSys 2020 Best Paper</td>
+<td>Implemented by us</td>
+</tr>
+<tr>
+<td>Progressive Layered Extraction (<a href="https://dl.acm.org/doi/10.1145/3383313.3412236">PLE</a>)</td>
+<td>ACM RecSys 2020 Best Paper</td>
+<td>Implemented by us</td>
+</tr>
+<tr>
+<td><a href="https://openreview.net/forum?id=tKlYQJLYN8v">DSelect-k</a></td>
+<td>NeurIPS 2021</td>
+<td>Modified from <a href="https://github.com/google-research/google-research/tree/master/dselect_k_moe">official TensorFlow implementation</a></td>
+</tr>
+</tbody>
+</table><ul class="simple">
+<li><p>84 combinations of different architectures and weighting strategies.</p></li>
+</ul>
+</div>
+<div class="section" id="citation">
+<h2>Citation<a class="headerlink" href="#citation" title="Permalink to this headline">¶</a></h2>
+<p>If you find <code class="docutils literal notranslate"><span class="pre">LibMTL</span></code> useful for your research or development, please citing the following:</p>
+<div class="highlight-latex notranslate"><div class="highlight"><pre><span></span>@misc<span class="nb">{</span>LibMTL,
+ author = <span class="nb">{</span>Baijiong Lin and Yu Zhang<span class="nb">}</span>,
+ title = <span class="nb">{</span>LibMTL: A PyTorch Library for Multi-Task Learning<span class="nb">}</span>,
+ year = <span class="nb">{</span>2021<span class="nb">}</span>,
+ publisher = <span class="nb">{</span>GitHub<span class="nb">}</span>,
+ journal = <span class="nb">{</span>GitHub repository<span class="nb">}</span>,
+ howpublished = <span class="nb">{</span><span class="k">\url</span><span class="nb">{</span>https://github.com/median-research-group/LibMTL<span class="nb">}}</span>
+<span class="nb">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="contributors">
+<h2>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">LibMTL</span></code> is developed and maintained by <a class="reference external" href="https://baijiong-lin.github.io">Baijiong Lin</a> and <a class="reference external" href="http://cse.sustech.edu.cn/faculty/~zhangy/">Yu Zhang</a>.</p>
+</div>
+<div class="section" id="contact-us">
+<h2>Contact Us<a class="headerlink" href="#contact-us" title="Permalink to this headline">¶</a></h2>
+<p>If you have any question or suggestion, please feel free to contact us by <a class="reference external" href="https://github.com/median-research-group/LibMTL/issues">raising an issue</a> or sending an email to <code class="docutils literal notranslate"><span class="pre">linbj&#64;mail.sustech.edu.cn</span></code>.</p>
+</div>
+<div class="section" id="acknowledgements">
+<h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this headline">¶</a></h2>
+<p>We would like to thank the authors that release the public repositories as follows (listed alphabetically):  <a class="reference external" href="https://github.com/Cranial-XIX/CAGrad">CAGrad</a>, <a class="reference external" href="https://github.com/google-research/google-research/tree/master/dselect_k_moe">dselect_k_moe</a>, <a class="reference external" href="https://github.com/isl-org/MultiObjectiveOptimization">MultiObjectiveOptimization</a>, and <a class="reference external" href="https://github.com/lorenmt/mtan">mtan</a>.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../index.html" class="btn btn-neutral float-left" title="LibMTL: A PyTorch Library for Multi-Task Learning" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Baijiong Lin and Yu Zhang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

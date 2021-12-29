@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apply to a New Dataset &mdash; LibMTL  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Customize an Architecture" href="arch.html" />
+    <link rel="prev" title="Office-31 and Office-Home" href="../user_guide/benchmark/office.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> LibMTL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../getting_started/quick_start.html">Quick Start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/mtl.html">What is Multi-Task Learning?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/framework.html">Overall Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/benchmark.html">Run a Benckmark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Apply to a New Dataset</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#define-a-mtl-problem">Define a MTL problem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example-1-the-office-31-dataset">Example 1 (The Office-31 Dataset)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-2-the-nyuv2-dataset">Example 2 (The NYUv2 Dataset)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#prepare-dataloaders">Prepare Dataloaders</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Example 1 (The Office-31 Dataset)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Example 2 (The NYUv2 Dataset)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#define-encoder-and-decoders">Define Encoder and Decoders</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Example 1 (The Office-31 Dataset)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">Example 2 (The NYUv2 Dataset)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#instantiate-the-training-framework">Instantiate the Training Framework</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id5">Example 1 (The Office-31 Dataset)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Example 2 (The NYUv2 Dataset)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#run-a-model">Run a Model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="arch.html">Customize an Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="weighting.html">Customize a Weighting Strategy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/loss/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.loss</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/utils/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.utils</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/model/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.model</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/config/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.config</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/metrics/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.metrics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/weighting/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.weighting</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../_autoapi/LibMTL/architecture/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.architecture</span></code></a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">LibMTL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Apply to a New Dataset</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/docs/develop/dataset.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="apply-to-a-new-dataset">
+<h1>Apply to a New Dataset<a class="headerlink" href="#apply-to-a-new-dataset" title="Permalink to this headline">¶</a></h1>
+<p>Here we would like to introduce how to apply <code class="docutils literal notranslate"><span class="pre">LibMTL</span></code> to a new dataset.</p>
+<div class="section" id="define-a-mtl-problem">
+<h2>Define a MTL problem<a class="headerlink" href="#define-a-mtl-problem" title="Permalink to this headline">¶</a></h2>
+<p>Firstly, you need to clear the the type of this MTL problem (i.e. a multi-label problem or multi-input problem, refer to <a class="reference external" href="./mtl.html#network-architecture">here</a>) and the information of each task including the task’s name, the instantiation of metric and loss classes, and whether the higher metric score the better performance or not.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">multi_input</span></code> is a command-line argument while all tasks’ information need to be defined as a dictionary. <code class="docutils literal notranslate"><span class="pre">LibMTL</span></code> provides some common loss functions and metrics, please refer to <a class="reference internal" href="../_autoapi/LibMTL/loss/index.html#module-LibMTL.loss" title="LibMTL.loss"><code class="xref py py-class docutils literal notranslate"><span class="pre">LibMTL.loss</span></code></a> and <a class="reference internal" href="../_autoapi/LibMTL/metrics/index.html#module-LibMTL.metrics" title="LibMTL.metrics"><code class="xref py py-class docutils literal notranslate"><span class="pre">LibMTL.metrics</span></code></a>, respectively. The example of a three-tasks MTL problem on the Office-31 dataset is as follows.</p>
+<div class="section" id="example-1-the-office-31-dataset">
+<h3>Example 1 (The Office-31 Dataset)<a class="headerlink" href="#example-1-the-office-31-dataset" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">LibMTL.loss</span> <span class="kn">import</span> <span class="n">CELoss</span>
+<span class="kn">from</span> <span class="nn">LibMTL.metrics</span> <span class="kn">import</span> <span class="n">AccMetric</span>
+
+<span class="c1"># define tasks</span>
+<span class="n">task_name</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;amazon&#39;</span><span class="p">,</span> <span class="s1">&#39;dslr&#39;</span><span class="p">,</span> <span class="s1">&#39;webcam&#39;</span><span class="p">]</span>
+<span class="n">task_dict</span> <span class="o">=</span> <span class="p">{</span><span class="n">task</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;metrics&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Acc&#39;</span><span class="p">],</span>
+                    <span class="s1">&#39;metrics_fn&#39;</span><span class="p">:</span> <span class="n">AccMetric</span><span class="p">(),</span>
+                    <span class="s1">&#39;loss_fn&#39;</span><span class="p">:</span> <span class="n">CELoss</span><span class="p">(),</span>
+                    <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]}</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">task_name</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Besides, <code class="docutils literal notranslate"><span class="pre">LibMTL</span></code> also supports users to customize new loss and metric classes. For example, if we would like to develop the metric classes for the segmentation task on the NYUv2 dataset, we need to inherit <a class="reference internal" href="../_autoapi/LibMTL/metrics/index.html#LibMTL.metrics.AbsMetric" title="LibMTL.metrics.AbsMetric"><code class="xref py py-class docutils literal notranslate"><span class="pre">LibMTL.metrics.AbsMetric</span></code></a> and rewrite the corresponding methods like <code class="xref py py-func docutils literal notranslate"><span class="pre">update_fun()</span></code>, <code class="xref py py-func docutils literal notranslate"><span class="pre">score_fun()</span></code>, and <code class="xref py py-func docutils literal notranslate"><span class="pre">reinit()</span></code> here, please see <a class="reference internal" href="../_autoapi/LibMTL/metrics/index.html#LibMTL.metrics.AbsMetric" title="LibMTL.metrics.AbsMetric"><code class="xref py py-class docutils literal notranslate"><span class="pre">LibMTL.metrics.AbsMetric</span></code></a> for details. The loss class for segmentation is customized similarly, please see <a class="reference internal" href="../_autoapi/LibMTL/loss/index.html#LibMTL.loss.AbsLoss" title="LibMTL.loss.AbsLoss"><code class="xref py py-class docutils literal notranslate"><span class="pre">LibMTL.loss.AbsLoss</span></code></a> for details.</p>
+</div>
+<div class="section" id="example-2-the-nyuv2-dataset">
+<h3>Example 2 (The NYUv2 Dataset)<a class="headerlink" href="#example-2-the-nyuv2-dataset" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">LibMTL.metrics</span> <span class="kn">import</span> <span class="n">AbsMetric</span>
+
+<span class="c1"># seg</span>
+<span class="k">class</span> <span class="nc">SegMetric</span><span class="p">(</span><span class="n">AbsMetric</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">SegMetric</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_classes</span> <span class="o">=</span> <span class="mi">13</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">record</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">num_classes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_classes</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">update_fun</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">gt</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">record</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">record</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">pred</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">pred</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="n">gt</span> <span class="o">=</span> <span class="n">gt</span><span class="o">.</span><span class="n">long</span><span class="p">()</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="p">(</span><span class="n">gt</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">gt</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_classes</span><span class="p">)</span>
+        <span class="n">inds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_classes</span> <span class="o">*</span> <span class="n">gt</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span> <span class="o">+</span> <span class="n">pred</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">record</span> <span class="o">+=</span> <span class="n">torch</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">inds</span><span class="p">,</span> <span class="n">minlength</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_classes</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_classes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_classes</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">score_fun</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">record</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+        <span class="n">iu</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">h</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">h</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">torch</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">h</span><span class="p">))</span>
+        <span class="n">acc</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">h</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">iu</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="n">acc</span><span class="o">.</span><span class="n">item</span><span class="p">()]</span>
+    
+    <span class="k">def</span> <span class="nf">reinit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">record</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">num_classes</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_classes</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The customized loss and metric classes of three tasks on the NYUv2 dataset are put in <code class="docutils literal notranslate"><span class="pre">examples/nyu/utils.py</span></code>. After that, the three-tasks MTL problem on the NYUv2 dataset is defined as follows.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># define tasks</span>
+<span class="n">task_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;segmentation&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;metrics&#39;</span><span class="p">:[</span><span class="s1">&#39;mIoU&#39;</span><span class="p">,</span> <span class="s1">&#39;pixAcc&#39;</span><span class="p">],</span> 
+                              <span class="s1">&#39;metrics_fn&#39;</span><span class="p">:</span> <span class="n">SegMetric</span><span class="p">(),</span>
+                              <span class="s1">&#39;loss_fn&#39;</span><span class="p">:</span> <span class="n">SegLoss</span><span class="p">(),</span>
+                              <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]},</span> 
+             <span class="s1">&#39;depth&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;metrics&#39;</span><span class="p">:[</span><span class="s1">&#39;abs_err&#39;</span><span class="p">,</span> <span class="s1">&#39;rel_err&#39;</span><span class="p">],</span> 
+                       <span class="s1">&#39;metrics_fn&#39;</span><span class="p">:</span> <span class="n">DepthMetric</span><span class="p">(),</span>
+                       <span class="s1">&#39;loss_fn&#39;</span><span class="p">:</span> <span class="n">DepthLoss</span><span class="p">(),</span>
+                       <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]},</span>
+             <span class="s1">&#39;normal&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;metrics&#39;</span><span class="p">:[</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;median&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;11.25&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;22.5&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;30&#39;</span><span class="p">],</span> 
+                        <span class="s1">&#39;metrics_fn&#39;</span><span class="p">:</span> <span class="n">NormalMetric</span><span class="p">(),</span>
+                        <span class="s1">&#39;loss_fn&#39;</span><span class="p">:</span> <span class="n">NormalLoss</span><span class="p">(),</span>
+                        <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]}}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="prepare-dataloaders">
+<h2>Prepare Dataloaders<a class="headerlink" href="#prepare-dataloaders" title="Permalink to this headline">¶</a></h2>
+<p>Secondly, you need to prepare the dataloaders with the correct format. For multi-input problem like the Office-31 datatset, each task need to have its own dataloader and all dataloaders are put in a dictionary with the task names as the corresponding keys.</p>
+<div class="section" id="id1">
+<h3>Example 1 (The Office-31 Dataset)<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">train_dataloaders</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;amazon&#39;</span><span class="p">:</span> <span class="n">amazon_dataloader</span><span class="p">,</span>
+                     <span class="s1">&#39;dslr&#39;</span><span class="p">:</span> <span class="n">dslr_dataloader</span><span class="p">,</span>
+                     <span class="s1">&#39;webcam&#39;</span><span class="p">:</span> <span class="n">webcam_dataloader</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>For multi-label problem like the NYUv2 dataset, all tasks share a common dataloader, which outputs a list in every iteration. The first element of this list is the input data tensor and the second element is a dictionary of the label tensors with the task names as the corresponding keys. An example is shown as follows.</p>
+</div>
+<div class="section" id="id2">
+<h3>Example 2 (The NYUv2 Dataset)<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nyuv2_train_loader</span> <span class="o">=</span> <span class="n">xx</span>
+<span class="c1"># print(iter(nyuv2_train_loader).next())</span>
+<span class="c1"># [torch.Tensor, {&#39;segmentation&#39;: torch.Tensor,</span>
+<span class="c1"># 		  &#39;depth&#39;: torch.Tensor,</span>
+<span class="c1"># 		  &#39;normal&#39;: torch.Tensor}]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="define-encoder-and-decoders">
+<h2>Define Encoder and Decoders<a class="headerlink" href="#define-encoder-and-decoders" title="Permalink to this headline">¶</a></h2>
+<p>Thirdly, you need to define the shared encoder and task-specific decoders. <code class="docutils literal notranslate"><span class="pre">LibMTL</span></code> provides some common networks like ResNet-based network, please see <a class="reference internal" href="../_autoapi/LibMTL/model/index.html#module-LibMTL.model" title="LibMTL.model"><code class="xref py py-class docutils literal notranslate"><span class="pre">LibMTL.model</span></code></a> for details. Also, you can customize the encoder and decoders.</p>
+<p>Note that the encoder does not be instantiated while the decoders should be instantiated.</p>
+<div class="section" id="id3">
+<h3>Example 1 (The Office-31 Dataset)<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">from</span> <span class="nn">LibMTL.model</span> <span class="kn">import</span> <span class="n">resnet18</span>
+
+<span class="c1"># define encoder and decoders</span>
+<span class="k">class</span> <span class="nc">Encoder</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Encoder</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">hidden_dim</span> <span class="o">=</span> <span class="mi">512</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resnet_network</span> <span class="o">=</span> <span class="n">resnet18</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">avgpool</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">AdaptiveAvgPool2d</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hidden_layer_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">),</span>
+                                  <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">),</span> <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hidden_layer</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">hidden_layer_list</span><span class="p">)</span>
+
+        <span class="c1"># initialization</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hidden_layer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">normal_</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.005</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hidden_layer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">bias</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">fill_</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">):</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">resnet_network</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">avgpool</span><span class="p">(</span><span class="n">out</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hidden_layer</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span>
+
+<span class="n">decoders</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleDict</span><span class="p">({</span><span class="n">task</span><span class="p">:</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="n">class_num</span><span class="p">)</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">task_name</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>If the customized encoder is a ResNet-based network and you would like to use <a class="reference internal" href="../_autoapi/LibMTL/architecture/index.html#LibMTL.architecture.MTAN" title="LibMTL.architecture.MTAN"><code class="xref py py-class docutils literal notranslate"><span class="pre">LibMTL.architecture.MTAN</span></code></a>, please make sure encoder has an attribute named <code class="docutils literal notranslate"><span class="pre">resnet_network</span></code> and corresponded to the ResNet network.</p>
+</div>
+<div class="section" id="id4">
+<h3>Example 2 (The NYUv2 Dataset)<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">aspp</span> <span class="kn">import</span> <span class="n">DeepLabHead</span>
+<span class="kn">from</span> <span class="nn">LibMTL.model</span> <span class="kn">import</span> <span class="n">resnet_dilated</span>
+
+<span class="c1"># define encoder and decoders</span>
+<span class="k">def</span> <span class="nf">encoder_class</span><span class="p">():</span>
+	<span class="k">return</span> <span class="n">resnet_dilated</span><span class="p">(</span><span class="s1">&#39;resnet50&#39;</span><span class="p">)</span>
+<span class="n">num_out_channels</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;segmentation&#39;</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span> <span class="s1">&#39;depth&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;normal&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<span class="n">decoders</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">ModuleDict</span><span class="p">({</span><span class="n">task</span><span class="p">:</span> <span class="n">DeepLabHead</span><span class="p">(</span><span class="n">encoder</span><span class="o">.</span><span class="n">feature_dim</span><span class="p">,</span> 
+                                            <span class="n">num_out_channels</span><span class="p">[</span><span class="n">task</span><span class="p">])</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">task_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="instantiate-the-training-framework">
+<h2>Instantiate the Training Framework<a class="headerlink" href="#instantiate-the-training-framework" title="Permalink to this headline">¶</a></h2>
+<p>Fourthly, you need to instantiate the training framework, please see <a class="reference internal" href="../_autoapi/LibMTL/index.html#LibMTL.Trainer" title="LibMTL.Trainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">LibMTL.Trainer</span></code></a> for more details.</p>
+<div class="section" id="id5">
+<h3>Example 1 (The Office-31 Dataset)<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">LibMTL</span> <span class="kn">import</span> <span class="n">Trainer</span>
+
+<span class="n">officeModel</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">task_dict</span><span class="o">=</span><span class="n">task_dict</span><span class="p">,</span> 
+                      <span class="n">weighting</span><span class="o">=</span><span class="n">weighting_method</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">params</span><span class="o">.</span><span class="n">weighting</span><span class="p">],</span> 
+                      <span class="n">architecture</span><span class="o">=</span><span class="n">architecture_method</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">params</span><span class="o">.</span><span class="n">arch</span><span class="p">],</span> 
+                      <span class="n">encoder_class</span><span class="o">=</span><span class="n">Encoder</span><span class="p">,</span> 
+                      <span class="n">decoders</span><span class="o">=</span><span class="n">decoders</span><span class="p">,</span>
+                      <span class="n">rep_grad</span><span class="o">=</span><span class="n">params</span><span class="o">.</span><span class="n">rep_grad</span><span class="p">,</span>
+                      <span class="n">multi_input</span><span class="o">=</span><span class="n">params</span><span class="o">.</span><span class="n">multi_input</span><span class="p">,</span>
+                      <span class="n">optim_param</span><span class="o">=</span><span class="n">optim_param</span><span class="p">,</span>
+                      <span class="n">scheduler_param</span><span class="o">=</span><span class="n">scheduler_param</span><span class="p">,</span>
+                      <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Also, you can inherit <a class="reference internal" href="../_autoapi/LibMTL/index.html#LibMTL.Trainer" title="LibMTL.Trainer"><code class="xref py py-class docutils literal notranslate"><span class="pre">LibMTL.Trainer</span></code></a> class and rewrite some functions like <code class="xref py py-func docutils literal notranslate"><span class="pre">process_preds()</span></code>.</p>
+</div>
+<div class="section" id="id6">
+<h3>Example 2 (The NYUv2 Dataset)<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">LibMTL</span> <span class="kn">import</span> <span class="n">Trainer</span>
+
+<span class="k">class</span> <span class="nc">NYUtrainer</span><span class="p">(</span><span class="n">Trainer</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_dict</span><span class="p">,</span> <span class="n">weighting</span><span class="p">,</span> <span class="n">architecture</span><span class="p">,</span> <span class="n">encoder_class</span><span class="p">,</span> 
+                 <span class="n">decoders</span><span class="p">,</span> <span class="n">rep_grad</span><span class="p">,</span> <span class="n">multi_input</span><span class="p">,</span> <span class="n">optim_param</span><span class="p">,</span> <span class="n">scheduler_param</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">NYUtrainer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">task_dict</span><span class="o">=</span><span class="n">task_dict</span><span class="p">,</span> 
+                                        <span class="n">weighting</span><span class="o">=</span><span class="n">weighting_method</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">weighting</span><span class="p">],</span> 
+                                        <span class="n">architecture</span><span class="o">=</span><span class="n">architecture_method</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">architecture</span><span class="p">],</span> 
+                                        <span class="n">encoder_class</span><span class="o">=</span><span class="n">encoder_class</span><span class="p">,</span> 
+                                        <span class="n">decoders</span><span class="o">=</span><span class="n">decoders</span><span class="p">,</span>
+                                        <span class="n">rep_grad</span><span class="o">=</span><span class="n">rep_grad</span><span class="p">,</span>
+                                        <span class="n">multi_input</span><span class="o">=</span><span class="n">multi_input</span><span class="p">,</span>
+                                        <span class="n">optim_param</span><span class="o">=</span><span class="n">optim_param</span><span class="p">,</span>
+                                        <span class="n">scheduler_param</span><span class="o">=</span><span class="n">scheduler_param</span><span class="p">,</span>
+                                        <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">process_preds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preds</span><span class="p">):</span>
+        <span class="n">img_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">288</span><span class="p">,</span> <span class="mi">384</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">task_name</span><span class="p">:</span>
+            <span class="n">preds</span><span class="p">[</span><span class="n">task</span><span class="p">]</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span><span class="n">preds</span><span class="p">[</span><span class="n">task</span><span class="p">],</span> <span class="n">img_size</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;bilinear&#39;</span><span class="p">,</span> <span class="n">align_corners</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">preds</span>
+
+<span class="n">NYUmodel</span> <span class="o">=</span> <span class="n">NYUtrainer</span><span class="p">(</span><span class="n">task_dict</span><span class="o">=</span><span class="n">task_dict</span><span class="p">,</span> 
+                      <span class="n">weighting</span><span class="o">=</span><span class="n">params</span><span class="o">.</span><span class="n">weighting</span><span class="p">,</span> 
+                      <span class="n">architecture</span><span class="o">=</span><span class="n">params</span><span class="o">.</span><span class="n">arch</span><span class="p">,</span> 
+                      <span class="n">encoder_class</span><span class="o">=</span><span class="n">encoder_class</span><span class="p">,</span> 
+                      <span class="n">decoders</span><span class="o">=</span><span class="n">decoders</span><span class="p">,</span>
+                      <span class="n">rep_grad</span><span class="o">=</span><span class="n">params</span><span class="o">.</span><span class="n">rep_grad</span><span class="p">,</span>
+                      <span class="n">multi_input</span><span class="o">=</span><span class="n">params</span><span class="o">.</span><span class="n">multi_input</span><span class="p">,</span>
+                      <span class="n">optim_param</span><span class="o">=</span><span class="n">optim_param</span><span class="p">,</span>
+                      <span class="n">scheduler_param</span><span class="o">=</span><span class="n">scheduler_param</span><span class="p">,</span>
+                      <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="run-a-model">
+<h2>Run a Model<a class="headerlink" href="#run-a-model" title="Permalink to this headline">¶</a></h2>
+<p>Finally, you can training the model using <code class="xref py py-func docutils literal notranslate"><span class="pre">train()</span></code> function like this.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">officeModel</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">train_dataloaders</span><span class="o">=</span><span class="n">train_dataloaders</span><span class="p">,</span> 
+                  <span class="n">val_dataloaders</span><span class="o">=</span><span class="n">val_dataloaders</span><span class="p">,</span>
+                  <span class="n">test_dataloaders</span><span class="o">=</span><span class="n">test_dataloaders</span><span class="p">,</span> 
+                  <span class="n">epochs</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When the training process ends, the best results on the test dataset will be printed automatically, please see <a class="reference internal" href="../_autoapi/LibMTL/index.html#LibMTL.Trainer.train" title="LibMTL.Trainer.train"><code class="xref py py-func docutils literal notranslate"><span class="pre">LibMTL.Trainer.train()</span></code></a> and <a class="reference internal" href="../_autoapi/LibMTL/utils/index.html#LibMTL.utils.count_improvement" title="LibMTL.utils.count_improvement"><code class="xref py py-func docutils literal notranslate"><span class="pre">LibMTL.utils.count_improvement()</span></code></a> for details.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../user_guide/benchmark/office.html" class="btn btn-neutral float-left" title="Office-31 and Office-Home" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="arch.html" class="btn btn-neutral float-right" title="Customize an Architecture" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Baijiong Lin and Yu Zhang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LibMTL.trainer &mdash; LibMTL  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> LibMTL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/getting_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/getting_started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/getting_started/quick_start.html">Quick Start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/user_guide/mtl.html">What is Multi-Task Learning?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/user_guide/framework.html">Overall Framework</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/user_guide/benchmark.html">Run a Benckmark</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/develop/dataset.html">Apply to a New Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/develop/arch.html">Customize an Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/develop/weighting.html">Customize a Weighting Strategy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/_autoapi/LibMTL/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/_autoapi/LibMTL/loss/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.loss</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/_autoapi/LibMTL/utils/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.utils</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/_autoapi/LibMTL/model/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.model</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/_autoapi/LibMTL/config/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.config</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/_autoapi/LibMTL/metrics/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.metrics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/_autoapi/LibMTL/weighting/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.weighting</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/_autoapi/LibMTL/architecture/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.architecture</span></code></a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">LibMTL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>LibMTL.trainer</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for LibMTL.trainer</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">LibMTL._record</span> <span class="kn">import</span> <span class="n">_PerformanceMeter</span>
+<span class="kn">from</span> <span class="nn">LibMTL.utils</span> <span class="kn">import</span> <span class="n">count_parameters</span>
+
+<div class="viewcode-block" id="Trainer"><a class="viewcode-back" href="../../docs/_autoapi/LibMTL/trainer/index.html#LibMTL.Trainer">[docs]</a><span class="k">class</span> <span class="nc">Trainer</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&#39;&#39;&#39;A Multi-Task Learning Trainer.</span>
+
+<span class="sd">    This is a unified and extensible training framework for multi-task learning. </span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        task_dict (dict): A dictionary of name-information pairs of type (:class:`str`, :class:`dict`). \</span>
+<span class="sd">                            The sub-dictionary for each task has four entries whose keywords are named **metrics**, \</span>
+<span class="sd">                            **metrics_fn**, **loss_fn**, **weight** and each of them corresponds to a :class:`list`.</span>
+<span class="sd">                            The list of **metrics** has ``m`` strings, repersenting the name of ``m`` metric objectives \</span>
+<span class="sd">                            for this task. The list of **metrics_fn** has two elements, i.e., the updating and score \</span>
+<span class="sd">                            functions, meaning how to update thoes objectives in the training process and get the final \</span>
+<span class="sd">                            scores, respectively. The list of **loss_fn** has ``m`` loss functions corresponding to each \</span>
+<span class="sd">                            metric objective. The list of **weight** has ``m`` binary integers corresponding to each \</span>
+<span class="sd">                            metric objective, where ``1`` means the score higher the performance of this objective better, \</span>
+<span class="sd">                            ``0`` otherwise.                           </span>
+<span class="sd">        weighting (class): A weighting strategy class based on :class:`LibMTL.weighting.abstract_weighting.AbsWeighting`.</span>
+<span class="sd">        architecture (class): An architecture class based on :class:`LibMTL.architecture.abstract_arch.AbsArchitecture`.</span>
+<span class="sd">        encoder_class (class): A neural network class.</span>
+<span class="sd">        decoders (dict): A dictionary of name-decoder pairs of type (:class:`str`, :class:`torch.nn.Module`).</span>
+<span class="sd">        rep_grad (bool): If ``True``, the gradient of the representation for each task can be computed.</span>
+<span class="sd">        multi_input (bool): Is ``True`` if each task has its own input data, ``False`` otherwise. </span>
+<span class="sd">        optim_param (dict): A dictionary of configuration for the optimizier.</span>
+<span class="sd">        scheduler_param (dict): A dictionary of configuration for learning rate scheduler. \</span>
+<span class="sd">                                 Setting it as ``None`` if you do not use a learning rate scheduler.</span>
+<span class="sd">        kwargs (dict): A dictionary of hyperparameters of weighting and architecture methods.</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">            It is recommended to use :func:`LibMTL.config.prepare_args` to return the dictionaries of ``optim_param``, \</span>
+<span class="sd">            ``scheduler_param``, and ``kwargs``.</span>
+
+<span class="sd">    Examples::</span>
+<span class="sd">        </span>
+<span class="sd">        import torch.nn as nn</span>
+<span class="sd">        from LibMTL import Trainer</span>
+<span class="sd">        from LibMTL.loss import CE_loss_fn</span>
+<span class="sd">        from LibMTL.metrics import acc_update_fun, acc_score_fun</span>
+<span class="sd">        from LibMTL.weighting import EW</span>
+<span class="sd">        from LibMTL.architecture import HPS</span>
+<span class="sd">        from LibMTL.model import ResNet18</span>
+<span class="sd">        from LibMTL.config import prepare_args</span>
+
+<span class="sd">        task_dict = {&#39;A&#39;: {&#39;metrics&#39;: [&#39;Acc&#39;],</span>
+<span class="sd">                           &#39;metrics_fn&#39;: [acc_update_fun, acc_score_fun],</span>
+<span class="sd">                           &#39;loss_fn&#39;: [CE_loss_fn],</span>
+<span class="sd">                           &#39;weight&#39;: [1]}}</span>
+<span class="sd">        </span>
+<span class="sd">        decoders = {&#39;A&#39;: nn.Linear(512, 31)}</span>
+<span class="sd">        </span>
+<span class="sd">        # You can use command-line arguments and return configurations by ``prepare_args``.</span>
+<span class="sd">        # kwargs, optim_param, scheduler_param = prepare_args(params)</span>
+<span class="sd">        optim_param = {&#39;optim&#39;: &#39;adam&#39;, &#39;lr&#39;: 1e-3, &#39;weight_decay&#39;: 1e-4}</span>
+<span class="sd">        scheduler_param = {&#39;scheduler&#39;: &#39;step&#39;}</span>
+<span class="sd">        kwargs = {&#39;weight_args&#39;: {}, &#39;arch_args&#39;: {}}</span>
+
+<span class="sd">        trainer = Trainer(task_dict=task_dict,</span>
+<span class="sd">                          weighting=EW,</span>
+<span class="sd">                          architecture=HPS,</span>
+<span class="sd">                          encoder_class=ResNet18,</span>
+<span class="sd">                          decoders=decoders,</span>
+<span class="sd">                          rep_grad=False,</span>
+<span class="sd">                          multi_input=False,</span>
+<span class="sd">                          optim_param=optim_param,</span>
+<span class="sd">                          scheduler_param=scheduler_param,</span>
+<span class="sd">                          **kwargs)</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_dict</span><span class="p">,</span> <span class="n">weighting</span><span class="p">,</span> <span class="n">architecture</span><span class="p">,</span> <span class="n">encoder_class</span><span class="p">,</span> <span class="n">decoders</span><span class="p">,</span> 
+                 <span class="n">rep_grad</span><span class="p">,</span> <span class="n">multi_input</span><span class="p">,</span> <span class="n">optim_param</span><span class="p">,</span> <span class="n">scheduler_param</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Trainer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cuda:0&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">task_dict</span> <span class="o">=</span> <span class="n">task_dict</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">task_num</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">task_dict</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">task_name</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">task_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rep_grad</span> <span class="o">=</span> <span class="n">rep_grad</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">multi_input</span> <span class="o">=</span> <span class="n">multi_input</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_prepare_model</span><span class="p">(</span><span class="n">weighting</span><span class="p">,</span> <span class="n">architecture</span><span class="p">,</span> <span class="n">encoder_class</span><span class="p">,</span> <span class="n">decoders</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_prepare_optimizer</span><span class="p">(</span><span class="n">optim_param</span><span class="p">,</span> <span class="n">scheduler_param</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">meter</span> <span class="o">=</span> <span class="n">_PerformanceMeter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">task_dict</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">multi_input</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">_prepare_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weighting</span><span class="p">,</span> <span class="n">architecture</span><span class="p">,</span> <span class="n">encoder_class</span><span class="p">,</span> <span class="n">decoders</span><span class="p">):</span>
+        
+        <span class="k">class</span> <span class="nc">MTLmodel</span><span class="p">(</span><span class="n">architecture</span><span class="p">,</span> <span class="n">weighting</span><span class="p">):</span>
+            <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_name</span><span class="p">,</span> <span class="n">encoder_class</span><span class="p">,</span> <span class="n">decoders</span><span class="p">,</span> <span class="n">rep_grad</span><span class="p">,</span> <span class="n">multi_input</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+                <span class="nb">super</span><span class="p">(</span><span class="n">MTLmodel</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">task_name</span><span class="p">,</span> <span class="n">encoder_class</span><span class="p">,</span> <span class="n">decoders</span><span class="p">,</span> <span class="n">rep_grad</span><span class="p">,</span> <span class="n">multi_input</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">init_param</span><span class="p">()</span>
+                
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">MTLmodel</span><span class="p">(</span><span class="n">task_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">task_name</span><span class="p">,</span> 
+                              <span class="n">encoder_class</span><span class="o">=</span><span class="n">encoder_class</span><span class="p">,</span> 
+                              <span class="n">decoders</span><span class="o">=</span><span class="n">decoders</span><span class="p">,</span> 
+                              <span class="n">rep_grad</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">rep_grad</span><span class="p">,</span> 
+                              <span class="n">multi_input</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">multi_input</span><span class="p">,</span>
+                              <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span>
+                              <span class="n">kwargs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;arch_args&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">count_parameters</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">_prepare_optimizer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optim_param</span><span class="p">,</span> <span class="n">scheduler_param</span><span class="p">):</span>
+        <span class="n">optim_dict</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;sgd&#39;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">,</span>
+                <span class="s1">&#39;adam&#39;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">,</span>
+                <span class="s1">&#39;adagrad&#39;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adagrad</span><span class="p">,</span>
+                <span class="s1">&#39;rmsprop&#39;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">RMSprop</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="n">scheduler_dict</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;exp&#39;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">ExponentialLR</span><span class="p">,</span>
+                <span class="s1">&#39;step&#39;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">StepLR</span><span class="p">,</span>
+                <span class="s1">&#39;cos&#39;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">CosineAnnealingLR</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="n">optim_arg</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">optim_param</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s1">&#39;optim&#39;</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim_dict</span><span class="p">[</span><span class="n">optim_param</span><span class="p">[</span><span class="s1">&#39;optim&#39;</span><span class="p">]](</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="o">**</span><span class="n">optim_arg</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">scheduler_param</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">scheduler_arg</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">scheduler_param</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="o">!=</span> <span class="s1">&#39;scheduler&#39;</span><span class="p">}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span> <span class="o">=</span> <span class="n">scheduler_dict</span><span class="p">[</span><span class="n">scheduler_param</span><span class="p">[</span><span class="s1">&#39;scheduler&#39;</span><span class="p">]](</span><span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="p">,</span> <span class="o">**</span><span class="n">scheduler_arg</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">_process_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loader</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">data</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">loader</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">loader</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">loader</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">data</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">loader</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="n">non_blocking</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">multi_input</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">task_name</span><span class="p">:</span>
+                <span class="n">label</span><span class="p">[</span><span class="n">task</span><span class="p">]</span> <span class="o">=</span> <span class="n">label</span><span class="p">[</span><span class="n">task</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="n">non_blocking</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="n">label</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">,</span> <span class="n">non_blocking</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">label</span>
+    
+<div class="viewcode-block" id="Trainer.process_preds"><a class="viewcode-back" href="../../docs/_autoapi/LibMTL/trainer/index.html#LibMTL.Trainer.process_preds">[docs]</a>    <span class="k">def</span> <span class="nf">process_preds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preds</span><span class="p">,</span> <span class="n">task_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&#39;&#39;&#39;The processing of prediction for each task. </span>
+
+<span class="sd">        - The default is no processing. If necessary, you can redefine this function. </span>
+<span class="sd">        - If ``multi_input``, ``task_name`` is valid, and ``preds`` with type :class:`torch.Tensor` is the prediction of this task.</span>
+<span class="sd">        - otherwise, ``task_name`` is invalid, and ``preds`` is a :class:`dict` of name-prediction pairs of all tasks.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            preds (dict or torch.Tensor): The prediction of ``task_name`` or all tasks.</span>
+<span class="sd">            task_name (str): The string of task name.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">preds</span></div>
+
+    <span class="k">def</span> <span class="nf">_compute_loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preds</span><span class="p">,</span> <span class="n">gts</span><span class="p">,</span> <span class="n">task_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">multi_input</span><span class="p">:</span>
+            <span class="n">train_losses</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">task_num</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">tn</span><span class="p">,</span> <span class="n">task</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">task_name</span><span class="p">):</span>
+                <span class="n">train_losses</span><span class="p">[</span><span class="n">tn</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">losses</span><span class="p">[</span><span class="n">task</span><span class="p">]</span><span class="o">.</span><span class="n">update_loss</span><span class="p">(</span><span class="n">preds</span><span class="p">[</span><span class="n">task</span><span class="p">],</span> <span class="n">gts</span><span class="p">[</span><span class="n">task</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">train_losses</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">losses</span><span class="p">[</span><span class="n">task_name</span><span class="p">]</span><span class="o">.</span><span class="n">update_loss</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">gts</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">train_losses</span>
+        
+    <span class="k">def</span> <span class="nf">_prepare_dataloaders</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataloaders</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">multi_input</span><span class="p">:</span>
+            <span class="n">loader</span> <span class="o">=</span> <span class="p">[</span><span class="n">dataloaders</span><span class="p">,</span> <span class="nb">iter</span><span class="p">(</span><span class="n">dataloaders</span><span class="p">)]</span>
+            <span class="k">return</span> <span class="n">loader</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataloaders</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">loader</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">batch_num</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">task_name</span><span class="p">:</span>
+                <span class="n">loader</span><span class="p">[</span><span class="n">task</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">dataloaders</span><span class="p">[</span><span class="n">task</span><span class="p">],</span> <span class="nb">iter</span><span class="p">(</span><span class="n">dataloaders</span><span class="p">[</span><span class="n">task</span><span class="p">])]</span>
+                <span class="n">batch_num</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataloaders</span><span class="p">[</span><span class="n">task</span><span class="p">]))</span>
+            <span class="k">return</span> <span class="n">loader</span><span class="p">,</span> <span class="n">batch_num</span>
+
+<div class="viewcode-block" id="Trainer.train"><a class="viewcode-back" href="../../docs/_autoapi/LibMTL/trainer/index.html#LibMTL.Trainer.train">[docs]</a>    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">train_dataloaders</span><span class="p">,</span> <span class="n">test_dataloaders</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> 
+              <span class="n">val_dataloaders</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">return_weight</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&#39;&#39;&#39;The training process of multi-task learning.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            train_dataloaders (dict or torch.utils.data.DataLoader): The dataloaders used for training. \</span>
+<span class="sd">                            If ``multi_input`` is ``True``, it is a dictionary of name-dataloader pairs. \</span>
+<span class="sd">                            Otherwise, it is a single dataloader which returns data and a dictionary \</span>
+<span class="sd">                            of name-label pairs in each iteration.</span>
+
+<span class="sd">            test_dataloaders (dict or torch.utils.data.DataLoader): The dataloaders used for validation or test. \</span>
+<span class="sd">                            The same structure with ``train_dataloaders``.</span>
+<span class="sd">            epochs (int): The total training epochs.</span>
+<span class="sd">            return_weight (bool): if ``True``, the loss weights will be returned.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">train_loader</span><span class="p">,</span> <span class="n">train_batch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prepare_dataloaders</span><span class="p">(</span><span class="n">train_dataloaders</span><span class="p">)</span>
+        <span class="n">train_batch</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">train_batch</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">multi_input</span> <span class="k">else</span> <span class="n">train_batch</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_weight</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">task_num</span><span class="p">,</span> <span class="n">epochs</span><span class="p">,</span> <span class="n">train_batch</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">train_loss_buffer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">task_num</span><span class="p">,</span> <span class="n">epochs</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">epoch</span> <span class="o">=</span> <span class="n">epoch</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">record_time</span><span class="p">(</span><span class="s1">&#39;begin&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">batch_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">train_batch</span><span class="p">):</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">multi_input</span><span class="p">:</span>
+                    <span class="n">train_inputs</span><span class="p">,</span> <span class="n">train_gts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_data</span><span class="p">(</span><span class="n">train_loader</span><span class="p">)</span>
+                    <span class="n">train_preds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">train_inputs</span><span class="p">)</span>
+                    <span class="n">train_preds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_preds</span><span class="p">(</span><span class="n">train_preds</span><span class="p">)</span>
+                    <span class="n">train_losses</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_loss</span><span class="p">(</span><span class="n">train_preds</span><span class="p">,</span> <span class="n">train_gts</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">train_preds</span><span class="p">,</span> <span class="n">train_gts</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">train_losses</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">task_num</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">tn</span><span class="p">,</span> <span class="n">task</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">task_name</span><span class="p">):</span>
+                        <span class="n">train_input</span><span class="p">,</span> <span class="n">train_gt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_data</span><span class="p">(</span><span class="n">train_loader</span><span class="p">[</span><span class="n">task</span><span class="p">])</span>
+                        <span class="n">train_pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">train_input</span><span class="p">,</span> <span class="n">task</span><span class="p">)</span>
+                        <span class="n">train_pred</span> <span class="o">=</span> <span class="n">train_pred</span><span class="p">[</span><span class="n">task</span><span class="p">]</span>
+                        <span class="n">train_pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_preds</span><span class="p">(</span><span class="n">train_pred</span><span class="p">,</span> <span class="n">task</span><span class="p">)</span>
+                        <span class="n">train_losses</span><span class="p">[</span><span class="n">tn</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_loss</span><span class="p">(</span><span class="n">train_pred</span><span class="p">,</span> <span class="n">train_gt</span><span class="p">,</span> <span class="n">task</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">train_pred</span><span class="p">,</span> <span class="n">train_gt</span><span class="p">,</span> <span class="n">task</span><span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+                <span class="n">w</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="n">train_losses</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;weight_args&#39;</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">w</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">batch_weight</span><span class="p">[:,</span> <span class="n">epoch</span><span class="p">,</span> <span class="n">batch_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">w</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+            
+            <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">record_time</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">get_score</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">train_loss_buffer</span><span class="p">[:,</span> <span class="n">epoch</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">loss_item</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">epoch</span><span class="o">=</span><span class="n">epoch</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;train&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">reinit</span><span class="p">()</span>
+            
+            <span class="k">if</span> <span class="n">val_dataloaders</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">has_val</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">val_dataloaders</span><span class="p">,</span> <span class="n">epoch</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;val&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="n">test_dataloaders</span><span class="p">,</span> <span class="n">epoch</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">scheduler</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">display_best_result</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">return_weight</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_weight</span></div>
+
+
+<div class="viewcode-block" id="Trainer.test"><a class="viewcode-back" href="../../docs/_autoapi/LibMTL/trainer/index.html#LibMTL.Trainer.test">[docs]</a>    <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_dataloaders</span><span class="p">,</span> <span class="n">epoch</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;test&#39;</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&#39;&#39;&#39;The test process of multi-task learning.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            test_dataloaders (dict or torch.utils.data.DataLoader): If ``multi_input`` is ``True``, \</span>
+<span class="sd">                            it is a dictionary of name-dataloader pairs. Otherwise, it is a single \</span>
+<span class="sd">                            dataloader which returns data and a dictionary of name-label pairs in each iteration.</span>
+<span class="sd">            epoch (int, default=None): The current epoch. </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">test_loader</span><span class="p">,</span> <span class="n">test_batch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prepare_dataloaders</span><span class="p">(</span><span class="n">test_dataloaders</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">record_time</span><span class="p">(</span><span class="s1">&#39;begin&#39;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">multi_input</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">batch_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">test_batch</span><span class="p">):</span>
+                    <span class="n">test_inputs</span><span class="p">,</span> <span class="n">test_gts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_data</span><span class="p">(</span><span class="n">test_loader</span><span class="p">)</span>
+                    <span class="n">test_preds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">test_inputs</span><span class="p">)</span>
+                    <span class="n">test_preds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_preds</span><span class="p">(</span><span class="n">test_preds</span><span class="p">)</span>
+                    <span class="n">test_losses</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_loss</span><span class="p">(</span><span class="n">test_preds</span><span class="p">,</span> <span class="n">test_gts</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">test_preds</span><span class="p">,</span> <span class="n">test_gts</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">tn</span><span class="p">,</span> <span class="n">task</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">task_name</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">batch_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">test_batch</span><span class="p">[</span><span class="n">tn</span><span class="p">]):</span>
+                        <span class="n">test_input</span><span class="p">,</span> <span class="n">test_gt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_data</span><span class="p">(</span><span class="n">test_loader</span><span class="p">[</span><span class="n">task</span><span class="p">])</span>
+                        <span class="n">test_pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">task</span><span class="p">)</span>
+                        <span class="n">test_pred</span> <span class="o">=</span> <span class="n">test_pred</span><span class="p">[</span><span class="n">task</span><span class="p">]</span>
+                        <span class="n">test_pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_preds</span><span class="p">(</span><span class="n">test_pred</span><span class="p">)</span>
+                        <span class="n">test_loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_loss</span><span class="p">(</span><span class="n">test_pred</span><span class="p">,</span> <span class="n">test_gt</span><span class="p">,</span> <span class="n">task</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">test_pred</span><span class="p">,</span> <span class="n">test_gt</span><span class="p">,</span> <span class="n">task</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">record_time</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">get_score</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="n">epoch</span><span class="o">=</span><span class="n">epoch</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">mode</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meter</span><span class="o">.</span><span class="n">reinit</span><span class="p">()</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Baijiong Lin and Yu Zhang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

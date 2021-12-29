@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Office-31 and Office-Home &mdash; LibMTL  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/theme_overrides.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Apply to a New Dataset" href="../../develop/dataset.html" />
+    <link rel="prev" title="NYUv2" href="nyuv2.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> LibMTL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/quick_start.html">Quick Start</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../mtl.html">What is Multi-Task Learning?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../framework.html">Overall Framework</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../benchmark.html">Run a Benckmark</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="nyuv2.html">NYUv2</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Office-31 and Office-Home</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#run-a-model">Run a Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developer Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../develop/dataset.html">Apply to a New Dataset</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../develop/arch.html">Customize an Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../develop/weighting.html">Customize a Weighting Strategy</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../_autoapi/LibMTL/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autoapi/LibMTL/loss/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.loss</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autoapi/LibMTL/utils/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.utils</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autoapi/LibMTL/model/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.model</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autoapi/LibMTL/config/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.config</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autoapi/LibMTL/metrics/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.metrics</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autoapi/LibMTL/weighting/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.weighting</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../_autoapi/LibMTL/architecture/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">LibMTL.architecture</span></code></a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">LibMTL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../benchmark.html">Run a Benckmark</a> &raquo;</li>
+      <li>Office-31 and Office-Home</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/docs/user_guide/benchmark/office.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="office-31-and-office-home">
+<h1>Office-31 and Office-Home<a class="headerlink" href="#office-31-and-office-home" title="Permalink to this headline">¶</a></h1>
+<p>The Office-31 dataset <span id="id1">[<a class="reference internal" href="#id12" title="Kate Saenko, Brian Kulis, Mario Fritz, and Trevor Darrell. Adapting visual category models to new domains. In Proceedings of the 6th European Conference on Computer Vision, 213–226. 2010.">1</a>]</span> consists of three domains: Amazon, DSLR, and Webcam, where each domain contains 31 object categories. It can be download <a class="reference external" href="https://www.cc.gatech.edu/~judy/domainadapt/#datasets_code">here</a>. This dataset contains 4,110 labeled images and we randomly split these samples with 60% for training, 20% for validation, and the rest 20% for test.</p>
+<p>The Office-Home dataset <span id="id2">[<a class="reference internal" href="#id13" title="Hemanth Venkateswara, Jose Eusebio, Shayok Chakraborty, and Sethuraman Panchanathan. Deep hashing network for unsupervised domain adaptation. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, 5018–5027. 2017.">2</a>]</span> has four domains: Artistic images (abbreviated as Art), Clip art, Product images, and Real-world images. It can be download <a class="reference external" href="https://www.hemanthdv.org/officeHomeDataset.html">here</a>. This dataset has 15,500 labeled images in total and each domain contains 65 classes. We divide the entire data in the same proportion as Office-31.</p>
+<p>For both two datasets, we consider the multi-class classification problem on each domain as a task. Thus, the <code class="docutils literal notranslate"><span class="pre">multi_input</span></code> must be <code class="docutils literal notranslate"><span class="pre">True</span></code> for both two office datasets.</p>
+<p>The training code are available in <code class="docutils literal notranslate"><span class="pre">examples/office</span></code>. We used the ResNet-18 network pretrained on the ImageNet dataset followed by a fully connected layer as a shared encoder among tasks and a fully connected layer is applied as a task-specific output layer for each task. All the input images are resized to 3x224x224.</p>
+<div class="section" id="run-a-model">
+<h2>Run a Model<a class="headerlink" href="#run-a-model" title="Permalink to this headline">¶</a></h2>
+<p>The script <code class="docutils literal notranslate"><span class="pre">train_office.py</span></code> is the main file for training and evaluating a MTL model on the Office-31 or Office-Home dataset. A set of command-line arguments is provided to allow users to adjust the training parameter configuration.</p>
+<p>Some important  arguments are described as follows.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">weighting</span></code>: The weighting strategy. Refer to <a class="reference external" href="../_autoapi/LibMTL/weighting/index.html">here</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">arch</span></code>: The MTL architecture. Refer to <a class="reference external" href="../_autoapi/LibMTL/architecture/index.html">here</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gpu_id</span></code>: The id of gpu. Default to ‘0’.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">seed</span></code>: The random seed for reproducibility. Default to 0.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">optim</span></code>: The type of the optimizer. We recommend to use ‘adam’ here.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dataset</span></code>: Training on Office-31 or Office-Home. Options: ‘office-31’, ‘office-home’.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dataset_path</span></code>: The path of the Office-31 or Office-Home dataset.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bs</span></code>: The batch size of training, validation, and test data. Default to 64.</p></li>
+</ul>
+<p>The complete command-line arguments and their descriptions can be found by running the following command.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python train_office.py -h
+</pre></div>
+</div>
+<p>If you understand those command-line arguments, you can train a MTL model by running a command like this.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python train_office.py --weighting WEIGHTING --arch ARCH --dataset_path PATH --gpu_id GPU_ID --multi_input
+</pre></div>
+</div>
+</div>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p id="id6"><dl class="citation">
+<dt class="label" id="id12"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Kate Saenko, Brian Kulis, Mario Fritz, and Trevor Darrell. Adapting visual category models to new domains. In <em>Proceedings of the 6th European Conference on Computer Vision</em>, 213–226. 2010.</p>
+</dd>
+<dt class="label" id="id13"><span class="brackets"><a class="fn-backref" href="#id2">2</a></span></dt>
+<dd><p>Hemanth Venkateswara, Jose Eusebio, Shayok Chakraborty, and Sethuraman Panchanathan. Deep hashing network for unsupervised domain adaptation. In <em>Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition</em>, 5018–5027. 2017.</p>
+</dd>
+</dl>
+</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="nyuv2.html" class="btn btn-neutral float-left" title="NYUv2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../develop/dataset.html" class="btn btn-neutral float-right" title="Apply to a New Dataset" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Baijiong Lin and Yu Zhang.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
