@@ -5,3 +5,5 @@
 
 See the [latest documentation](https://libmtl.readthedocs.io/en/latest/) for getting started instructions and detailed APIs.
 
+This is the beta version. The official version is coming soon...
+
