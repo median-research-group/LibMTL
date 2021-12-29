@@ -18,8 +18,8 @@ class DSelect_k(MMoE):
         kgamma (float, default=1.0): A scaling parameter for the smooth-step function.
 
     """
-    def __init__(self, task_name, encoder, decoders, rep_grad, multi_input, device, **kwargs):
-        super(DSelect_k, self).__init__(task_name, encoder, decoders, rep_grad, multi_input, device, **kwargs)
+    def __init__(self, task_name, encoder_class, decoders, rep_grad, multi_input, device, **kwargs):
+        super(DSelect_k, self).__init__(task_name, encoder_class, decoders, rep_grad, multi_input, device, **kwargs)
         
         self._num_nonzeros = self.kwargs['num_nonzeros']
         self._gamma = self.kwargs['kgamma']

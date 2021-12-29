@@ -9,7 +9,7 @@ class AbsArchitecture(nn.Module):
 
     Args:
         task_name (list): A list of strings for all tasks.
-        encoder (torch.nn.Module): A neural network module.
+        encoder_class (class): A neural network class.
         decoders (dict): A dictionary of name-decoder pairs of type (:class:`str`, :class:`torch.nn.Module`).
         rep_grad (bool): If ``True``, the gradient of the representation for each task can be computed.
         multi_input (bool): Is ``True`` if each task has its own input data, ``False`` otherwise. 
@@ -17,12 +17,12 @@ class AbsArchitecture(nn.Module):
         kwargs (dict): A dictionary of hyperparameters of architecture methods.
      
     """
-    def __init__(self, task_name, encoder, decoders, rep_grad, multi_input, device, **kwargs):
+    def __init__(self, task_name, encoder_class, decoders, rep_grad, multi_input, device, **kwargs):
         super(AbsArchitecture, self).__init__()
         
         self.task_name = task_name
         self.task_num = len(task_name)
-        self.encoder = encoder
+        self.encoder_class = encoder_class
         self.decoders = decoders
         self.rep_grad = rep_grad
         self.multi_input = multi_input
@@ -31,12 +31,10 @@ class AbsArchitecture(nn.Module):
         
         if self.rep_grad:
             self.rep_tasks = {}
-#             self.rep = None
-#             if self.multi_input:
             self.rep = {}
     
     def forward(self, inputs, task_name=None):
-        r"""The forward function of an architecture.
+        r"""
 
         Args: 
             inputs (torch.Tensor): The input data.
@@ -67,17 +65,6 @@ class AbsArchitecture(nn.Module):
         self.encoder.zero_grad()
         
     def _prepare_rep(self, rep, task, same_rep=None):
-        r"""A useful function to allow to compute the gradients of the representations.
-
-        Args:
-            rep (torch.Tensor): The representation of one task.
-            task (str): The task name corresponding to the ``rep``.
-            same_rep (bool): Is ``True`` if all tasks share the same representation.
-
-        Return:
-            torch.Tensor: a representation with the same value with the input representation while \
-                          can be computed gradients if ``rep_grad`` is ``True``. 
-        """
         if self.rep_grad:
             if not same_rep:
                 self.rep[task] = rep

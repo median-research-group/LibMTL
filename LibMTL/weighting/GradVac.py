@@ -33,6 +33,7 @@ class GradVac(AbsWeighting):
         else:
             self._compute_grad_dim()
             grads = self._compute_grad(losses, mode='backward') # [task_num, grad_dim]
+        batch_weight = np.ones(len(losses))
         pc_grads = grads.clone()
         for tn_i in range(self.task_num):
             task_index = list(range(self.task_num))
@@ -41,8 +42,10 @@ class GradVac(AbsWeighting):
             for tn_j in task_index:
                 rho_ij = torch.dot(pc_grads[tn_i], grads[tn_j]) / (pc_grads[tn_i].norm()*grads[tn_j].norm())
                 if rho_ij < self.rho_T[tn_i, tn_j]:
-                    pc_grads[tn_i] += pc_grads[tn_i].norm()*grads[tn_j]*(self.rho_T[tn_i, tn_j]*(1-rho_ij**2).sqrt()-rho_ij*(1-self.rho_T[tn_i, tn_j]**2).sqrt())/(grads[tn_j].norm()*(1-self.rho_T[tn_i, tn_j]**2).sqrt())
+                    w = pc_grads[tn_i].norm()*(self.rho_T[tn_i, tn_j]*(1-rho_ij**2).sqrt()-rho_ij*(1-self.rho_T[tn_i, tn_j]**2).sqrt())/(grads[tn_j].norm()*(1-self.rho_T[tn_i, tn_j]**2).sqrt())
+                    pc_grads[tn_i] += grads[tn_j]*w
+                    batch_weight[tn_j] += w.item()
                     self.rho_T[tn_i, tn_j] = (1-beta)*self.rho_T[tn_i, tn_j] + beta*rho_ij
         new_grads = pc_grads.sum(0)
         self._reset_grad(new_grads)
-        return None
+        return batch_weight

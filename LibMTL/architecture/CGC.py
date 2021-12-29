@@ -17,12 +17,12 @@ class CGC(MMoE):
         num_experts (list): The numbers of experts shared for all tasks and specific to each task, respectively. Each expert is the encoder network.
 
     """
-    def __init__(self, task_name, encoder, decoders, rep_grad, multi_input, device, **kwargs):
-        super(CGC, self).__init__(task_name, encoder, decoders, rep_grad, multi_input, device, **kwargs)
+    def __init__(self, task_name, encoder_class, decoders, rep_grad, multi_input, device, **kwargs):
+        super(CGC, self).__init__(task_name, encoder_class, decoders, rep_grad, multi_input, device, **kwargs)
         
         self.num_experts = {task: self.kwargs['num_experts'][tn+1] for tn, task in enumerate(self.task_name)}
         self.num_experts['share'] = self.kwargs['num_experts'][0]
-        self.experts_specific = nn.ModuleDict({task: nn.ModuleList([encoder]*self.num_experts[task]) for task in self.task_name})
+        self.experts_specific = nn.ModuleDict({task: nn.ModuleList([encoder_class() for _ in range(self.num_experts[task])]) for task in self.task_name})
         self.gate_specific = nn.ModuleDict({task: nn.Sequential(nn.Linear(self.input_size, 
                                                                           self.num_experts['share']+self.num_experts[task]),
                                                                 nn.Softmax(dim=-1)) for task in self.task_name})
@@ -41,3 +41,4 @@ class CGC(MMoE):
             gate_rep = self._prepare_rep(gate_rep, task, same_rep=False)
             out[task] = self.decoders[task](gate_rep)
         return out      
+

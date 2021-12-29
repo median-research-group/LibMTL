@@ -19,6 +19,7 @@ class PCGrad(AbsWeighting):
         super(PCGrad, self).__init__()
         
     def backward(self, losses, **kwargs):
+        batch_weight = np.ones(len(losses))
         if self.rep_grad:
             raise ValueError('No support method PCGrad with representation gradients (rep_grad=True)')
         else:
@@ -32,6 +33,7 @@ class PCGrad(AbsWeighting):
                 g_ij = torch.dot(pc_grads[tn_i], grads[tn_j])
                 if g_ij < 0:
                     pc_grads[tn_i] -= g_ij * grads[tn_j] / (grads[tn_j].norm().pow(2))
+                    batch_weight[tn_j] -= (g_ij/(grads[tn_j].norm().pow(2))).item()
         new_grads = pc_grads.sum(0)
         self._reset_grad(new_grads)
-        return None
+        return batch_weight

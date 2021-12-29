@@ -26,11 +26,11 @@ class _transform_resnet_MTAN(nn.Module):
             if i == 0:
                 self.encoder_att[str(i)] = nn.ModuleList([self._att_layer(ch[0], 
                                                                           ch[0]//self.expansion,
-                                                                          ch[0]).to(self.device)]*self.task_num)
+                                                                          ch[0]).to(self.device) for _ in range(self.task_num)])
             else:
                 self.encoder_att[str(i)] = nn.ModuleList([self._att_layer(2*ch[i], 
                                                                             ch[i]//self.expansion, 
-                                                                            ch[i]).to(self.device)]*self.task_num)
+                                                                            ch[i]).to(self.device) for _ in range(self.task_num)])
                 
             if i < 3:
                 self.encoder_block_att.append(self._conv_layer(ch[i], ch[i+1]//self.expansion).to(self.device))
@@ -62,7 +62,6 @@ class _transform_resnet_MTAN(nn.Module):
         ss_rep = {i: [0]*2 for i in range(4)}
         att_rep = [0]*self.task_num
         for i in range(4):
-#             print('--', i)
             for j in range(2):
                 if i == 0 and j == 0:
                     sh_rep = s_rep
@@ -71,7 +70,6 @@ class _transform_resnet_MTAN(nn.Module):
                 else:
                     sh_rep = ss_rep[i][0]
                 ss_rep[i][j] = self.shared_layer[str(i)][j](sh_rep)
-#                 print('**', i, j, ss_rep[i][j].shape)
             
             for tn, task in enumerate(self.task_name):
                 if self.forward_task is not None and task != self.forward_task:
@@ -87,7 +85,6 @@ class _transform_resnet_MTAN(nn.Module):
                     att_rep[tn] = self.encoder_block_att[i](att_rep[tn])
                 if i == 0:
                     att_rep[tn] = self.down_sampling(att_rep[tn])
-                # print('++', [att_rep[tn].shape for tn in range(self.task_num)])
         if self.forward_task is None:
             return att_rep
         else:
@@ -104,12 +101,13 @@ class MTAN(AbsArchitecture):
             :class:`MTAN` is only supported with ResNet-based encoder.
 
     """
-    def __init__(self, task_name, encoder, decoders, rep_grad, multi_input, device, **kwargs):
-        super(MTAN, self).__init__(task_name, encoder, decoders, rep_grad, multi_input, device, **kwargs)
+    def __init__(self, task_name, encoder_class, decoders, rep_grad, multi_input, device, **kwargs):
+        super(MTAN, self).__init__(task_name, encoder_class, decoders, rep_grad, multi_input, device, **kwargs)
         
+        self.encoder = self.encoder_class()
         try: 
             callable(eval('self.encoder.layer1'))
-            self.encoder = _transform_resnet_MTAN(encoder.to(device), task_name, device)
+            self.encoder = _transform_resnet_MTAN(self.encoder.to(device), task_name, device)
         except:
             self.encoder.resnet_network = _transform_resnet_MTAN(self.encoder.resnet_network.to(device), task_name, device)
             

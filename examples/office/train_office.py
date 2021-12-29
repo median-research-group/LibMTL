@@ -64,13 +64,12 @@ def main(params):
             out = self.hidden_layer(out)
             return out
 
-    encoder = Encoder()
     decoders = nn.ModuleDict({task: nn.Linear(512, class_num) for task in list(task_dict.keys())})
     
     officeModel = Trainer(task_dict=task_dict, 
                           weighting=weighting_method.__dict__[params.weighting], 
                           architecture=architecture_method.__dict__[params.arch], 
-                          encoder=encoder, 
+                          encoder_class=Encoder, 
                           decoders=decoders,
                           rep_grad=params.rep_grad,
                           multi_input=params.multi_input,

@@ -14,15 +14,17 @@ class Trainer(nn.Module):
     Args:
         task_dict (dict): A dictionary of name-information pairs of type (:class:`str`, :class:`dict`). \
                             The sub-dictionary for each task has four entries whose keywords are named **metrics**, \
-                            **metrics_fn**, **loss_fn**, **weight**. Specifically, **metrics** corresponds to a list \
-                            of ``m`` strings, repersenting the name of ``m`` metric objectives for this task. \
-                            **metrics_fn** corresponds to a instantiation of a metric class. **loss_fn** corresponds \
-                            to a instantiation of a loss class. **weight** corresponds to a list of ``m`` binary \
-                            integers corresponding to each metric objective, where ``1`` means the score higher the \
-                            performance of this objective better, ``0`` otherwise.                           
+                            **metrics_fn**, **loss_fn**, **weight** and each of them corresponds to a :class:`list`.
+                            The list of **metrics** has ``m`` strings, repersenting the name of ``m`` metric objectives \
+                            for this task. The list of **metrics_fn** has two elements, i.e., the updating and score \
+                            functions, meaning how to update thoes objectives in the training process and get the final \
+                            scores, respectively. The list of **loss_fn** has ``m`` loss functions corresponding to each \
+                            metric objective. The list of **weight** has ``m`` binary integers corresponding to each \
+                            metric objective, where ``1`` means the score higher the performance of this objective better, \
+                            ``0`` otherwise.                           
         weighting (class): A weighting strategy class based on :class:`LibMTL.weighting.abstract_weighting.AbsWeighting`.
         architecture (class): An architecture class based on :class:`LibMTL.architecture.abstract_arch.AbsArchitecture`.
-        encoder (torch.nn.Module): A neural network module.
+        encoder_class (class): A neural network class.
         decoders (dict): A dictionary of name-decoder pairs of type (:class:`str`, :class:`torch.nn.Module`).
         rep_grad (bool): If ``True``, the gradient of the representation for each task can be computed.
         multi_input (bool): Is ``True`` if each task has its own input data, ``False`` otherwise. 
@@ -39,18 +41,18 @@ class Trainer(nn.Module):
         
         import torch.nn as nn
         from LibMTL import Trainer
-        from LibMTL.loss import CELoss
-        from LibMTL.metrics import AccMetric
+        from LibMTL.loss import CE_loss_fn
+        from LibMTL.metrics import acc_update_fun, acc_score_fun
         from LibMTL.weighting import EW
         from LibMTL.architecture import HPS
         from LibMTL.model import ResNet18
         from LibMTL.config import prepare_args
 
         task_dict = {'A': {'metrics': ['Acc'],
-                           'metrics_fn': AccMetric(),
-                           'loss_fn': CELoss(),
+                           'metrics_fn': [acc_update_fun, acc_score_fun],
+                           'loss_fn': [CE_loss_fn],
                            'weight': [1]}}
-        encoder = ResNet18()
+        
         decoders = {'A': nn.Linear(512, 31)}
         
         # You can use command-line arguments and return configurations by ``prepare_args``.
@@ -62,7 +64,7 @@ class Trainer(nn.Module):
         trainer = Trainer(task_dict=task_dict,
                           weighting=EW,
                           architecture=HPS,
-                          encoder=encoder,
+                          encoder_class=ResNet18,
                           decoders=decoders,
                           rep_grad=False,
                           multi_input=False,
@@ -71,7 +73,7 @@ class Trainer(nn.Module):
                           **kwargs)
 
     '''
-    def __init__(self, task_dict, weighting, architecture, encoder, decoders, 
+    def __init__(self, task_dict, weighting, architecture, encoder_class, decoders, 
                  rep_grad, multi_input, optim_param, scheduler_param, **kwargs):
         super(Trainer, self).__init__()
         
@@ -83,20 +85,20 @@ class Trainer(nn.Module):
         self.rep_grad = rep_grad
         self.multi_input = multi_input
 
-        self._prepare_model(weighting, architecture, encoder, decoders)
+        self._prepare_model(weighting, architecture, encoder_class, decoders)
         self._prepare_optimizer(optim_param, scheduler_param)
         
         self.meter = _PerformanceMeter(self.task_dict, self.multi_input)
         
-    def _prepare_model(self, weighting, architecture, encoder, decoders):
+    def _prepare_model(self, weighting, architecture, encoder_class, decoders):
         
         class MTLmodel(architecture, weighting):
-            def __init__(self, task_name, encoder, decoders, rep_grad, multi_input, device, kwargs):
-                super(MTLmodel, self).__init__(task_name, encoder, decoders, rep_grad, multi_input, device, **kwargs)
+            def __init__(self, task_name, encoder_class, decoders, rep_grad, multi_input, device, kwargs):
+                super(MTLmodel, self).__init__(task_name, encoder_class, decoders, rep_grad, multi_input, device, **kwargs)
                 self.init_param()
                 
         self.model = MTLmodel(task_name=self.task_name, 
-                              encoder=encoder, 
+                              encoder_class=encoder_class, 
                               decoders=decoders, 
                               rep_grad=self.rep_grad, 
                               multi_input=self.multi_input,
@@ -155,9 +157,9 @@ class Trainer(nn.Module):
         if not self.multi_input:
             train_losses = torch.zeros(self.task_num).to(self.device)
             for tn, task in enumerate(self.task_name):
-                train_losses[tn] = self.meter.losses[task]._update_loss(preds[task], gts[task])
+                train_losses[tn] = self.meter.losses[task].update_loss(preds[task], gts[task])
         else:
-            train_losses = self.meter.losses[task_name]._update_loss(preds, gts)
+            train_losses = self.meter.losses[task_name].update_loss(preds, gts)
         return train_losses
         
     def _prepare_dataloaders(self, dataloaders):
@@ -172,7 +174,8 @@ class Trainer(nn.Module):
                 batch_num.append(len(dataloaders[task]))
             return loader, batch_num
 
-    def train(self, train_dataloaders, test_dataloaders, epochs, val_dataloaders=None):
+    def train(self, train_dataloaders, test_dataloaders, epochs, 
+              val_dataloaders=None, return_weight=False):
         r'''The training process of multi-task learning.
 
         Args:
@@ -180,16 +183,11 @@ class Trainer(nn.Module):
                             If ``multi_input`` is ``True``, it is a dictionary of name-dataloader pairs. \
                             Otherwise, it is a single dataloader which returns data and a dictionary \
                             of name-label pairs in each iteration.
-            val_dataloaders (dict or torch.utils.data.DataLoader): The dataloaders used for validation. \
-                            The same structure with ``train_dataloaders``.
-            test_dataloaders (dict or torch.utils.data.DataLoader): The dataloaders used for test. \
+
+            test_dataloaders (dict or torch.utils.data.DataLoader): The dataloaders used for validation or test. \
                             The same structure with ``train_dataloaders``.
             epochs (int): The total training epochs.
-
-        .. warning::
-            If the validation dataset exists, the best results on test dataset is tested on the model with the best \
-            validation result. Otherwise, the best test results is reported directly. 
-
+            return_weight (bool): if ``True``, the loss weights will be returned.
         '''
         train_loader, train_batch = self._prepare_dataloaders(train_dataloaders)
         train_batch = max(train_batch) if self.multi_input else train_batch
@@ -236,6 +234,8 @@ class Trainer(nn.Module):
             if self.scheduler is not None:
                 self.scheduler.step()
         self.meter.display_best_result()
+        if return_weight:
+            return self.batch_weight
 
 
     def test(self, test_dataloaders, epoch=None, mode='test'):
@@ -246,7 +246,6 @@ class Trainer(nn.Module):
                             it is a dictionary of name-dataloader pairs. Otherwise, it is a single \
                             dataloader which returns data and a dictionary of name-label pairs in each iteration.
             epoch (int, default=None): The current epoch. 
-            mode ({'val', 'test'}, default='test'): Validation or test data.
         '''
         test_loader, test_batch = self._prepare_dataloaders(test_dataloaders)
         

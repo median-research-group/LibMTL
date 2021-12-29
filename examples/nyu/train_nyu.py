@@ -58,18 +58,19 @@ def main(params):
                             'weight': [0, 0, 1, 1, 1]}}
     
     # define encoder and decoders
-    encoder = resnet_dilated('resnet50')
+    def encoder_class(): 
+        return resnet_dilated('resnet50')
     num_out_channels = {'segmentation': 13, 'depth': 1, 'normal': 3}
-    decoders = nn.ModuleDict({task: DeepLabHead(encoder.feature_dim, 
+    decoders = nn.ModuleDict({task: DeepLabHead(2048, 
                                                 num_out_channels[task]) for task in list(task_dict.keys())})
     
     class NYUtrainer(Trainer):
-        def __init__(self, task_dict, weighting, architecture, encoder, 
+        def __init__(self, task_dict, weighting, architecture, encoder_class, 
                      decoders, rep_grad, multi_input, optim_param, scheduler_param, **kwargs):
             super(NYUtrainer, self).__init__(task_dict=task_dict, 
                                             weighting=weighting_method.__dict__[weighting], 
                                             architecture=architecture_method.__dict__[architecture], 
-                                            encoder=encoder, 
+                                            encoder_class=encoder_class, 
                                             decoders=decoders,
                                             rep_grad=rep_grad,
                                             multi_input=multi_input,
@@ -86,14 +87,14 @@ def main(params):
     NYUmodel = NYUtrainer(task_dict=task_dict, 
                           weighting=params.weighting, 
                           architecture=params.arch, 
-                          encoder=encoder, 
+                          encoder_class=encoder_class, 
                           decoders=decoders,
                           rep_grad=params.rep_grad,
                           multi_input=params.multi_input,
                           optim_param=optim_param,
                           scheduler_param=scheduler_param,
                           **kwargs)
-    NYUmodel.train(nyuv2_train_loader, nyuv2_test_loader, 250)
+    NYUmodel.train(nyuv2_train_loader, nyuv2_test_loader, 200)
     
 if __name__ == "__main__":
     params = parse_args(LibMTL_args)
