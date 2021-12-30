@@ -10,7 +10,6 @@ class AbsLoss(object):
         self.record = []
         self.bs = []
     
-    @property
     def compute_loss(self, pred, gt):
         r"""Calculate the loss.
         
