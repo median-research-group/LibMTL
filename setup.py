@@ -5,7 +5,7 @@ with open('README.md', 'r', encoding='utf-8') as f:
 
 setup(
         name='LibMTL',    
-        version='1.1.2',   
+        version='1.1.5',   
         description='A PyTorch Library for Multi-Task Learning',   
         author='Baijiong Lin',  
         author_email='linbj@mail.sustech.edu.cn',  

@@ -157,9 +157,9 @@ class Trainer(nn.Module):
         if not self.multi_input:
             train_losses = torch.zeros(self.task_num).to(self.device)
             for tn, task in enumerate(self.task_name):
-                train_losses[tn] = self.meter.losses[task].update_loss(preds[task], gts[task])
+                train_losses[tn] = self.meter.losses[task]._update_loss(preds[task], gts[task])
         else:
-            train_losses = self.meter.losses[task_name].update_loss(preds, gts)
+            train_losses = self.meter.losses[task_name]._update_loss(preds, gts)
         return train_losses
         
     def _prepare_dataloaders(self, dataloaders):
