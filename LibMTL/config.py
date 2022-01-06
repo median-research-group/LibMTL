@@ -30,9 +30,6 @@ _parser.add_argument('--gamma', type=float, default=0.5, help='gamma for StepLR'
 # args for weighting
 ## DWA
 _parser.add_argument('--T', type=float, default=2.0, help='T for DWA')
-## RLW
-_parser.add_argument('--dist', type=str, default='Normal',
-    help='sampling distribution, option: Uniform, Normal, Dirichlet, Bernoulli, constrained_Bernoulli')
 ## MGDA
 _parser.add_argument('--mgda_gn', default='none', type=str, 
                     help='type of gradient normalization for MGDA, option: l2, none, loss, loss+')
@@ -100,11 +97,6 @@ def prepare_args(params):
                 kwargs['weight_args']['rescale'] = params.rescale
             else:
                 raise ValueError('CAGrad needs keywaord calpha and rescale')
-        elif params.weighting in ['RLW']:
-            if params.dist is not None:
-                kwargs['weight_args']['dist'] = params.dist
-            else:
-                raise ValueError('RLW needs keywaord dist')
     else:
         raise ValueError('No support weighting method {}'.format(params.weighting)) 
         
