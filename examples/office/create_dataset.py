@@ -48,8 +48,8 @@ def office_dataloader(dataset, batchsize, root_path):
         data_loader[d] = {}
         iter_data_loader[d] = {}
         for mode in ['train', 'val', 'test', 'trval']:
-            shuffle = False if mode == 'test' else True
-            drop_last = False if mode == 'test' else True
+            shuffle = True if mode == 'train' or mode == 'trval' else False
+            drop_last = True if mode == 'train' or mode == 'trval' else False
             txt_dataset = office_Dataset(dataset, root_path, d, mode)
 #             print(d, mode, len(txt_dataset))
             data_loader[d][mode] = DataLoader(txt_dataset, 
