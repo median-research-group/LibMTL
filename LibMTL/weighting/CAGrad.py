@@ -44,7 +44,7 @@ class CAGrad(AbsWeighting):
         b = x_start.copy()
         c = (calpha*g0_norm+1e-8).item()
         def objfn(x):
-            return (x.reshape(1,3).dot(A).dot(b.reshape(3, 1))+c*np.sqrt(x.reshape(1,3).dot(A).dot(x.reshape(3,1))+1e-8)).sum()
+            return (x.reshape(1,-1).dot(A).dot(b.reshape(-1,1))+c*np.sqrt(x.reshape(1,-1).dot(A).dot(x.reshape(-1,1))+1e-8)).sum()
         res = minimize(objfn, x_start, bounds=bnds, constraints=cons)
         w_cpu = res.x
         ww = torch.Tensor(w_cpu).to(self.device)
