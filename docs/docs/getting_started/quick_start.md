@@ -26,7 +26,7 @@ The NYUv2 dataset is a MTL benchmark dataset, which includes three tasks: 13-cla
 
 ### Run a Model
 
-The complete training code for the NYUv2 dataset is provided [examples/nyu](https://github.com/median-research-group/LibMTL/examples/nyu). The file ``train_nyu.py`` is the main file for training on the NYUv2 dataset.
+The complete training code for the NYUv2 dataset is provided in [examples/nyu](https://github.com/median-research-group/LibMTL/examples/nyu). The file ``train_nyu.py`` is the main file for training on the NYUv2 dataset.
 
 You can find the command-line arguments by running the following command.
 
