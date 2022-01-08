@@ -5,7 +5,7 @@
 
 :star: Star us on GitHub — it motivates us a lot!
 
-## Table of content
+## Table of Content
 
 - [Features](#features)
 - [Overall Framework](#overall-framework)
