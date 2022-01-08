@@ -1,9 +1,9 @@
 ## What is Multi-Task Learning?
 
 ```eval_rst
-Multi-Task Learning (MTL) is an active research field in machine learning. It is a learning paradigm which aims to jointly learn several related tasks to improve their generalization performance by leveraging common knowledge among them. In recent years, many researchers also successfully apply MTL in different fields such as computer vision, natural language processing, reinforcement learning, recommendation system and so on. 
+Multi-Task Learning (MTL) is an active research field in machine learning. It is a learning paradigm which aims to jointly learn several related tasks to improve their generalization performance by leveraging common knowledge among them. In recent years, many researchers have successfully applied MTL to different fields such as computer vision, natural language processing, reinforcement learning, recommendation system and so on. 
 
-The recent studies of MTL mainly focus on two perspectives, network architecture design, and optimization procedure improvement. We investigate some general and representative methods in ``LibMTL``.
+The recent studies of MTL mainly focus on two perspectives, network architecture design and loss weighting. We implement some general and representative methods in ``LibMTL``.
 
 For more relevant introduction, please refer to :cite:`ZhangY21, Vandenhende21, lin2021rlw, Michael20`.
 ```
@@ -11,7 +11,7 @@ For more relevant introduction, please refer to :cite:`ZhangY21, Vandenhende21, 
 ### Network Architecture
 
 ```eval_rst
-In the design of network architecture, the simplest and most popular method is the hard parameter sharing (HPS, :class:`LibMTL.architecture.HPS`), as shown in :numref:`my-fig-1`, where a encoder is shared among all tasks and each task has its own specific output decoder. Since most of the parameters are shared among tasks, such pattern easily causes negative sharing when tasks are not enough related. To better deal with task relationships, different MTL architectures have been proposed.  ``LibMTL`` supports several state-of-the-art architectures, please see :class:`LibMTL.architecture` for details.
+In the design of network architectures, the simplest and most popular method is the hard parameter sharing (HPS, :class:`LibMTL.architecture.HPS`), as shown in :numref:`my-fig-1`, where an encoder is shared among all the tasks and each task has its own specific decoder. Since most of the parameters are shared among tasks, such architecture easily causes negative sharing when tasks are not enough related. To better deal with task relationships, different MTL architectures have been proposed.  ``LibMTL`` supports several state-of-the-art architectures, please see :class:`LibMTL.architecture` for details.
 ```
 
 ```eval_rst
