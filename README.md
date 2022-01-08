@@ -3,6 +3,12 @@
 
 ``LibMTL`` is an open-source library built on [PyTorch](https://pytorch.org/) for Multi-Task Learning (MTL). See the [latest documentation](https://libmtl.readthedocs.io/en/latest/) for detailed introductions and API instructions.
 
+:star: Star us on GitHub — it motivates us a lot!
+
+## Table of content
+
+- [Features](#features)
+
 ## Features
 
 - **Unified**:  ``LibMTL`` provides a unified code base to implement and a consistent evaluation procedure including data processing, metric objectives, and hyper-parameters on several representative MTL benchmark datasets, which allows quantitative, fair, and consistent comparisons between different MTL algorithms.
@@ -109,10 +115,14 @@ If you find ``LibMTL`` useful for your research or development, please cite the 
 
 ``LibMTL`` is developed and maintained by [Baijiong Lin](https://baijiong-lin.github.io) and [Yu Zhang](http://cse.sustech.edu.cn/faculty/~zhangy/).
 
-### Contact Us
+## Contact Us
 
 If you have any question or suggestion, please feel free to contact us by [raising an issue](https://github.com/median-research-group/LibMTL/issues) or sending an email to ``linbj@mail.sustech.edu.cn``.
 
 ## Acknowledgements
 
 We would like to thank the authors that release the public repositories (listed alphabetically):  [CAGrad](https://github.com/Cranial-XIX/CAGrad), [dselect_k_moe](https://github.com/google-research/google-research/tree/master/dselect_k_moe), [MultiObjectiveOptimization](https://github.com/isl-org/MultiObjectiveOptimization), and [mtan](https://github.com/lorenmt/mtan).
+
+## License
+
+``LibMTL`` is released under the [MIT](./LICENSE) license.
