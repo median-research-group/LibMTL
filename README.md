@@ -8,6 +8,17 @@
 ## Table of content
 
 - [Features](#features)
+- [Overall Framework](#overall-framework)
+- [Supported Algorithms](#supported-algorithms)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+    - [Download Dataset](#download-dataset)
+    - [Run a Model](#run-a-model)
+- [Citation](#citation)
+- [Contributors](#contributors)
+- [Contact Us](#contact-us)
+- [Acknowledgements](#acknowledgements)
+- [License](#license)
 
 ## Features
 
