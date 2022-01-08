@@ -5,7 +5,7 @@
 To install ``LibMTL``, you need to setup the following libraries:
 
 - Python >= 3.7
-- PyTorch >= 1.8.0
+- torch >= 1.8.0
 - torchvision >= 0.9.0
 - numpy >= 1.20
 
@@ -21,7 +21,7 @@ pip install -U LibMTL
 
 #### Using Source Code
 
-If you prefer, you can clone the source code from the GitHub and run the setup.py file.
+You can clone the source code from the GitHub and run the setup.py file.
 
 ```shell
 git clone https://github.com/median-research-group/LibMTL.git
