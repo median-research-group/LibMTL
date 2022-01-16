@@ -2,9 +2,6 @@ from torch.utils.data import DataLoader, Dataset
 import os
 import torch
 import torch.nn.functional as F
-import fnmatch
-import numpy as np
-import random
 import torchvision.transforms as transforms
 from PIL import Image
 
@@ -16,16 +13,9 @@ class office_Dataset(Dataset):
                         transforms.ToTensor(),
                         transforms.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229, 0.224, 0.225]),
                         ])
-        if mode != 'trval':
-            f = open('./data_txt/{}/{}_{}.txt'.format(dataset, task, mode), 'r')
-            self.img_list = f.readlines()
-            f.close()
-        else:
-            f1 = open('./data_txt/{}/{}_train.txt'.format(dataset, task), 'r')
-            f2 = open('./data_txt/{}/{}_val.txt'.format(dataset, task), 'r')
-            self.img_list = f1.readlines() + f2.readlines()
-            f1.close()
-            f2.close()
+        f = open('./data_txt/{}/{}_{}.txt'.format(dataset, task, mode), 'r')
+        self.img_list = f.readlines()
+        f.close()
         self.root_path = root_path
         
     def __getitem__(self, i):
@@ -47,9 +37,9 @@ def office_dataloader(dataset, batchsize, root_path):
     for k, d in enumerate(tasks):
         data_loader[d] = {}
         iter_data_loader[d] = {}
-        for mode in ['train', 'val', 'test', 'trval']:
-            shuffle = True if mode == 'train' or mode == 'trval' else False
-            drop_last = True if mode == 'train' or mode == 'trval' else False
+        for mode in ['train', 'val', 'test']:
+            shuffle = True if mode == 'train' else False
+            drop_last = True if mode == 'train' else False
             txt_dataset = office_Dataset(dataset, root_path, d, mode)
 #             print(d, mode, len(txt_dataset))
             data_loader[d][mode] = DataLoader(txt_dataset, 
