@@ -7,7 +7,7 @@ from LibMTL.architecture.abstract_arch import AbsArchitecture
 
 
 class HPS(AbsArchitecture):
-    r"""Hrad Parameter Sharing (HPS).
+    r"""Hard Parameter Sharing (HPS).
 
     This method is proposed in `Multitask Learning: A Knowledge-Based Source of Inductive Bias (ICML 1993) <https://dl.acm.org/doi/10.5555/3091529.3091535>`_ \
     and implemented by us. 
