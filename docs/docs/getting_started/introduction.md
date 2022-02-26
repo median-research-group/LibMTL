@@ -64,7 +64,7 @@ If you find ``LibMTL`` useful for your research or development, please cite the 
 
 ### Contact Us
 
-If you have any question or suggestion, please feel free to contact us by [raising an issue](https://github.com/median-research-group/LibMTL/issues) or sending an email to ``linbj@mail.sustech.edu.cn``.
+If you have any question or suggestion, please feel free to contact us by [raising an issue](https://github.com/median-research-group/LibMTL/issues) or sending an email to ``bj.lin.email@gmail.com``.
 
 ### Acknowledgements
 
