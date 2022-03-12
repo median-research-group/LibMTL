@@ -34,7 +34,7 @@ class AbsMetric(object):
         pass
     
     def reinit(self):
-        r"""Reset :attr:`record` and :attr:`bs` (when a epoch ends).
+        r"""Reset :attr:`record` and :attr:`bs` (when an epoch ends).
         """
         self.record = []
         self.bs = []

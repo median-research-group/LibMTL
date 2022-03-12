@@ -315,7 +315,7 @@ def wide_resnet50_2(pretrained=False, progress=True, **kwargs):
     The model is the same as ResNet except for the bottleneck number of channels
     which is twice larger in every block. The number of channels in outer 1x1
     convolutions is the same, e.g. last block in ResNet-50 has 2048-512-2048
-    channels, and in Wide ResNet-50-2 has 2048-1024-2048.
+    channels, while in Wide ResNet-50-2 there are 2048-1024-2048.
 
     Args:
         pretrained (bool): If True, returns a model pre-trained on ImageNet.
@@ -333,7 +333,7 @@ def wide_resnet101_2(pretrained=False, progress=True, **kwargs):
     The model is the same as ResNet except for the bottleneck number of channels
     which is twice larger in every block. The number of channels in outer 1x1
     convolutions is the same, e.g. last block in ResNet-50 has 2048-512-2048
-    channels, and in Wide ResNet-50-2 has 2048-1024-2048.
+    channels, while in Wide ResNet-50-2 there are 2048-1024-2048.
 
     Args:
         pretrained (bool): If True, returns a model pre-trained on ImageNet.

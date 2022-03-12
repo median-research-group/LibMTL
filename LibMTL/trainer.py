@@ -20,17 +20,17 @@ class Trainer(nn.Module):
                             functions, meaning how to update thoes objectives in the training process and get the final \
                             scores, respectively. The list of **loss_fn** has ``m`` loss functions corresponding to each \
                             metric objective. The list of **weight** has ``m`` binary integers corresponding to each \
-                            metric objective, where ``1`` means the score higher the performance of this objective better, \
-                            ``0`` otherwise.                           
-        weighting (class): A weighting strategy class based on :class:`LibMTL.weighting.abstract_weighting.AbsWeighting`.
-        architecture (class): An architecture class based on :class:`LibMTL.architecture.abstract_arch.AbsArchitecture`.
+                            metric objective, where ``1`` means the higher the score is, the better the performance of this objective is, \
+                            ``0`` means the opposite.                           
+        weighting (class): A weighting strategy class bases on :class:`LibMTL.weighting.abstract_weighting.AbsWeighting`.
+        architecture (class): An architecture class bases on :class:`LibMTL.architecture.abstract_arch.AbsArchitecture`.
         encoder_class (class): A neural network class.
         decoders (dict): A dictionary of name-decoder pairs of type (:class:`str`, :class:`torch.nn.Module`).
         rep_grad (bool): If ``True``, the gradient of the representation for each task can be computed.
-        multi_input (bool): Is ``True`` if each task has its own input data, ``False`` otherwise. 
+        multi_input (bool): Is ``True`` if each task has its own input data, otherwise is ``False``. 
         optim_param (dict): A dictionary of configuration for the optimizier.
         scheduler_param (dict): A dictionary of configuration for learning rate scheduler. \
-                                 Setting it as ``None`` if you do not use a learning rate scheduler.
+                                 Set it as ``None`` if you do not use a learning rate scheduler.
         kwargs (dict): A dictionary of hyperparameters of weighting and architecture methods.
 
     .. note::

@@ -16,7 +16,7 @@ class GradVac(AbsWeighting):
         beta (float, default=0.5): The exponential moving average (EMA) decay parameter.
 
     .. warning::
-            GradVac is not supported with representation gradients, i.e., ``rep_grad`` must be ``False``.
+            GradVac is not supported by representation gradients, i.e., ``rep_grad`` must be ``False``.
 
     """
     def __init__(self):

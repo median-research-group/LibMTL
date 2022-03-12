@@ -12,7 +12,7 @@ class PCGrad(AbsWeighting):
     and implemented by us.
 
     .. warning::
-            PCGrad is not supported with representation gradients, i.e., ``rep_grad`` must be ``False``.
+            PCGrad is not supported by representation gradients, i.e., ``rep_grad`` must be ``False``.
 
     """
     def __init__(self):

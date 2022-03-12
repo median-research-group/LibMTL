@@ -16,7 +16,7 @@ class GradDrop(AbsWeighting):
         leak (float, default=0.0): The leak parameter for the weighting matrix.
 
     .. warning::
-            GradDrop is not supported with parameter gradients, i.e., ``rep_grad`` must be ``True``.
+            GradDrop is not supported by parameter gradients, i.e., ``rep_grad`` must be ``True``.
 
     """
     def __init__(self):

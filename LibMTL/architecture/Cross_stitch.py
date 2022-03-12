@@ -43,7 +43,7 @@ class Cross_stitch(AbsArchitecture):
     .. warning::
             - :class:`Cross_stitch` does not work with multiple inputs MTL problem, i.e., ``multi_input`` must be ``False``.
 
-            - :class:`Cross_stitch` is only supported with ResNet-based encoder.
+            - :class:`Cross_stitch` is only supported by ResNet-based encoder.
 
     """
     def __init__(self, task_name, encoder_class, decoders, rep_grad, multi_input, device, **kwargs):

@@ -14,7 +14,7 @@ class CGC(MMoE):
 
     Args:
         img_size (list): The size of input data. For example, [3, 244, 244] for input images with size 3x224x224.
-        num_experts (list): The numbers of experts shared for all tasks and specific to each task, respectively. Each expert is the encoder network.
+        num_experts (list): The numbers of experts shared for all tasks and are specific to each task, respectively. Each expert is the encoder network.
 
     """
     def __init__(self, task_name, encoder_class, decoders, rep_grad, multi_input, device, **kwargs):

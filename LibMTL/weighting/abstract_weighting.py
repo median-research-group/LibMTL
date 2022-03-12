@@ -118,7 +118,7 @@ class AbsWeighting(nn.Module):
     def backward(self, losses, **kwargs):
         r"""
         Args:
-            losses (list): A list of loss of each task.
+            losses (list): A list of losses of each task.
             kwargs (dict): A dictionary of hyperparameters of weighting methods.
         """
         pass

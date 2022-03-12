@@ -5,9 +5,9 @@ Here we would like to introduce how to apply ``LibMTL`` to a new dataset.
 ### Define a MTL problem
 
 ```eval_rst
-Firstly, you need to clear the the type of this MTL problem (i.e. a multi-label problem or multi-input problem, refer to `here <./mtl.html#network-architecture>`_) and the information of each task including the task's name, the instantiation of metric and loss classes, and whether the higher metric score the better performance or not. 
+Firstly, you need to clear the the type of this MTL problem (i.e. a multi-label problem or a multi-input problem, refer to `here <./mtl.html#network-architecture>`_) and the information of each task, including the task's name, the instantiation of metric and loss classes, and determine whether the higher the metric score is, the better the performance is. 
 
-The ``multi_input`` is a command-line argument while all tasks' information need to be defined as a dictionary. ``LibMTL`` provides some common loss functions and metrics, please refer to :class:`LibMTL.loss` and :class:`LibMTL.metrics`, respectively. The example of a three-tasks MTL problem on the Office-31 dataset is as follows.
+The ``multi_input`` is a command-line argument and all tasks' information needs to be defined as a dictionary. ``LibMTL`` provides some common loss functions and metrics, please refer to :class:`LibMTL.loss` and :class:`LibMTL.metrics`, respectively. The examples of a three-tasks MTL problem on the Office-31 dataset are as follows.
 ```
 
 #### Example 1 (The Office-31 Dataset)
@@ -25,7 +25,7 @@ task_dict = {task: {'metrics': ['Acc'],
 ```
 
 ```eval_rst
-Besides, ``LibMTL`` also supports users to customize new loss and metric classes. For example, if we would like to develop the metric classes for the segmentation task on the NYUv2 dataset, we need to inherit :class:`LibMTL.metrics.AbsMetric` and rewrite the corresponding methods like :func:`update_fun`, :func:`score_fun`, and :func:`reinit` here, please see :class:`LibMTL.metrics.AbsMetric` for details. The loss class for segmentation is customized similarly, please see :class:`LibMTL.loss.AbsLoss` for details.
+Besides, ``LibMTL`` also supports users to customize new loss and metric classes. For example, if we would like to develop the metric classes for the segmentation task on the NYUv2 dataset, we need to inherit :class:`LibMTL.metrics.AbsMetric` and rewrite the corresponding methods like :func:`update_fun`, :func:`score_fun`, and :func:`reinit` here, please see :class:`LibMTL.metrics.AbsMetric` for details. The loss class for segmentation is customized similarly, please refer to :class:`LibMTL.loss.AbsLoss` for details.
 ```
 
 #### Example 2 (The NYUv2 Dataset)
@@ -84,7 +84,7 @@ task_dict = {'segmentation': {'metrics':['mIoU', 'pixAcc'],
 ### Prepare Dataloaders
 
 ```eval_rst
-Secondly, you need to prepare the dataloaders with the correct format. For multi-input problem like the Office-31 datatset, each task need to have its own dataloader and all dataloaders are put in a dictionary with the task names as the corresponding keys.
+Secondly, you need to prepare the dataloaders with correct format. For multi-input problem like the Office-31 datatset, each task has its own dataloader and all dataloaders are put in a dictionary with the task names as the corresponding keys.
 ```
 
 #### Example 1 (The Office-31 Dataset)
@@ -96,7 +96,7 @@ train_dataloaders = {'amazon': amazon_dataloader,
 ```
 
 ```eval_rst
-For multi-label problem like the NYUv2 dataset, all tasks share a common dataloader, which outputs a list in every iteration. The first element of this list is the input data tensor and the second element is a dictionary of the label tensors with the task names as the corresponding keys. An example is shown as follows. 
+For multi-label problem like the NYUv2 dataset, all tasks share a common dataloader, which outputs a list in every iteration. The first element of this list is the input data tensor and the second is a dictionary of the label tensors with the task names as the corresponding keys. An example is shown as follows. 
 ```
 
 #### Example 2 (The NYUv2 Dataset)
@@ -149,7 +149,7 @@ decoders = nn.ModuleDict({task: nn.Linear(512, class_num) for task in task_name}
 ```
 
 ```eval_rst
-If the customized encoder is a ResNet-based network and you would like to use :class:`LibMTL.architecture.MTAN`, please make sure encoder has an attribute named ``resnet_network`` and corresponded to the ResNet network.
+If the customized encoder is a ResNet-based network and you would like to use :class:`LibMTL.architecture.MTAN`, please make sure the encoder has an attribute named ``resnet_network`` and corresponds to the ResNet network.
 ```
 
 #### Example 2 (The NYUv2 Dataset)
@@ -233,7 +233,7 @@ NYUmodel = NYUtrainer(task_dict=task_dict,
 ### Run a Model
 
 ```eval_rst
-Finally, you can training the model using :func:`train` function like this.
+Finally, you can train the model by using :func:`train` function like this.
 ```
 
 ```python

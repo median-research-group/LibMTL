@@ -12,7 +12,7 @@ class AbsArchitecture(nn.Module):
         encoder_class (class): A neural network class.
         decoders (dict): A dictionary of name-decoder pairs of type (:class:`str`, :class:`torch.nn.Module`).
         rep_grad (bool): If ``True``, the gradient of the representation for each task can be computed.
-        multi_input (bool): Is ``True`` if each task has its own input data, ``False`` otherwise. 
+        multi_input (bool): Is ``True`` if each task has its own input data, otherwise is ``False``. 
         device (torch.device): The device where model and data will be allocated. 
         kwargs (dict): A dictionary of hyperparameters of architecture methods.
      

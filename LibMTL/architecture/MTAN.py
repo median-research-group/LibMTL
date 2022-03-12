@@ -98,7 +98,7 @@ class MTAN(AbsArchitecture):
     and implemented by modifying from the `official PyTorch implementation <https://github.com/lorenmt/mtan>`_. 
 
     .. warning::
-            :class:`MTAN` is only supported with ResNet-based encoder.
+            :class:`MTAN` is only supported by ResNet-based encoder.
 
     """
     def __init__(self, task_name, encoder_class, decoders, rep_grad, multi_input, device, **kwargs):

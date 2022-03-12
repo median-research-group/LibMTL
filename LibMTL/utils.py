@@ -24,7 +24,7 @@ def set_device(gpu_id):
     os.environ["CUDA_VISIBLE_DEVICES"] = gpu_id
 
 def count_parameters(model):
-    r'''Calculates the number of parameters for a model.
+    r'''Calculate the number of parameters for a model.
 
     Args:
         model (torch.nn.Module): A neural network module.
@@ -51,7 +51,7 @@ def count_improvement(base_result, new_result, weight):
     Args:
         base_result (dict): A dictionary of scores of all metrics of all tasks.
         new_result (dict): The same structure with ``base_result``.
-        weight (dict): The same structure with ``base_result`` while each elements is binary integer representing whether higher or lower score is better.
+        weight (dict): The same structure with ``base_result`` while each element is binary integer representing whether higher or lower score is better.
 
     Returns:
         float: The improvement between ``new_result`` and ``base_result``.

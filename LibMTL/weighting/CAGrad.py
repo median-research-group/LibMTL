@@ -18,7 +18,7 @@ class CAGrad(AbsWeighting):
         rescale ({0, 1, 2}, default=1): The type of gradient rescale.
 
     .. warning::
-            CAGrad is not supported with representation gradients, i.e., ``rep_grad`` must be ``False``.
+            CAGrad is not supported by representation gradients, i.e., ``rep_grad`` must be ``False``.
 
     """
     def __init__(self):
