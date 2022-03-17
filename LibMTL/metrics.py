@@ -26,7 +26,7 @@ class AbsMetric(object):
     
     @property
     def score_fun(self):
-        r"""Calculate the final score (when a epoch ends).
+        r"""Calculate the final score (when an epoch ends).
 
         Return:
             list: A list of metric scores.

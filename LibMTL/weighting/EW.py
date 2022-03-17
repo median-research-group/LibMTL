@@ -6,9 +6,9 @@ import numpy as np
 from LibMTL.weighting.abstract_weighting import AbsWeighting
 
 class EW(AbsWeighting):
-    r"""Equally Weighting (EW).
+    r"""Equal Weighting (EW).
 
-    The loss weight for each task is always ``1 / T`` in every iteration, where ``T`` means the number of tasks.
+    The loss weight for each task is always ``1 / T`` in every iteration, where ``T`` denotes the number of tasks.
 
     """
     def __init__(self):

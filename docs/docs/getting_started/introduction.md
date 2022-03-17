@@ -16,7 +16,7 @@
 
 | Weighting Strategy                                           | Venues              | Comments                                                     |
 | ------------------------------------------------------------ | ------------------- | ------------------------------------------------------------ |
-| Equally Weighting (EW)                                       | -                   | Implemented by us                                            |
+| Equal Weighting (EW)                                         | -                   | Implemented by us                                            |
 | Gradient Normalization ([GradNorm](http://proceedings.mlr.press/v80/chen18a/chen18a.pdf)) | ICML 2018           | Implemented by us                                            |
 | Uncertainty Weights ([UW](https://openaccess.thecvf.com/content_cvpr_2018/papers/Kendall_Multi-Task_Learning_Using_CVPR_2018_paper.pdf)) | CVPR 2018           | Implemented by us                                            |
 | [MGDA](https://papers.nips.cc/paper/2018/hash/432aca3a1e345e339f35a30c8f65edce-Abstract.html) | NeurIPS 2018        | Referenced from [official PyTorch implementation](https://github.com/isl-org/MultiObjectiveOptimization) |
@@ -39,7 +39,7 @@
 | Multi-Task Attention Network ([MTAN](https://openaccess.thecvf.com/content_CVPR_2019/papers/Liu_End-To-End_Multi-Task_Learning_With_Attention_CVPR_2019_paper.pdf)) | CVPR 2019                  | Referenced from [official PyTorch implementation](https://github.com/lorenmt/mtan) |
 | Customized Gate Control ([CGC](https://dl.acm.org/doi/10.1145/3383313.3412236)) | ACM RecSys 2020 Best Paper | Implemented by us                                            |
 | Progressive Layered Extraction ([PLE](https://dl.acm.org/doi/10.1145/3383313.3412236)) | ACM RecSys 2020 Best Paper | Implemented by us                                            |
-| [DSelect-k](https://openreview.net/forum?id=tKlYQJLYN8v)     | NeurIPS 2021               | Referenced from [official TensorFlow implementation](https://github.com/google-research/google-research/tree/master/dselect_k_moe) |
+| [DSelect-k](https://proceedings.neurips.cc/paper/2021/hash/f5ac21cd0ef1b88e9848571aeb53551a-Abstract.html) | NeurIPS 2021               | Referenced from [official TensorFlow implementation](https://github.com/google-research/google-research/tree/master/dselect_k_moe) |
 
 - 84 combinations of different architectures and loss weighting strategies.
 

@@ -12,8 +12,8 @@ class MMoE(AbsArchitecture):
     and implemented by us.
 
     Args:
-        img_size (list): The size of input data. For example, [3, 244, 244] for input images with size 3x224x224.
-        num_experts (int): The number of experts shared for all tasks. Each expert is the encoder network.
+        img_size (list): The size of input data. For example, [3, 244, 244] denotes input images with size 3x224x224.
+        num_experts (int): The number of experts shared for all tasks. Each expert is an encoder network.
 
     """
     def __init__(self, task_name, encoder_class, decoders, rep_grad, multi_input, device, **kwargs):

@@ -14,7 +14,7 @@ class AbsArchitecture(nn.Module):
         rep_grad (bool): If ``True``, the gradient of the representation for each task can be computed.
         multi_input (bool): Is ``True`` if each task has its own input data, otherwise is ``False``. 
         device (torch.device): The device where model and data will be allocated. 
-        kwargs (dict): A dictionary of hyperparameters of architecture methods.
+        kwargs (dict): A dictionary of hyperparameters of architectures.
      
     """
     def __init__(self, task_name, encoder_class, decoders, rep_grad, multi_input, device, **kwargs):

@@ -15,7 +15,7 @@ class CAGrad(AbsWeighting):
 
     Args:
         calpha (float, default=0.5): A hyperparameter that controls the convergence rate.
-        rescale ({0, 1, 2}, default=1): The type of gradient rescale.
+        rescale ({0, 1, 2}, default=1): The type of the gradient rescaling.
 
     .. warning::
             CAGrad is not supported by representation gradients, i.e., ``rep_grad`` must be ``False``.

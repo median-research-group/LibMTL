@@ -42,7 +42,7 @@ def count_parameters(model):
     print('Non-trainable Params:', non_trainable_params)
         
 def count_improvement(base_result, new_result, weight):
-    r"""Calculate the improvement between two results,
+    r"""Calculate the improvement between two results as
 
     .. math::
         \Delta_{\mathrm{p}}=100\%\times \frac{1}{T}\sum_{t=1}^T 

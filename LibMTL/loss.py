@@ -4,7 +4,7 @@ import torch.nn.functional as F
 import numpy as np
 
 class AbsLoss(object):
-    r"""An abstract class for loss function. 
+    r"""An abstract class for loss functions. 
     """
     def __init__(self):
         self.record = []
@@ -38,7 +38,7 @@ class AbsLoss(object):
         self.bs = []
         
 class CELoss(AbsLoss):
-    r"""The cross entropy loss function.
+    r"""The cross-entropy loss function.
     """
     def __init__(self):
         super(CELoss, self).__init__()

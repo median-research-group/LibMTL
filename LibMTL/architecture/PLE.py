@@ -85,12 +85,12 @@ class PLE(AbsArchitecture):
     and implemented by us. 
 
     Args:
-        img_size (list): The size of input data. For example, [3, 244, 244] for input images with size 3x224x224.
-        num_experts (list): The numbers of experts shared for all tasks and are specific to each task, respectively. Each expert is the encoder network.
+        img_size (list): The size of input data. For example, [3, 244, 244] denotes input images with size 3x224x224.
+        num_experts (list): The numbers of experts shared by all the tasks and specific to each task, respectively. Each expert is an encoder network.
 
     .. warning::
-            - :class:`PLE` does not work with multiple inputs MTL problem, i.e., ``multi_input`` must be ``False``.
-            - :class:`PLE` is only supported by ResNet-based encoder.
+            - :class:`PLE` does not work with multi-input problems, i.e., ``multi_input`` must be ``False``.
+            - :class:`PLE` is only supported by ResNet-based encoders.
 
     """
     def __init__(self, task_name, encoder_class, decoders, rep_grad, multi_input, device, **kwargs):

@@ -15,22 +15,22 @@ class Trainer(nn.Module):
         task_dict (dict): A dictionary of name-information pairs of type (:class:`str`, :class:`dict`). \
                             The sub-dictionary for each task has four entries whose keywords are named **metrics**, \
                             **metrics_fn**, **loss_fn**, **weight** and each of them corresponds to a :class:`list`.
-                            The list of **metrics** has ``m`` strings, repersenting the name of ``m`` metric objectives \
+                            The list of **metrics** has ``m`` strings, repersenting the name of ``m`` metrics \
                             for this task. The list of **metrics_fn** has two elements, i.e., the updating and score \
-                            functions, meaning how to update thoes objectives in the training process and get the final \
+                            functions, meaning how to update thoes objectives in the training process and obtain the final \
                             scores, respectively. The list of **loss_fn** has ``m`` loss functions corresponding to each \
-                            metric objective. The list of **weight** has ``m`` binary integers corresponding to each \
-                            metric objective, where ``1`` means the higher the score is, the better the performance of this objective is, \
+                            metric. The list of **weight** has ``m`` binary integers corresponding to each \
+                            metric, where ``1`` means the higher the score is, the better the performance, \
                             ``0`` means the opposite.                           
-        weighting (class): A weighting strategy class bases on :class:`LibMTL.weighting.abstract_weighting.AbsWeighting`.
-        architecture (class): An architecture class bases on :class:`LibMTL.architecture.abstract_arch.AbsArchitecture`.
+        weighting (class): A weighting strategy class based on :class:`LibMTL.weighting.abstract_weighting.AbsWeighting`.
+        architecture (class): An architecture class based on :class:`LibMTL.architecture.abstract_arch.AbsArchitecture`.
         encoder_class (class): A neural network class.
         decoders (dict): A dictionary of name-decoder pairs of type (:class:`str`, :class:`torch.nn.Module`).
         rep_grad (bool): If ``True``, the gradient of the representation for each task can be computed.
         multi_input (bool): Is ``True`` if each task has its own input data, otherwise is ``False``. 
-        optim_param (dict): A dictionary of configuration for the optimizier.
-        scheduler_param (dict): A dictionary of configuration for learning rate scheduler. \
-                                 Set it as ``None`` if you do not use a learning rate scheduler.
+        optim_param (dict): A dictionary of configurations for the optimizier.
+        scheduler_param (dict): A dictionary of configurations for learning rate scheduler. \
+                                 Set it to ``None`` if you do not use a learning rate scheduler.
         kwargs (dict): A dictionary of hyperparameters of weighting and architecture methods.
 
     .. note::
@@ -143,9 +143,9 @@ class Trainer(nn.Module):
     def process_preds(self, preds, task_name=None):
         r'''The processing of prediction for each task. 
 
-        - The default is no processing. If necessary, you can redefine this function. 
-        - If ``multi_input``, ``task_name`` is valid, and ``preds`` with type :class:`torch.Tensor` is the prediction of this task.
-        - otherwise, ``task_name`` is invalid, and ``preds`` is a :class:`dict` of name-prediction pairs of all tasks.
+        - The default is no processing. If necessary, you can rewrite this function. 
+        - If ``multi_input`` is ``True``, ``task_name`` is valid and ``preds`` with type :class:`torch.Tensor` is the prediction of this task.
+        - otherwise, ``task_name`` is invalid and ``preds`` is a :class:`dict` of name-prediction pairs of all tasks.
 
         Args:
             preds (dict or torch.Tensor): The prediction of ``task_name`` or all tasks.
@@ -184,7 +184,7 @@ class Trainer(nn.Module):
                             Otherwise, it is a single dataloader which returns data and a dictionary \
                             of name-label pairs in each iteration.
 
-            test_dataloaders (dict or torch.utils.data.DataLoader): The dataloaders used for validation or test. \
+            test_dataloaders (dict or torch.utils.data.DataLoader): The dataloaders used for the validation or testing. \
                             The same structure with ``train_dataloaders``.
             epochs (int): The total training epochs.
             return_weight (bool): if ``True``, the loss weights will be returned.

@@ -8,12 +8,12 @@ from LibMTL.architecture.MMoE import MMoE
 class DSelect_k(MMoE):
     r"""DSelect-k.
     
-    This method is proposed in `DSelect-k: Differentiable Selection in the Mixture of Experts with Applications to Multi-Task Learning (NeurIPS 2021) <https://openreview.net/forum?id=tKlYQJLYN8v>`_ \
+    This method is proposed in `DSelect-k: Differentiable Selection in the Mixture of Experts with Applications to Multi-Task Learning (NeurIPS 2021) <https://proceedings.neurips.cc/paper/2021/hash/f5ac21cd0ef1b88e9848571aeb53551a-Abstract.html>`_ \
     and implemented by modifying from the `official TensorFlow implementation <https://github.com/google-research/google-research/tree/master/dselect_k_moe>`_. 
 
     Args:
-        img_size (list): The size of input data. For example, [3, 244, 244] for input images with size 3x224x224.
-        num_experts (int): The number of experts shared for all tasks. Each expert is the encoder network.
+        img_size (list): The size of input data. For example, [3, 244, 244] denotes input images with size 3x224x224.
+        num_experts (int): The number of experts shared by all the tasks. Each expert is an encoder network.
         num_nonzeros (int): The number of selected experts.
         kgamma (float, default=1.0): A scaling parameter for the smooth-step function.
 
