@@ -24,6 +24,6 @@
 
 ```eval_rst
 .. figure:: ../images/framework.png
-        :scale: 100%
+        :scale: 80%
 ```
 
