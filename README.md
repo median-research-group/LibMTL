@@ -30,11 +30,7 @@
 
  ![framework](./docs/docs/images/framework.png).
 
-- **Config Module**: Responsible for all the configuration parameters involved in the running framework, including the parameters of optimizer and learning rate scheduler, the hyper-parameters of MTL model, training configuration like batch size, total epoch, random seed and so on.
-- **Dataloaders Module**: Responsible for data pre-processing and loading.
-- **Model Module**: Responsible for inheriting classes architecture and weighting and instantiating a MTL model. Note that the architecture and the weighting strategy determine the forward and backward processes of the MTL model, respectively.
-- **Losses Module**: Responsible for computing the loss for each task. 
-- **Metrics Module**: Responsible for evaluating the MTL model and calculating the metric scores for each task.
+Each module is introduced in [Docs](https://libmtl.readthedocs.io/en/latest/docs/user_guide/framework.html).
 
 ## Supported Algorithms
 
@@ -69,7 +65,7 @@
 | Progressive Layered Extraction ([PLE](https://dl.acm.org/doi/10.1145/3383313.3412236)) | ACM RecSys 2020 Best Paper | Implemented by us                                            |
 | [DSelect-k](https://proceedings.neurips.cc/paper/2021/hash/f5ac21cd0ef1b88e9848571aeb53551a-Abstract.html) | NeurIPS 2021               | Referenced from [official TensorFlow implementation](https://github.com/google-research/google-research/tree/master/dselect_k_moe) |
 
-- 84 combinations of different architectures and loss weighting strategies.
+- Different combinations of different architectures and loss weighting strategies.
 
 ## Installation
 
