@@ -2,7 +2,7 @@
 
 The NYUv2 dataset [[1]](#1) is an indoor scene understanding dataset, which consists of video sequences recorded by the RGB and Depth cameras in the Microsoft Kinect. It contains 795 and 654 images with ground-truths for training and validation, respectively. 
 
-We use the pre-processed NYUv2 dataset in [[2]](#2), which can be downloaded [here](https://www.dropbox.com/sh/86nssgwm6hm3vkb/AACrnUQ4GxpdrBbLjb6n-mWNa?dl=0). Each input image has been resized to $$3\times284\times384$$ and has labels for three tasks, including 13-class semantic segmentation, depth estimation, and surface normal prediction. Thus, it is a single-input problem, which means ``multi_input`` must be ``False``.
+We use the pre-processed NYUv2 dataset in [[2]](#2), which can be downloaded [here](https://www.dropbox.com/sh/86nssgwm6hm3vkb/AACrnUQ4GxpdrBbLjb6n-mWNa?dl=0). Each input image has been resized to <img src="https://render.githubusercontent.com/render/math?math=3\times284\times384"> and has labels for three tasks, including 13-class semantic segmentation, depth estimation, and surface normal prediction. Thus, it is a single-input problem, which means ``multi_input`` must be ``False``.
 
 The training codes are mainly modified from [mtan](https://github.com/lorenmt/mtan). We use DeepLabV3+ architecture [[3]](#3), where a ResNet-50 network pretrained on the ImageNet dataset with dilated convolutions [[4]](#4) is used as a shared encoder among tasks and the Atrous Spatial Pyramid Pooling (ASPP) module [[3]](#3) is used as task-specific head for each task. 
 
