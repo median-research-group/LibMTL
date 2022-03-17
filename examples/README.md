@@ -2,5 +2,5 @@
 
 Here we introduce some MTL benchmark datasets and show how to run models on them for a fair comparison. 
 
-- [The NYUv2 Dataset](../../examples/nyu)
-- [The Office-31 and Office-Home Datasets](../../examples/office)
+- [The NYUv2 Dataset](https://github.com/median-research-group/LibMTL/tree/main/examples/nyu)
+- [The Office-31 and Office-Home Datasets](https://github.com/median-research-group/LibMTL/tree/main/examples/office)
