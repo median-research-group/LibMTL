@@ -28,7 +28,7 @@
 
 ## Overall Framework
 
- ![framework](./docs/docs/images/framework.png).
+ ![framework](./docs/docs/images/framework.png)
 
 Each module is introduced in [Docs](https://libmtl.readthedocs.io/en/latest/docs/user_guide/framework.html).
 
