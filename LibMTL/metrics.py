@@ -57,3 +57,25 @@ class AccMetric(AbsMetric):
         r"""
         """
         return [(sum(self.record)/sum(self.bs))]
+
+
+# L1 Error
+class L1Metric(AbsMetric):
+    r"""Calculate the Mean Absolute Error (MAE/L1 error).
+    """
+    def __init__(self):
+        super(L1Metric, self).__init__()
+        
+    def update_fun(self, pred, gt):
+        r"""
+        """
+        abs_err = torch.abs(pred - gt)
+        self.record.append(abs_err)
+        self.bs.append(pred.size()[0])
+        
+    def score_fun(self):
+        r"""
+        """
+        records = np.array(self.abs_record)
+        batch_size = np.array(self.bs)
+        return [(records*batch_size).sum()/(sum(batch_size))]
