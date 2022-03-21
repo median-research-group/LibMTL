@@ -61,7 +61,7 @@ class AccMetric(AbsMetric):
 
 # L1 Error
 class L1Metric(AbsMetric):
-    r"""Calculate the Mean Absolute Error (MAE/L1 error).
+    r"""Calculate the Mean Absolute Error (MAE).
     """
     def __init__(self):
         super(L1Metric, self).__init__()
