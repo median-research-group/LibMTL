@@ -48,13 +48,11 @@
 If you find ``LibMTL`` useful for your research or development, please cite the following:
 
 ```latex
-@misc{LibMTL,
- author = {Baijiong Lin and Yu Zhang},
- title = {LibMTL: A PyTorch Library for Multi-Task Learning},
- year = {2021},
- publisher = {GitHub},
- journal = {GitHub repository},
- howpublished = {\url{https://github.com/median-research-group/LibMTL}}
+@article{LibMTL,
+  title={LibMTL: A Python Library for Multi-Task Learning},
+  author={Baijiong Lin and Yu Zhang},
+  journal={arXiv preprint arXiv:2203.14338},
+  year={2022}
 }
 ```
 
