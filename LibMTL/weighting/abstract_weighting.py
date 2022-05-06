@@ -62,10 +62,10 @@ class AbsWeighting(nn.Module):
     def _reset_grad(self, new_grads):
         count = 0
         for param in self.get_share_params():
-            beg = 0 if count == 0 else sum(self.grad_index[:count])
-            end = sum(self.grad_index[:(count+1)])
-    #             print(param.data.size(), end-beg, new_grads.shape)
-            param.grad.data = new_grads[beg:end].contiguous().view(param.data.size()).data.clone()
+            if param.grad is not None:
+                beg = 0 if count == 0 else sum(self.grad_index[:count])
+                end = sum(self.grad_index[:(count+1)])
+                param.grad.data = new_grads[beg:end].contiguous().view(param.data.size()).data.clone()
             count += 1
             
     def _get_grads(self, losses, mode='backward'):
