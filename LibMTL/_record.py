@@ -60,7 +60,7 @@ class _PerformanceMeter(object):
         print('TIME')
     
     def display(self, mode, epoch):
-        if epoch == 0 and self.base_result is None and (mode=='val' if self.has_val else 'test'):
+        if epoch == 0 and self.base_result is None and mode==('val' if self.has_val else 'test'):
             self.base_result = self.results
         if mode == 'train':
             print('Epoch: {:04d} | '.format(epoch), end='')
