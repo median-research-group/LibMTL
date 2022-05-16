@@ -45,7 +45,7 @@ class AbsArchitecture(nn.Module):
         """
         out = {}
         s_rep = self.encoder(inputs)
-        same_rep = True if isinstance(s_rep, list) and not self.multi_input else False
+        same_rep = True if not isinstance(s_rep, list) and not self.multi_input else False
         for tn, task in enumerate(self.task_name):
             if task_name is not None and task != task_name:
                 continue
