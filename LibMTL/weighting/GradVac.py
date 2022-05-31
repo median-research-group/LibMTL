@@ -22,12 +22,12 @@ class GradVac(AbsWeighting):
     def __init__(self):
         super(GradVac, self).__init__()
         
+    def init_param(self):
+        self.rho_T = torch.zeros(self.task_num, self.task_num).to(self.device)
+        
     def backward(self, losses, **kwargs):
         beta = kwargs['beta']
-        try:
-            a = self.rho_T
-        except:
-            self.rho_T = torch.zeros(self.task_num, self.task_num).to(self.device)
+
         if self.rep_grad:
             raise ValueError('No support method GradVac with representation gradients (rep_grad=True)')
         else:
