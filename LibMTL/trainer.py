@@ -194,6 +194,7 @@ class Trainer(nn.Module):
         
         self.batch_weight = np.zeros([self.task_num, epochs, train_batch])
         self.model.train_loss_buffer = np.zeros([self.task_num, epochs])
+        self.model.epochs = epochs
         for epoch in range(epochs):
             self.model.epoch = epoch
             self.model.train()
