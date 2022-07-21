@@ -7,6 +7,7 @@
 
 ## News
 
+- **[Jul 21 2022]**: Added support for [Learning to Branch](http://proceedings.mlr.press/v119/guo20e/guo20e.pdf). Many thanks to [@yuezhixiong](https://github.com/yuezhixiong) ([#14](https://github.com/median-research-group/LibMTL/pull/14)).
 - **[Mar 29 2022]**: Paper is now available on the [arXiv](https://arxiv.org/abs/2203.14338).
 
 ## Table of Content
@@ -27,7 +28,7 @@
 ## Features
 
 - **Unified**:  ``LibMTL`` provides a unified code base to implement and a consistent evaluation procedure including data processing, metric objectives, and hyper-parameters on several representative MTL benchmark datasets, which allows quantitative, fair, and consistent comparisons between different MTL algorithms.
-- **Comprehensive**: ``LibMTL`` supports 84 MTL models combined by 7 architectures and 12 loss weighting strategies. Meanwhile, ``LibMTL`` provides a fair comparison on 3 computer vision datasets.
+- **Comprehensive**: ``LibMTL`` supports 96 MTL models combined by 8 architectures and 12 loss weighting strategies. Meanwhile, ``LibMTL`` provides a fair comparison on 3 computer vision datasets.
 - **Extensible**:  ``LibMTL`` follows the modular design principles, which allows users to flexibly and conveniently add customized components or make personalized modifications. Therefore, users can easily and fast develop novel loss weighting strategies and architectures or apply the existing MTL algorithms to new application scenarios with the support of ``LibMTL``.
 
 ## Overall Framework
@@ -57,7 +58,7 @@ Each module is introduced in [Docs](https://libmtl.readthedocs.io/en/latest/docs
 | Conflict-Averse Gradient descent ([CAGrad](https://openreview.net/forum?id=_61Qh8tULj_)) | NeurIPS 2021        | Referenced from [official PyTorch implementation](https://github.com/Cranial-XIX/CAGrad) |
 | Random Loss Weighting ([RLW](https://arxiv.org/abs/2111.10603)) | arXiv               | Implemented by us                                            |
 
-- 7 architectures.
+- 8 architectures.
 
 | Architecture                                                 | Venues                     | Comments                                                     |
 | ------------------------------------------------------------ | -------------------------- | ------------------------------------------------------------ |
@@ -67,6 +68,7 @@ Each module is introduced in [Docs](https://libmtl.readthedocs.io/en/latest/docs
 | Multi-Task Attention Network ([MTAN](https://openaccess.thecvf.com/content_CVPR_2019/papers/Liu_End-To-End_Multi-Task_Learning_With_Attention_CVPR_2019_paper.pdf)) | CVPR 2019                  | Referenced from [official PyTorch implementation](https://github.com/lorenmt/mtan) |
 | Customized Gate Control ([CGC](https://dl.acm.org/doi/10.1145/3383313.3412236)) | ACM RecSys 2020 Best Paper | Implemented by us                                            |
 | Progressive Layered Extraction ([PLE](https://dl.acm.org/doi/10.1145/3383313.3412236)) | ACM RecSys 2020 Best Paper | Implemented by us                                            |
+| Learning to Branch ([LTB](http://proceedings.mlr.press/v119/guo20e/guo20e.pdf)) | ICML 2020 |  Implemented by us |
 | [DSelect-k](https://proceedings.neurips.cc/paper/2021/hash/f5ac21cd0ef1b88e9848571aeb53551a-Abstract.html) | NeurIPS 2021               | Referenced from [official TensorFlow implementation](https://github.com/google-research/google-research/tree/master/dselect_k_moe) |
 
 - Different combinations of different architectures and loss weighting strategies.
