@@ -6,6 +6,7 @@ from LibMTL.architecture.MTAN import MTAN
 from LibMTL.architecture.CGC import CGC
 from LibMTL.architecture.PLE import PLE
 from LibMTL.architecture.DSelect_k import DSelect_k
+from LibMTL.architecture.LTB import LTB
 
 __all__ = ['AbsArchitecture',
            'HPS',
@@ -14,4 +15,5 @@ __all__ = ['AbsArchitecture',
            'MTAN',
            'CGC',
            'PLE',
-           'DSelect_k']
+           'DSelect_k',
+           'LTB']
