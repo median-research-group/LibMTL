@@ -70,7 +70,7 @@ class L1Metric(AbsMetric):
         r"""
         """
         abs_err = torch.abs(pred - gt)
-        self.record.append(abs_err)
+        self.record.append(abs_err.item())
         self.bs.append(pred.size()[0])
         
     def score_fun(self):
