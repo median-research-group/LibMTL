@@ -42,6 +42,10 @@ _parser.add_argument('--leak', type=float, default=0.0, help='leak for GradDrop'
 ## CAGrad
 _parser.add_argument('--calpha', type=float, default=0.5, help='calpha for CAGrad')
 _parser.add_argument('--rescale', type=int, default=1, help='rescale for CAGrad')
+## Nash_MTL
+_parser.add_argument('--update_weights_every', type=int, default=1, help='update_weights_every for Nash_MTL')
+_parser.add_argument('--optim_niter', type=int, default=20, help='optim_niter for Nash_MTL')
+_parser.add_argument('--max_norm', type=float, default=1.0, help='max_norm for Nash_MTL')
 
 # args for architecture
 ## CGC
@@ -62,7 +66,7 @@ def prepare_args(params):
     """
     kwargs = {'weight_args': {}, 'arch_args': {}}
     if params.weighting in ['EW', 'UW', 'GradNorm', 'GLS', 'RLW', 'MGDA', 'IMTL',
-                            'PCGrad', 'GradVac', 'CAGrad', 'GradDrop', 'DWA', 'DIY']:
+                            'PCGrad', 'GradVac', 'CAGrad', 'GradDrop', 'DWA', 'Nash_MTL']:
         if params.weighting in ['DWA']:
             if params.T is not None:
                 kwargs['weight_args']['T'] = params.T
@@ -97,6 +101,13 @@ def prepare_args(params):
                 kwargs['weight_args']['rescale'] = params.rescale
             else:
                 raise ValueError('CAGrad needs keywaord calpha and rescale')
+        elif params.weighting in ['Nash_MTL']:
+            if params.update_weights_every is not None and params.optim_niter is not None and params.max_norm is not None:
+                kwargs['weight_args']['update_weights_every'] = params.update_weights_every
+                kwargs['weight_args']['optim_niter'] = params.optim_niter
+                kwargs['weight_args']['max_norm'] = params.max_norm
+            else:
+                raise ValueError('Nash_MTL needs update_weights_every, optim_niter, and max_norm')
     else:
         raise ValueError('No support weighting method {}'.format(params.weighting)) 
         

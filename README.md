@@ -7,7 +7,8 @@
 
 ## News
 
-- **[Jul 21 2022]**: Added support for [Learning to Branch](http://proceedings.mlr.press/v119/guo20e/guo20e.pdf). Many thanks to [@yuezhixiong](https://github.com/yuezhixiong) ([#14](https://github.com/median-research-group/LibMTL/pull/14)).
+- **[Jul 22 2022]**: Added support for [Nash-MTL](https://proceedings.mlr.press/v162/navon22a/navon22a.pdf) (ICML 2022).
+- **[Jul 21 2022]**: Added support for [Learning to Branch](http://proceedings.mlr.press/v119/guo20e/guo20e.pdf) (ICML 2020). Many thanks to [@yuezhixiong](https://github.com/yuezhixiong) ([#14](https://github.com/median-research-group/LibMTL/pull/14)).
 - **[Mar 29 2022]**: Paper is now available on the [arXiv](https://arxiv.org/abs/2203.14338).
 
 ## Table of Content
@@ -28,7 +29,7 @@
 ## Features
 
 - **Unified**:  ``LibMTL`` provides a unified code base to implement and a consistent evaluation procedure including data processing, metric objectives, and hyper-parameters on several representative MTL benchmark datasets, which allows quantitative, fair, and consistent comparisons between different MTL algorithms.
-- **Comprehensive**: ``LibMTL`` supports 96 MTL models combined by 8 architectures and 12 loss weighting strategies. Meanwhile, ``LibMTL`` provides a fair comparison on 3 computer vision datasets.
+- **Comprehensive**: ``LibMTL`` supports 104 MTL models combined by 8 architectures and 13 loss weighting strategies. Meanwhile, ``LibMTL`` provides a fair comparison on 3 computer vision datasets.
 - **Extensible**:  ``LibMTL`` follows the modular design principles, which allows users to flexibly and conveniently add customized components or make personalized modifications. Therefore, users can easily and fast develop novel loss weighting strategies and architectures or apply the existing MTL algorithms to new application scenarios with the support of ``LibMTL``.
 
 ## Overall Framework
@@ -41,7 +42,7 @@ Each module is introduced in [Docs](https://libmtl.readthedocs.io/en/latest/docs
 
 ``LibMTL`` currently supports the following algorithms:
 
-- 12 loss weighting strategies.
+- 13 loss weighting strategies.
 
 | Weighting Strategy                                           | Venues              | Comments                                                     |
 | ------------------------------------------------------------ | ------------------- | ------------------------------------------------------------ |
@@ -56,6 +57,7 @@ Each module is introduced in [Docs](https://libmtl.readthedocs.io/en/latest/docs
 | Impartial Multi-Task Learning ([IMTL](https://openreview.net/forum?id=IMPnRXEWpvr)) | ICLR 2021           | Implemented by us                                            |
 | Gradient Vaccine ([GradVac](https://openreview.net/forum?id=F1vEjWK-lH_)) | ICLR 2021 Spotlight | Implemented by us                                            |
 | Conflict-Averse Gradient descent ([CAGrad](https://openreview.net/forum?id=_61Qh8tULj_)) | NeurIPS 2021        | Referenced from [official PyTorch implementation](https://github.com/Cranial-XIX/CAGrad) |
+| [Nash-MTL](https://proceedings.mlr.press/v162/navon22a/navon22a.pdf) | ICML 2022        | Referenced from [official PyTorch implementation](https://github.com/AvivNavon/nash-mtl) |
 | Random Loss Weighting ([RLW](https://arxiv.org/abs/2111.10603)) | arXiv               | Implemented by us                                            |
 
 - 8 architectures.
@@ -66,8 +68,7 @@ Each module is introduced in [Docs](https://libmtl.readthedocs.io/en/latest/docs
 | Cross-stitch Networks ([Cross_stitch](https://openaccess.thecvf.com/content_cvpr_2016/papers/Misra_Cross-Stitch_Networks_for_CVPR_2016_paper.pdf)) | CVPR 2016                  | Implemented by us                                            |
 | Multi-gate Mixture-of-Experts ([MMoE](https://dl.acm.org/doi/10.1145/3219819.3220007)) | KDD 2018                   | Implemented by us                                            |
 | Multi-Task Attention Network ([MTAN](https://openaccess.thecvf.com/content_CVPR_2019/papers/Liu_End-To-End_Multi-Task_Learning_With_Attention_CVPR_2019_paper.pdf)) | CVPR 2019                  | Referenced from [official PyTorch implementation](https://github.com/lorenmt/mtan) |
-| Customized Gate Control ([CGC](https://dl.acm.org/doi/10.1145/3383313.3412236)) | ACM RecSys 2020 Best Paper | Implemented by us                                            |
-| Progressive Layered Extraction ([PLE](https://dl.acm.org/doi/10.1145/3383313.3412236)) | ACM RecSys 2020 Best Paper | Implemented by us                                            |
+| Customized Gate Control ([CGC](https://dl.acm.org/doi/10.1145/3383313.3412236)), Progressive Layered Extraction ([PLE](https://dl.acm.org/doi/10.1145/3383313.3412236)) | ACM RecSys 2020 Best Paper | Implemented by us                                            |
 | Learning to Branch ([LTB](http://proceedings.mlr.press/v119/guo20e/guo20e.pdf)) | ICML 2020 |  Implemented by us |
 | [DSelect-k](https://proceedings.neurips.cc/paper/2021/hash/f5ac21cd0ef1b88e9848571aeb53551a-Abstract.html) | NeurIPS 2021               | Referenced from [official TensorFlow implementation](https://github.com/google-research/google-research/tree/master/dselect_k_moe) |
 
@@ -132,7 +133,7 @@ If you have any question or suggestion, please feel free to contact us by [raisi
 
 ## Acknowledgements
 
-We would like to thank the authors that release the public repositories (listed alphabetically):  [CAGrad](https://github.com/Cranial-XIX/CAGrad), [dselect_k_moe](https://github.com/google-research/google-research/tree/master/dselect_k_moe), [MultiObjectiveOptimization](https://github.com/isl-org/MultiObjectiveOptimization), and [mtan](https://github.com/lorenmt/mtan).
+We would like to thank the authors that release the public repositories (listed alphabetically):  [CAGrad](https://github.com/Cranial-XIX/CAGrad), [dselect_k_moe](https://github.com/google-research/google-research/tree/master/dselect_k_moe), [MultiObjectiveOptimization](https://github.com/isl-org/MultiObjectiveOptimization), [mtan](https://github.com/lorenmt/mtan), and [nash-mtl](https://github.com/AvivNavon/nash-mtl).
 
 ## License
 
