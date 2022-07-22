@@ -76,6 +76,6 @@ class L1Metric(AbsMetric):
     def score_fun(self):
         r"""
         """
-        records = np.array(self.abs_record)
+        records = np.array(self.record)
         batch_size = np.array(self.bs)
         return [(records*batch_size).sum()/(sum(batch_size))]
