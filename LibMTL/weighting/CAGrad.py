@@ -5,7 +5,12 @@ import numpy as np
 
 from LibMTL.weighting.abstract_weighting import AbsWeighting
 
-from scipy.optimize import minimize
+try:
+    from scipy.optimize import minimize
+except ModuleNotFoundError:
+    from pip._internal import main as pip
+    pip(['install', '--user', 'scipy'])
+    from scipy.optimize import minimize
 
 class CAGrad(AbsWeighting):
     r"""Conflict-Averse Gradient descent (CAGrad).
@@ -14,7 +19,7 @@ class CAGrad(AbsWeighting):
     and implemented by modifying from the `official PyTorch implementation <https://github.com/Cranial-XIX/CAGrad>`_. 
 
     Args:
-        calpha (float, default=0.5): A hyperparameter that controls the convergence rate.
+        alpha (float, default=0.5): A hyperparameter that controls the convergence rate.
         rescale ({0, 1, 2}, default=1): The type of the gradient rescaling.
 
     .. warning::
@@ -25,7 +30,7 @@ class CAGrad(AbsWeighting):
         super(CAGrad, self).__init__()
         
     def backward(self, losses, **kwargs):
-        calpha, rescale = kwargs['calpha'], kwargs['rescale']
+        alpha, rescale = kwargs['alpha'], kwargs['rescale']
         if self.rep_grad:
             raise ValueError('No support method CAGrad with representation gradients (rep_grad=True)')
 #             per_grads = self._compute_grad(losses, mode='backward', rep_grad=True)
@@ -42,7 +47,7 @@ class CAGrad(AbsWeighting):
         cons=({'type':'eq','fun':lambda x:1-sum(x)})
         A = GG.numpy()
         b = x_start.copy()
-        c = (calpha*g0_norm+1e-8).item()
+        c = (alpha*g0_norm+1e-8).item()
         def objfn(x):
             return (x.reshape(1,-1).dot(A).dot(b.reshape(-1,1))+c*np.sqrt(x.reshape(1,-1).dot(A).dot(x.reshape(-1,1))+1e-8)).sum()
         res = minimize(objfn, x_start, bounds=bnds, constraints=cons)
@@ -55,9 +60,9 @@ class CAGrad(AbsWeighting):
         if rescale == 0:
             new_grads = g
         elif rescale == 1:
-            new_grads = g / (1+calpha**2)
+            new_grads = g / (1+alpha**2)
         elif rescale == 2:
-            new_grads = g / (1 + calpha)
+            new_grads = g / (1 + alpha)
         else:
             raise ValueError('No support rescale type {}'.format(rescale))
         self._reset_grad(new_grads)

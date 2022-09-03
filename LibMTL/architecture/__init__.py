@@ -1,12 +1,12 @@
-from LibMTL.architecture.abstract_arch import AbsArchitecture
-from LibMTL.architecture.HPS import HPS
-from LibMTL.architecture.Cross_stitch import Cross_stitch
-from LibMTL.architecture.MMoE import MMoE
-from LibMTL.architecture.MTAN import MTAN
-from LibMTL.architecture.CGC import CGC
-from LibMTL.architecture.PLE import PLE
-from LibMTL.architecture.DSelect_k import DSelect_k
-from LibMTL.architecture.LTB import LTB
+from .abstract_arch import AbsArchitecture
+from .HPS import HPS
+from .Cross_stitch import Cross_stitch
+from .MMoE import MMoE
+from .MTAN import MTAN
+from .CGC import CGC
+from .PLE import PLE
+from .DSelect_k import DSelect_k
+from .LTB import LTB
 
 __all__ = ['AbsArchitecture',
            'HPS',

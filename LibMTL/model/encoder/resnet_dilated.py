@@ -1,5 +1,5 @@
 import torch.nn as nn
-import LibMTL.model.resnet as resnet 
+import LibMTL.model.encoder.resnet as resnet 
 
 class ResnetDilated(nn.Module):
     def __init__(self, orig_resnet, dilate_scale=8):

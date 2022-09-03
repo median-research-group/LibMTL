@@ -1,0 +1,67 @@
+general:
+  seed: 0
+  deterministic: False
+  gpu_id: 0
+  save_dir: ./
+  exp_name: test1
+
+tasks:
+  info:
+    amazon: &amazon
+      metric_fn: AccMetric
+      loss_fn: CELoss
+    dslr:
+      <<: *amazon
+    webcam:
+      <<: *amazon
+  multi_input: True
+
+training:
+  optimizer:
+    name: Adam
+    lr: 1.0e-4
+    weight_decay: 1.0e-5
+  epochs: 1
+  dataloader:
+    train:
+      dataset: &train_dataset
+        name: OfficeDataset 
+        path: /path/to/office31
+        split_path: ./data_txt/office-31
+        augmentation: False
+      batch_size: 64
+      num_workers: 2
+      drop_last: True
+      shuffle: True
+      pin_memory: True
+    val: &val_dataloader
+      dataset:
+        <<: *train_dataset
+      batch_size: 64
+      num_workers: 2
+      drop_last: False
+      shuffle: False
+      pin_memory: True
+    test:
+      <<: *val_dataloader
+
+weighting:
+  name: DWA
+  rep_grad: False
+
+architecture:
+  name: HPS
+
+model:
+  encoder: 
+    name: OfficeEncoder
+    basenet: resnet18
+  decoders:
+    amazon: &amazon_decoder 
+      name: Linear
+      input_num: 512
+      output_num: 31
+    dslr:
+      <<: *amazon_decoder
+    webcam:
+      <<: *amazon_decoder

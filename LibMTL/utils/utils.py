@@ -2,7 +2,7 @@ import random, torch, os
 import numpy as np
 import torch.nn as nn
 
-def set_random_seed(seed):
+def set_random_seed(seed: int, deterministic: bool = False):
     r"""Set the random seed for reproducibility.
 
     Args:
@@ -11,9 +11,11 @@ def set_random_seed(seed):
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    torch.cuda.manual_seed(seed)
     if torch.cuda.is_available():
-        torch.backends.cudnn.deterministic = True
-        torch.backends.cudnn.benchmark = False
+        torch.backends.cudnn.deterministic = deterministic
+        torch.backends.cudnn.benchmark = not deterministic
         
 def set_device(gpu_id):
     r"""Set the device where model and data will be allocated. 
@@ -21,7 +23,13 @@ def set_device(gpu_id):
     Args:
         gpu_id (str, default='0'): The id of gpu.
     """
-    os.environ["CUDA_VISIBLE_DEVICES"] = gpu_id
+    if torch.cuda.is_available():   
+        # os.environ["CUDA_VISIBLE_DEVICES"] = str(gpu_id)
+        torch.cuda.set_device('cuda:{}'.format(gpu_id))
+        device = torch.device('cuda:{}'.format(gpu_id))
+    else:
+        device = torch.device('cpu')
+    return device
 
 def count_parameters(model):
     r'''Calculate the number of parameters for a model.
@@ -41,7 +49,9 @@ def count_parameters(model):
     print('Trainable Params:', trainable_params)
     print('Non-trainable Params:', non_trainable_params)
         
-def count_improvement(base_result, new_result, weight):
+def count_improvement(base_result: dict, 
+                      new_result: dict, 
+                      weight: dict) -> float:
     r"""Calculate the improvement between two results as
 
     .. math::
@@ -58,17 +68,18 @@ def count_improvement(base_result, new_result, weight):
 
     Examples::
 
-        base_result = {'A': [96, 98], 'B': [0.2]}
-        new_result = {'A': [93, 99], 'B': [0.5]}
-        weight = {'A': [1, 0], 'B': [1]}
+        base_result = {'A': {'AM1': 96, 'AM2': 98}, 'B': {'BM1': 0.2}}
+        new_result = {'A': {'AM1': 93, 'AM2': 99}, 'B': {'BM1': 0.5}}
+        weight = {'A': {'AM1':1, 'AM2': 0}, 'B': {'BM1': 1}}
 
         print(count_improvement(base_result, new_result, weight))
     """
     improvement = 0
     count = 0
     for task in list(base_result.keys()):
-        improvement += (((-1)**np.array(weight[task]))*\
-                        (np.array(base_result[task])-np.array(new_result[task]))/\
-                         np.array(base_result[task])).mean()
+        we_array = np.array([weight[task][metric] for metric in list(base_result[task].keys())])
+        br_array = np.array([base_result[task][metric] for metric in list(base_result[task].keys())])
+        nr_array = np.array([new_result[task][metric] for metric in list(base_result[task].keys())])
+        improvement += (((-1) ** we_array) * (br_array - nr_array) / br_array).mean()
         count += 1
-    return improvement/count
+    return improvement / count

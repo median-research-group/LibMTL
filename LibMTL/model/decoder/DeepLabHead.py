@@ -2,16 +2,20 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-
 class DeepLabHead(nn.Sequential):
-    def __init__(self, in_channels, num_classes):
+    def __init__(self, input_channels, output_channels, img_size):
         super(DeepLabHead, self).__init__(
-            ASPP(in_channels, [12, 24, 36]),
+            ASPP(input_channels, [12, 24, 36]),
             nn.Conv2d(256, 256, 3, padding=1, bias=False),
             nn.BatchNorm2d(256),
             nn.ReLU(),
-            nn.Conv2d(256, num_classes, 1)
+            nn.Conv2d(256, output_channels, 1)
         )
+        self.img_size = img_size
+
+    def forward(self, x):
+        x = super(DeepLabHead, self).forward(x)
+        return F.interpolate(x, self.img_size, mode='bilinear', align_corners=True)
 
 
 class ASPPConv(nn.Sequential):

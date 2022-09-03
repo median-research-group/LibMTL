@@ -43,7 +43,6 @@ class _transform_resnet_ltb(nn.Module):
 
 class LTB(AbsArchitecture):
     r"""Learning To Branch (LTB).
-
     This method is proposed in `Learning to Branch for Multi-Task Learning (ICML 2020) <http://proceedings.mlr.press/v119/guo20e.html>`_ \
     and implemented by us. 
     """
@@ -70,4 +69,4 @@ class LTB(AbsArchitecture):
             ss_rep = s_rep[tn] if isinstance(s_rep, list) else s_rep
             ss_rep = self._prepare_rep(ss_rep, task, same_rep)
             out[task] = self.decoders[task](ss_rep)
-        return out
+        return 

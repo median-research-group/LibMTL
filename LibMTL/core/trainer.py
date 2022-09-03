@@ -2,11 +2,16 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
+from typing import Optional, Type
 
-from LibMTL._record import _PerformanceMeter
-from LibMTL.utils import count_parameters
+from LibMTL.utils.recorder import ExpRecorder
+from LibMTL.utils.timer import TimeRecorder
+from LibMTL.utils.builder import build_from_cfg, build_dataloader
+from LibMTL.core.common_init import common_init
+import LibMTL.weighting as weighting_method
+import LibMTL.architecture as architecture_method
 
-class Trainer(nn.Module):
+class Trainer:
     r'''A Multi-Task Learning Trainer.
 
     This is a unified and extensible training framework for multi-task learning. 
@@ -73,24 +78,46 @@ class Trainer(nn.Module):
                           **kwargs)
 
     '''
-    def __init__(self, task_dict, weighting, architecture, encoder_class, decoders, 
-                 rep_grad, multi_input, optim_param, scheduler_param, **kwargs):
-        super(Trainer, self).__init__()
+    def __init__(self, 
+                 cfg_file: str,
+                 task_dict: Optional[dict] = None, 
+                 encoder_class: Optional[Type[nn.Module]] = None,
+                 decoders: Optional[nn.ModuleDict] = None,
+                 dataloaders: Optional[dict] = None,
+                 **kwargs):
         
-        self.device = torch.device('cuda:0')
         self.kwargs = kwargs
-        self.task_dict = task_dict
-        self.task_num = len(task_dict)
-        self.task_name = list(task_dict.keys())
-        self.rep_grad = rep_grad
-        self.multi_input = multi_input
 
-        self._prepare_model(weighting, architecture, encoder_class, decoders)
-        self._prepare_optimizer(optim_param, scheduler_param)
+        self.cfg, self.saver, self.device = common_init(cfg_file)
+        self.use_gpu = True if torch.cuda.is_available() else False
+        ## tasks
+        self.task_dict = self.cfg['tasks'] if task_dict is None else task_dict
+        self.task_num = len(self.task_dict['info'])
+        self.task_name = list(self.task_dict['info'].keys())
+        self.multi_input = self.task_dict['multi_input']
+        ## train config
+        self.epochs = self.cfg['training']['epochs']
+
+        self._prepare_model() # self.model
+        self._prepare_optimizer() # self.optimizer, self.scheduler
+        if dataloaders is None:
+            self._prepare_dataloaders() # self.dataloaders
+        else:
+            self.dataloaders = dataloaders
+        self._prepare_loss() # self.losses
+        self._prepare_metric() # self.metrics
+        self.recorder = ExpRecorder(self.task_dict, self.losses, self.metrics)
         
-        self.meter = _PerformanceMeter(self.task_dict, self.multi_input)
-        
-    def _prepare_model(self, weighting, architecture, encoder_class, decoders):
+    def _prepare_model(self):
+
+        architecture = architecture_method.__dict__[self.cfg['architecture']['name']]
+        weighting = weighting_method.__dict__[self.cfg['weighting']['name']]
+        arch_arg = {k: v for k, v in self.cfg['architecture'].items() if k != 'name'}
+        def encoder_class():
+            return build_from_cfg(build_type='encoder', cfg=self.cfg['model']['encoder'])
+        decoders = nn.ModuleDict({})
+        for task in self.task_name:
+            decoders[task] = build_from_cfg(build_type='decoder', cfg=self.cfg['model']['decoders'][task])
         
         class MTLmodel(architecture, weighting):
             def __init__(self, task_name, encoder_class, decoders, rep_grad, multi_input, device, kwargs):
@@ -100,42 +127,61 @@ class Trainer(nn.Module):
         self.model = MTLmodel(task_name=self.task_name, 
                               encoder_class=encoder_class, 
                               decoders=decoders, 
-                              rep_grad=self.rep_grad, 
+                              rep_grad=self.cfg['weighting']['rep_grad'], 
                               multi_input=self.multi_input,
                               device=self.device,
-                              kwargs=self.kwargs['arch_args']).to(self.device)
-        count_parameters(self.model)
+                              kwargs=arch_arg).to(self.device)
         
-    def _prepare_optimizer(self, optim_param, scheduler_param):
-        optim_dict = {
-                'sgd': torch.optim.SGD,
-                'adam': torch.optim.Adam,
-                'adagrad': torch.optim.Adagrad,
-                'rmsprop': torch.optim.RMSprop,
-            }
-        scheduler_dict = {
-                'exp': torch.optim.lr_scheduler.ExponentialLR,
-                'step': torch.optim.lr_scheduler.StepLR,
-                'cos': torch.optim.lr_scheduler.CosineAnnealingLR,
-            }
-        optim_arg = {k: v for k, v in optim_param.items() if k != 'optim'}
-        self.optimizer = optim_dict[optim_param['optim']](self.model.parameters(), **optim_arg)
-        if scheduler_param is not None:
-            scheduler_arg = {k: v for k, v in scheduler_param.items() if k != 'scheduler'}
-            self.scheduler = scheduler_dict[scheduler_param['scheduler']](self.optimizer, **scheduler_arg)
+    def _prepare_optimizer(self):
+        self.optimizer = build_from_cfg(build_type='optimizer',
+                                        cfg=self.cfg['training']['optimizer'],
+                                        other_arg={'params': self.model.parameters()})
+        if 'scheduler' in list(self.cfg['training'].keys()):
+            self.scheduler = build_from_cfg(build_type='lr_scheduler',
+                                            cfg=self.cfg['training']['lr_scheduler'],
+                                            other_arg={'optimizer': self.optimizer})
         else:
             self.scheduler = None
 
-    def _process_data(self, loader):
+    def _prepare_dataloaders(self):
+        self.dataloaders = {}
+        for mode in list(self.cfg['training']['dataloader'].keys()):
+            if mode in ['train', 'val', 'test']:
+                if self.multi_input:
+                    dataset = {}
+                    for task in self.task_name:
+                        dataset[task] = build_from_cfg(build_type='dataset',
+                                            cfg=self.cfg['training']['dataloader'][mode]['dataset'],
+                                            other_arg={'mode': mode, 'current_task': task})
+                else:
+                    dataset = build_from_cfg(build_type='dataset',
+                                        cfg=self.cfg['training']['dataloader'][mode]['dataset'],
+                                        other_arg={'task_name': self.task_name})
+                dataloader_arg = {k: v for k, v in self.cfg['training']['dataloader'][mode].items() if k not in  ['dataset']}
+                self.dataloaders[mode] = build_dataloader(dataset, self.multi_input, self.task_name, **dataloader_arg)
+
+    def _prepare_loss(self):
+        self.losses = {}
+        for task in self.task_name:
+            self.losses[task] = build_from_cfg(build_type='loss',
+                                            cfg=self.cfg['tasks']['info'][task]['loss_fn'])
+
+    def _prepare_metric(self):
+        self.metrics = {}
+        for task in self.task_name:
+            self.metrics[task] = build_from_cfg(build_type='metric',
+                                            cfg=self.cfg['tasks']['info'][task]['metric_fn'])
+
+    def data_step(self, loader):
         try:
             data, label = loader[1].next()
         except:
             loader[1] = iter(loader[0])
             data, label = loader[1].next()
         data = data.to(self.device, non_blocking=True)
-        if not self.multi_input:
-            for task in self.task_name:
-                label[task] = label[task].to(self.device, non_blocking=True)
+        if not self.multi_input and isinstance(label, dict):
+            for k, v in label.items():
+                label[k] = v.to(self.device, non_blocking=True)
         else:
             label = label.to(self.device, non_blocking=True)
         return data, label
@@ -157,12 +203,12 @@ class Trainer(nn.Module):
         if not self.multi_input:
             train_losses = torch.zeros(self.task_num).to(self.device)
             for tn, task in enumerate(self.task_name):
-                train_losses[tn] = self.meter.losses[task]._update_loss(preds[task], gts[task])
+                train_losses[tn] = self.losses[task].update_loss(preds[task], gts[task])
         else:
-            train_losses = self.meter.losses[task_name]._update_loss(preds, gts)
+            train_losses = self.losses[task_name].update_loss(preds[task_name], gts)
         return train_losses
         
-    def _prepare_dataloaders(self, dataloaders):
+    def _process_dataloaders(self, dataloaders):
         if not self.multi_input:
             loader = [dataloaders, iter(dataloaders)]
             return loader, len(dataloaders)
@@ -174,8 +220,17 @@ class Trainer(nn.Module):
                 batch_num.append(len(dataloaders[task]))
             return loader, batch_num
 
-    def train(self, train_dataloaders, test_dataloaders, epochs, 
-              val_dataloaders=None, return_weight=False):
+    def run_step(self, dataloader, task_name=None):
+        with TimeRecorder(self.use_gpu) as data_time_t:
+            inputs, gts = self.data_step(dataloader)
+        self.data_time += data_time_t.elapse
+        with TimeRecorder(self.use_gpu) as forward_time_t:
+            preds = self.model(inputs, task_name)
+        self.forward_time += forward_time_t.elapse
+        preds = self.process_preds(preds)
+        return gts, preds
+
+    def train(self, return_weight=False):
         r'''The training process of multi-task learning.
 
         Args:
@@ -189,57 +244,55 @@ class Trainer(nn.Module):
             epochs (int): The total training epochs.
             return_weight (bool): if ``True``, the loss weights will be returned.
         '''
-        train_loader, train_batch = self._prepare_dataloaders(train_dataloaders)
+        train_loader, train_batch = self._process_dataloaders(self.dataloaders['train'])
         train_batch = max(train_batch) if self.multi_input else train_batch
         
-        self.batch_weight = np.zeros([self.task_num, epochs, train_batch])
-        self.model.train_loss_buffer = np.zeros([self.task_num, epochs])
-        self.model.epochs = epochs
-        for epoch in range(epochs):
+        self.batch_weight = np.zeros([self.task_num, self.epochs, train_batch])
+        self.model.train_loss_buffer = np.zeros([self.task_num, self.epochs])
+        for epoch in range(self.epochs):
+            self.data_time, self.forward_time, self.backward_time = 0, 0, 0
             self.model.epoch = epoch
             self.model.train()
-            self.meter.record_time('begin')
+            self.recorder.reset(epoch=epoch, mode='train')
             for batch_index in range(train_batch):
                 if not self.multi_input:
-                    train_inputs, train_gts = self._process_data(train_loader)
-                    train_preds = self.model(train_inputs)
-                    train_preds = self.process_preds(train_preds)
+                    train_gts, train_preds = self.run_step(train_loader)
                     train_losses = self._compute_loss(train_preds, train_gts)
-                    self.meter.update(train_preds, train_gts)
+                    self.recorder.update(train_preds, train_gts)
                 else:
                     train_losses = torch.zeros(self.task_num).to(self.device)
                     for tn, task in enumerate(self.task_name):
-                        train_input, train_gt = self._process_data(train_loader[task])
-                        train_pred = self.model(train_input, task)
-                        train_pred = train_pred[task]
-                        train_pred = self.process_preds(train_pred, task)
+                        train_gt, train_pred = self.run_step(train_loader[task], task)
                         train_losses[tn] = self._compute_loss(train_pred, train_gt, task)
-                        self.meter.update(train_pred, train_gt, task)
+                        self.recorder.update(train_pred[task], train_gt, task)
 
                 self.optimizer.zero_grad()
-                w = self.model.backward(train_losses, **self.kwargs['weight_args'])
+                weighting_arg = {k: v for k, v in self.cfg['weighting'].items() if k not in  ['name', 'rep_grad']}
+                with TimeRecorder(self.use_gpu) as backward_time_t:
+                    w = self.model.backward(train_losses, **weighting_arg)
+                self.backward_time += backward_time_t.elapse
                 if w is not None:
                     self.batch_weight[:, epoch, batch_index] = w
                 self.optimizer.step()
             
-            self.meter.record_time('end')
-            self.meter.get_score()
-            self.model.train_loss_buffer[:, epoch] = self.meter.loss_item
-            self.meter.display(epoch=epoch, mode='train')
-            self.meter.reinit()
+            self.recorder.record_time(self.data_time, self.forward_time, self.backward_time)
+            self.recorder.get_score()
+            self.recorder.print_result()
+            self.model.train_loss_buffer[:, epoch] = self.recorder._return_loss(epoch, mode='train')
+            self.saver.save_best_model(self.model, self.recorder.best_epoch)
             
-            if val_dataloaders is not None:
-                self.meter.has_val = True
-                self.test(val_dataloaders, epoch, mode='val')
-            self.test(test_dataloaders, epoch, mode='test')
+            if 'val' in list(self.dataloaders.keys()):
+                self.recorder.has_val = True
+                self.evaluate(self.dataloaders['val'], epoch, mode='val')
+            self.evaluate(self.dataloaders['test'], epoch, mode='test')
             if self.scheduler is not None:
                 self.scheduler.step()
-        self.meter.display_best_result()
+        self.recorder.print_best_result()
         if return_weight:
             return self.batch_weight
 
 
-    def test(self, test_dataloaders, epoch=None, mode='test'):
+    def evaluate(self, test_dataloaders, epoch=None, mode='test'):
         r'''The test process of multi-task learning.
 
         Args:
@@ -248,28 +301,23 @@ class Trainer(nn.Module):
                             dataloader which returns data and a dictionary of name-label pairs in each iteration.
             epoch (int, default=None): The current epoch. 
         '''
-        test_loader, test_batch = self._prepare_dataloaders(test_dataloaders)
+        test_loader, test_batch = self._process_dataloaders(test_dataloaders)
         
         self.model.eval()
-        self.meter.record_time('begin')
+        self.recorder.reset(epoch=epoch, mode=mode)
+        self.data_time, self.forward_time = 0, 0
         with torch.no_grad():
             if not self.multi_input:
                 for batch_index in range(test_batch):
-                    test_inputs, test_gts = self._process_data(test_loader)
-                    test_preds = self.model(test_inputs)
-                    test_preds = self.process_preds(test_preds)
+                    test_gts, test_preds = self.run_step(test_loader)
                     test_losses = self._compute_loss(test_preds, test_gts)
-                    self.meter.update(test_preds, test_gts)
+                    self.recorder.update(test_preds, test_gts)
             else:
                 for tn, task in enumerate(self.task_name):
                     for batch_index in range(test_batch[tn]):
-                        test_input, test_gt = self._process_data(test_loader[task])
-                        test_pred = self.model(test_input, task)
-                        test_pred = test_pred[task]
-                        test_pred = self.process_preds(test_pred)
+                        test_gt, test_pred = self.run_step(test_loader[task], task)
                         test_loss = self._compute_loss(test_pred, test_gt, task)
-                        self.meter.update(test_pred, test_gt, task)
-        self.meter.record_time('end')
-        self.meter.get_score()
-        self.meter.display(epoch=epoch, mode=mode)
-        self.meter.reinit()
+                        self.recorder.update(test_pred[task], test_gt, task)
+        self.recorder.record_time(self.data_time, self.forward_time)
+        self.recorder.get_score()
+        self.recorder.print_result()

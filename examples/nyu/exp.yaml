@@ -1,0 +1,81 @@
+general:
+  seed: 0
+  deterministic: False
+  gpu_id: 0
+  save_dir: ./
+  exp_name: test1
+
+tasks:
+  info:
+    segmentation:
+      metric_fn: 
+        name: SegMetric
+        num_classes: 13
+      loss_fn: SegLoss
+    depth:
+      metric_fn: DepthMetric
+      loss_fn: DepthLoss
+    normal:
+      metric_fn: NormalMetric
+      loss_fn: NormalLoss
+  multi_input: False
+
+training:
+  optimizer:
+    name: Adam
+    lr: 1.0e-4
+    weight_decay: 1.0e-5
+  lr_scheduler:
+    name: StepLR
+    step_size: 100
+    gamma: 0.5
+  epochs: 1
+  dataloader:
+    train:
+      dataset:
+        name: NYUv2Dataset 
+        path: /path/to/nyuv2/train
+        augmentation: False
+      batch_size: 8
+      num_workers: 2
+      drop_last: True
+      shuffle: True
+      pin_memory: True
+    test:
+      dataset:
+        name: NYUv2Dataset
+        path: /path/to/nyuv2/val
+        augmentation: False
+      batch_size: 8
+      num_workers: 2
+      drop_last: False
+      shuffle: False
+      pin_memory: True
+
+weighting:
+  name: DWA
+  rep_grad: False
+
+architecture:
+  name: HPS
+
+model:
+  encoder: 
+    name: resnet_dilated
+    basenet: resnet50
+  decoders:
+    segmentation: 
+      name: DeepLabHead
+      input_channels: 2048
+      output_channels: 13
+      img_size: [288, 384]
+    depth:
+      name: DeepLabHead
+      input_channels: 2048
+      output_channels: 1
+      img_size: [288, 384]
+    normal:
+      name: DeepLabHead
+      input_channels: 2048
+      output_channels: 3
+      img_size: [288, 384]
