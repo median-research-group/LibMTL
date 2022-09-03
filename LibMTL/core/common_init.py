@@ -11,6 +11,6 @@ def common_init(cfg_file):
     set_random_seed(cfg['general']['seed'])
     saver = ExpSaver(cfg)
     logger = get_root_logger()
-    # logger.info('Config info:\n' + pformat(cfg) + '\n' + '='*60)
-    # logger.info('System info:\n' + pformat(collect_env()) + '\n' + '='*60)
+    logger.info('Config info:\n' + pformat(cfg) + '\n' + '='*60)
+    logger.info('System info:\n' + pformat(collect_env()) + '\n' + '='*60)
     return cfg, saver, device
