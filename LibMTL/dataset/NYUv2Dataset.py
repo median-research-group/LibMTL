@@ -9,7 +9,9 @@ class NYUv2Dataset(AbsDataset):
                  path: str, 
                  task_name: list = ['segmentation', 'depth', 'normal'], 
                  augmentation: bool = False):
-        super(NYUv2Dataset, self).__init__(path, task_name, augmentation)
+        super(NYUv2Dataset, self).__init__(path=path, 
+                                        task_name=task_name, 
+                                        augmentation=augmentation)
 
     def _prepare_list(self):
         data_len = len(fnmatch.filter(os.listdir(os.path.join(self.path, 'image')), '*.npy'))
