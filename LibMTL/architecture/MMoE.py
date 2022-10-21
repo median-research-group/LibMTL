@@ -21,7 +21,7 @@ class MMoE(AbsArchitecture):
         
         self.img_size = self.kwargs['img_size']
         self.input_size = np.array(self.img_size, dtype=int).prod()
-        self.num_experts = self.kwargs['num_experts'][0]
+        self.num_experts = self.kwargs['num_experts']
         self.experts_shared = nn.ModuleList([encoder_class() for _ in range(self.num_experts)])
         self.gate_specific = nn.ModuleDict({task: nn.Sequential(nn.Linear(self.input_size, self.num_experts),
                                                                 nn.Softmax(dim=-1)) for task in self.task_name})
