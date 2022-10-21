@@ -12,6 +12,7 @@ from .IMTL import IMTL
 from .CAGrad import CAGrad
 from .Nash_MTL import Nash_MTL
 from .RLW import RLW
+from .RGW import RGW
 
 __all__ = ['AbsWeighting',
            'EW', 
@@ -26,4 +27,5 @@ __all__ = ['AbsWeighting',
            'IMTL',
            'CAGrad',
            'Nash_MTL',
-           'RLW']
+           'RLW',
+           'RGW']
