@@ -13,7 +13,7 @@ class DSelect_k(MMoE):
 
     Args:
         img_size (list): The size of input data. For example, [3, 244, 244] denotes input images with size 3x224x224.
-        num_experts (int): The number of experts shared by all the tasks. Each expert is an encoder network.
+        num_experts (list): The number of experts shared by all the tasks. Each expert is an encoder network.
         num_nonzeros (int): The number of selected experts.
         kgamma (float, default=1.0): A scaling parameter for the smooth-step function.
 
