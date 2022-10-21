@@ -47,14 +47,14 @@ class _transform_resnet_MTAN(nn.Module):
             nn.Sigmoid())
         
     def _conv_layer(self, in_channel, out_channel):
-        from LibMTL.model.resnet import conv1x1
+        from LibMTL.model.encoder.resnet import conv1x1
         downsample = nn.Sequential(conv1x1(in_channel, self.expansion * out_channel, stride=1),
                                    nn.BatchNorm2d(self.expansion * out_channel))
         if self.expansion == 4:
-            from LibMTL.model.resnet import Bottleneck
+            from LibMTL.model.encoder.resnet import Bottleneck
             return Bottleneck(in_channel, out_channel, downsample=downsample)
         else:
-            from LibMTL.model.resnet import BasicBlock
+            from LibMTL.model.encoder.resnet import BasicBlock
             return BasicBlock(in_channel, out_channel, downsample=downsample)
         
     def forward(self, inputs):
