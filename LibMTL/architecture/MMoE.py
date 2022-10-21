@@ -13,7 +13,7 @@ class MMoE(AbsArchitecture):
 
     Args:
         img_size (list): The size of input data. For example, [3, 244, 244] denotes input images with size 3x224x224.
-        num_experts (int): The number of experts shared for all tasks. Each expert is an encoder network.
+        num_experts (list): The number of experts shared for all tasks. Each expert is an encoder network.
 
     """
     def __init__(self, task_name, encoder_class, decoders, rep_grad, multi_input, device, **kwargs):
@@ -21,7 +21,7 @@ class MMoE(AbsArchitecture):
         
         self.img_size = self.kwargs['img_size']
         self.input_size = np.array(self.img_size, dtype=int).prod()
-        self.num_experts = self.kwargs['num_experts']
+        self.num_experts = self.kwargs['num_experts'][0]
         self.experts_shared = nn.ModuleList([encoder_class() for _ in range(self.num_experts)])
         self.gate_specific = nn.ModuleDict({task: nn.Sequential(nn.Linear(self.input_size, self.num_experts),
                                                                 nn.Softmax(dim=-1)) for task in self.task_name})
