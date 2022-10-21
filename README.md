@@ -58,7 +58,7 @@ Each module is introduced in [Docs](https://libmtl.readthedocs.io/en/latest/docs
 | Gradient Vaccine ([GradVac](https://openreview.net/forum?id=F1vEjWK-lH_)) | ICLR 2021 Spotlight | Implemented by us                                            |
 | Conflict-Averse Gradient descent ([CAGrad](https://openreview.net/forum?id=_61Qh8tULj_)) | NeurIPS 2021        | Referenced from [official PyTorch implementation](https://github.com/Cranial-XIX/CAGrad) |
 | [Nash-MTL](https://proceedings.mlr.press/v162/navon22a/navon22a.pdf) | ICML 2022        | Referenced from [official PyTorch implementation](https://github.com/AvivNavon/nash-mtl) |
-| Random Loss Weighting ([RLW](https://arxiv.org/abs/2111.10603)) | arXiv               | Implemented by us                                            |
+| Random Loss Weighting ([RLW](https://openreview.net/forum?id=jjtFD8A1Wx)), Random Gradient Weighting ([RGW](https://openreview.net/forum?id=jjtFD8A1Wx))| TMLR 2022               | Implemented by us                                            |
 
 - 8 architectures.
 
