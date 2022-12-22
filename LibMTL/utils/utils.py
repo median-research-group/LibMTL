@@ -83,3 +83,16 @@ def count_improvement(base_result: dict,
         improvement += (((-1) ** we_array) * (br_array - nr_array) / br_array).mean()
         count += 1
     return improvement / count
+
+def pformat(result: dict) -> str:
+    task_name = [k for k in result.keys() if k != 'time']
+    pstr = ''
+    for t in task_name:
+        pstr += '{} - loss: {:.5f} '.format(t, result[t]['loss'])
+        for mname, mvalue in result[t]['metrics'].items():
+            pstr += '{}: {:.5f} '.format(mname, mvalue)
+        pstr += '| '
+    pstr += 'Time - '
+    for mname, mvalue in result['time'].items():
+        pstr += '{}: {:.5f} '.format(mname, mvalue)
+    return pstr

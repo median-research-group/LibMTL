@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
 from typing import Optional
-from pprint import pformat
+from LibMTL.utils.utils import pformat
 
 from LibMTL.utils.utils import count_improvement
 from LibMTL.loss import *
@@ -72,7 +72,7 @@ class ExpRecorder(object):
     def print_result(self, show_all_tasks: bool = True):
         current_result = self.all_results[self.current_epoch][self.current_mode]
         message = '[Epoch: {}] [Mode: {}]\n'.format(self.current_epoch, self.current_mode)
-        self.logger.info(message+pformat(self.all_results[self.current_epoch][self.current_mode])+'\n'+'-'*60)
+        self.logger.info(message+pformat(self.all_results[self.current_epoch][self.current_mode]))
 
     def print_best_result(self):
         message = 'Best Epoch {}; Result {}'.format(self.best_epoch, 
