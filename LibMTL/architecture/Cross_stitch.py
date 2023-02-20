@@ -20,7 +20,7 @@ class _transform_resnet_cross(nn.Module):
             for tn in range(self.task_num):
                 encoder = encoder_list[tn]
                 self.resnet_layer[str(i)].append(eval('encoder.layer'+str(i+1)))
-        self.cross_unit = nn.Parameter(torch.ones(4, self.task_num))
+        self.cross_unit = nn.Parameter(torch.ones(4, self.task_num, self.task_num))
         
     def forward(self, inputs):
         s_rep = {task: self.resnet_conv[task](inputs) for task in self.task_name}
@@ -30,7 +30,7 @@ class _transform_resnet_cross(nn.Module):
                 if i == 0:
                     ss_rep[i][tn] = self.resnet_layer[str(i)][tn](s_rep[task])
                 else:
-                    cross_rep = sum([self.cross_unit[i-1][j]*ss_rep[i-1][j] for j in range(self.task_num)])
+                    cross_rep = sum([self.cross_unit[i-1][tn][j]*ss_rep[i-1][j] for j in range(self.task_num)])
                     ss_rep[i][tn] = self.resnet_layer[str(i)][tn](cross_rep)
         return ss_rep[3]
 
