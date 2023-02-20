@@ -104,14 +104,16 @@ class AbsWeighting(nn.Module):
         """
         if self.rep_grad:
             if not isinstance(self.rep, dict):
-                transformed_grad = torch.einsum('i, i... -> ...', batch_weight, per_grads)
+                # transformed_grad = torch.einsum('i, i... -> ...', batch_weight, per_grads)
+                transformed_grad = sum([batch_weight[i] * per_grads[i] for i in range(self.task_num)])
                 self.rep.backward(transformed_grad)
             else:
                 for tn, task in enumerate(self.task_name):
                     rg = True if (tn+1)!=self.task_num else False
                     self.rep[task].backward(batch_weight[tn]*per_grads[tn], retain_graph=rg)
         else:
-            new_grads = torch.einsum('i, i... -> ...', batch_weight, grads)
+            # new_grads = torch.einsum('i, i... -> ...', batch_weight, grads)
+            new_grads = sum([batch_weight[i] * grads[i] for i in range(self.task_num)])
             self._reset_grad(new_grads)
     
     @property
