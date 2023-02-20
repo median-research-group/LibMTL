@@ -9,7 +9,7 @@ from LibMTL.weighting.abstract_weighting import AbsWeighting
 class RLW(AbsWeighting):
     r"""Random Loss Weighting (RLW).
     
-    This method is proposed in `A Closer Look at Loss Weighting in Multi-Task Learning (arXiv:2111.10603) <https://arxiv.org/abs/2111.10603>`_ \
+    This method is proposed in `Reasonable Effectiveness of Random Weighting: A Litmus Test for Multi-Task Learning (TMLR 2022) <https://openreview.net/forum?id=jjtFD8A1Wx>`_ \
     and implemented by us.
 
     """
