@@ -84,6 +84,7 @@ class Trainer(nn.Module):
         self.task_name = list(task_dict.keys())
         self.rep_grad = rep_grad
         self.multi_input = multi_input
+        self.scheduler_param = scheduler_param
 
         self._prepare_model(weighting, architecture, encoder_class, decoders)
         self._prepare_optimizer(optim_param, scheduler_param)
