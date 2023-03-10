@@ -8,6 +8,7 @@
 
 ## News
 
+- **[Mar 10 2023]**: Added [QM9](https://github.com/median-research-group/LibMTL/tree/main/examples/qm9) and [PAWS-X](https://github.com/median-research-group/LibMTL/tree/main/examples/xtreme) examples.
 - **[Jul 22 2022]**: Added support for [Nash-MTL](https://proceedings.mlr.press/v162/navon22a/navon22a.pdf) (ICML 2022).
 - **[Jul 21 2022]**: Added support for [Learning to Branch](http://proceedings.mlr.press/v119/guo20e/guo20e.pdf) (ICML 2020). Many thanks to [@yuezhixiong](https://github.com/yuezhixiong) ([#14](https://github.com/median-research-group/LibMTL/pull/14)).
 - **[Mar 29 2022]**: Paper is now available on the [arXiv](https://arxiv.org/abs/2203.14338).
