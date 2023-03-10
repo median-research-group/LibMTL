@@ -91,6 +91,7 @@ class _PerformanceMeter(object):
     def _update_best_result_by_val(self, new_result, epoch, mode):
         if mode == 'val':
             improvement = count_improvement(self.base_result, new_result, self.weight)
+            self.improvement = improvement
             if improvement > self.best_result['improvement']:
                 self.best_result['improvement'] = improvement
                 self.best_result['epoch'] = epoch
@@ -100,6 +101,7 @@ class _PerformanceMeter(object):
         
     def _update_best_result(self, new_result, epoch):
         improvement = count_improvement(self.base_result, new_result, self.weight)
+        self.improvement = improvement
         if improvement > self.best_result['improvement']:
             self.best_result['improvement'] = improvement
             self.best_result['epoch'] = epoch

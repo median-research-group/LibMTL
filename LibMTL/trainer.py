@@ -117,6 +117,7 @@ class Trainer(nn.Module):
                 'exp': torch.optim.lr_scheduler.ExponentialLR,
                 'step': torch.optim.lr_scheduler.StepLR,
                 'cos': torch.optim.lr_scheduler.CosineAnnealingLR,
+                'reduce': torch.optim.lr_scheduler.ReduceLROnPlateau,
             }
         optim_arg = {k: v for k, v in optim_param.items() if k != 'optim'}
         self.optimizer = optim_dict[optim_param['optim']](self.model.parameters(), **optim_arg)
@@ -230,16 +231,19 @@ class Trainer(nn.Module):
             
             if val_dataloaders is not None:
                 self.meter.has_val = True
-                self.test(val_dataloaders, epoch, mode='val')
+                val_improvement = self.test(val_dataloaders, epoch, mode='val', return_improvement=True)
             self.test(test_dataloaders, epoch, mode='test')
             if self.scheduler is not None:
-                self.scheduler.step()
+                if self.scheduler_param['scheduler'] == 'reduce' and val_dataloaders is not None:
+                    self.scheduler.step(val_improvement)
+                else:
+                    self.scheduler.step()
         self.meter.display_best_result()
         if return_weight:
             return self.batch_weight
 
 
-    def test(self, test_dataloaders, epoch=None, mode='test'):
+    def test(self, test_dataloaders, epoch=None, mode='test', return_improvement=False):
         r'''The test process of multi-task learning.
 
         Args:
@@ -272,4 +276,7 @@ class Trainer(nn.Module):
         self.meter.record_time('end')
         self.meter.get_score()
         self.meter.display(epoch=epoch, mode=mode)
+        improvement = self.meter.improvement
         self.meter.reinit()
+        if return_improvement:
+            return improvement
