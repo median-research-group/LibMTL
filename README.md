@@ -73,13 +73,13 @@ Each module is introduced in [Docs](https://libmtl.readthedocs.io/en/latest/docs
 
 ## Supported Benchmark Datasets
 
-| Datasets                                                                                 | Problems                      | Task Number  | Tasks                                                                      | Multi/Single-input |
-|:----------------------------------------------------------------------------------------:|:-----------------------------:|:------------:|:--------------------------------------------------------------------------:|:------------------:|
-| [NYUv2](https://github.com/median-research-group/LibMTL/tree/main/examples/nyu)          | Scene Understanding           | 3            | Semantic segmentation+<br/>Depth Estimation+<br/>Surface Normal Prediction | S                  |
-| [Office-31](https://github.com/median-research-group/LibMTL/tree/main/examples/office)   | Image Recognition             | 3            | Classification                                                             | M                  |
-| [Office-Home](https://github.com/median-research-group/LibMTL/tree/main/examples/office) | Image Recognition             | 4            | Classification                                                             | M                  |
-| [QM9](https://github.com/median-research-group/LibMTL/tree/main/examples/qm9)            | Molecular Property Prediction | 11 (default) | Regression                                                                 | S                  |
-| [PAWS-X](https://github.com/median-research-group/LibMTL/tree/main/examples/xtreme)      | Paraphrase Identification     | 4 (default)  | Classification                                 | M                  |
+| Datasets                                                                                 | Problems                      | Task Number  | Tasks                                                                                                  | Multi/Single-input |
+|:----------------------------------------------------------------------------------------:|:-----------------------------:|:------------:|:------------------------------------------------------------------------------------------------------:|:------------------:|
+| [NYUv2](https://github.com/median-research-group/LibMTL/tree/main/examples/nyu)          | Scene Understanding           | 3            | Semantic Segmentation+<br/>Depth Estimation+<br/>Surface Normal Prediction | S                  |
+| [Office-31](https://github.com/median-research-group/LibMTL/tree/main/examples/office)   | Image Recognition             | 3            | Classification                                                                                         | M                  |
+| [Office-Home](https://github.com/median-research-group/LibMTL/tree/main/examples/office) | Image Recognition             | 4            | Classification                                                                                         | M                  |
+| [QM9](https://github.com/median-research-group/LibMTL/tree/main/examples/qm9)            | Molecular Property Prediction | 11 (default) | Regression                                                                                             | S                  |
+| [PAWS-X](https://github.com/median-research-group/LibMTL/tree/main/examples/xtreme)      | Paraphrase Identification     | 4 (default)  | Classification                                                                                         | M                  |
 
 ## Installation
 
