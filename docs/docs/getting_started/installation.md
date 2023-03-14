@@ -11,22 +11,22 @@ To install ``LibMTL``, you need to setup the following libraries:
 
 ### User Installation
 
-#### Using PyPi
+* Create a virtual environment
+  
+  ```shell
+  conda create -n libmtl python=3.8
+  conda activate libmtl
+  pip install torch==1.8.0 torchvision==0.9.0 numpy==1.20
+  ```
 
-The simplest way to install `LibMTL` is using `pip`.
+* Clone the repository
+  
+  ```shell
+  git clone https://github.com/median-research-group/LibMTL.git
+  ```
 
-```shell
-pip install -U LibMTL
-```
-
-#### Using Source Code
-
-You can clone the source code from the GitHub and run the setup.py file.
-
-```shell
-git clone https://github.com/median-research-group/LibMTL.git
-cd LibMTL
-python setup.py install
-```
-
- 
+* Install `LibMTL`
+  
+  ```shell
+  pip install -e .
+  ```
