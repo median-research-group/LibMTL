@@ -21,7 +21,7 @@
     - [Download Dataset](#download-dataset)
     - [Run a Model](#run-a-model)
 - [Citation](#citation)
-- [Contributors](#contributors)
+- [Contributor](#contributor)
 - [Contact Us](#contact-us)
 - [Acknowledgements](#acknowledgements)
 - [License](#license)
