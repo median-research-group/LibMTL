@@ -100,6 +100,7 @@ Each module is introduced in [Docs](https://libmtl.readthedocs.io/en/latest/docs
 3. Install `LibMTL`
    
    ```shell
+   cd LibMTL
    pip install -e .
    ```
 
