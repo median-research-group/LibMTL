@@ -125,11 +125,11 @@ class Nash_MTL(AbsWeighting):
             self.normalization_factor = torch.norm(GTG).detach().cpu().numpy().reshape((1,))
             GTG = GTG / self.normalization_factor.item()
             alpha = self.solve_optimization(GTG.cpu().detach().numpy())
-            alpha = torch.from_numpy(alpha).to(torch.float32).to(self.device)
         else:
             self.step += 1
             alpha = self.prvs_alpha
-
+            
+        alpha = torch.from_numpy(alpha).to(torch.float32).to(self.device)
         torch.sum(alpha*losses).backward()
 
         if self.max_norm > 0:
