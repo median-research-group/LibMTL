@@ -4,7 +4,7 @@ import torch
 import torch.nn.functional as F
 import torchvision.transforms as transforms
 from PIL import Image
-
+from LibMTL.utils import get_root_dir
 
 class office_Dataset(Dataset):
     def __init__(self, dataset, root_path, task, mode):
@@ -13,7 +13,7 @@ class office_Dataset(Dataset):
                         transforms.ToTensor(),
                         transforms.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229, 0.224, 0.225]),
                         ])
-        f = open('./data_txt/{}/{}_{}.txt'.format(dataset, task, mode), 'r')
+        f = open(os.path.join(get_root_dir(), 'examples/office', 'data_txt/{}/{}_{}.txt'.format(dataset, task, mode)), 'r')
         self.img_list = f.readlines()
         f.close()
         self.root_path = root_path

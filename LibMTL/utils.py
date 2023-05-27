@@ -2,6 +2,10 @@ import random, torch, os
 import numpy as np
 import torch.nn as nn
 
+def get_root_dir():
+    r"""Return the root path of project."""
+    return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 def set_random_seed(seed):
     r"""Set the random seed for reproducibility.
 
