@@ -7,6 +7,7 @@ import fnmatch
 import numpy as np
 import random
 import json
+from LibMTL.utils import get_root_dir
 
 
 class RandomScaleCrop(object):
@@ -46,7 +47,7 @@ class NYUv2(Dataset):
         self.root = os.path.expanduser(root)
         self.augmentation = augmentation
         
-        with open('./data_split.json', 'r') as f:
+        with open(os.path.join(get_root_dir(), 'examples/nyu', 'data_split.json'), 'r') as f:
             data_split = json.load(f)
         train_index, val_index = data_split['train'], data_split['val']
         # read the data file
