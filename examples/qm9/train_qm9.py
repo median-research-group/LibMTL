@@ -21,6 +21,7 @@ from torch_geometric.utils import remove_self_loops
 
 def parse_args(parser):
     parser.add_argument('--bs', default=128, type=int, help='batch size')
+    parser.add_argument('--epochs', default=300, type=int, help='training epochs')
     parser.add_argument('--dataset_path', default='/', type=str, help='dataset path')
     parser.add_argument('--target', default=[0, 1, 2, 3, 5, 6, 12, 13, 14, 15, 11], 
                         type=int, nargs='+', help='target')
@@ -161,7 +162,7 @@ def main(params):
                           optim_param=optim_param,
                           scheduler_param=scheduler_param,
                           **kwargs)
-    QM9model.train(train_loader, test_loader, 300, val_dataloaders=val_loader)
+    QM9model.train(train_loader, test_loader, params.epochs, val_dataloaders=val_loader)
     
 if __name__ == "__main__":
     params = parse_args(LibMTL_args)

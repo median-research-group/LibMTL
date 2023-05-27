@@ -16,6 +16,7 @@ from LibMTL.metrics import AccMetric
 def parse_args(parser):
     parser.add_argument('--dataset', default='office-31', type=str, help='office-31, office-home')
     parser.add_argument('--bs', default=64, type=int, help='batch size')
+    parser.add_argument('--epochs', default=100, type=int, help='training epochs')
     parser.add_argument('--dataset_path', default='/', type=str, help='dataset path')
     return parser.parse_args()
 
@@ -79,7 +80,7 @@ def main(params):
     officeModel.train(train_dataloaders=train_dataloaders, 
                       val_dataloaders=val_dataloaders,
                       test_dataloaders=test_dataloaders, 
-                      epochs=100)
+                      epochs=params.epochs)
     
 if __name__ == "__main__":
     params = parse_args(LibMTL_args)

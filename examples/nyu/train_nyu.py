@@ -18,6 +18,7 @@ def parse_args(parser):
     parser.add_argument('--train_mode', default='trainval', type=str, help='trainval, train')
     parser.add_argument('--train_bs', default=8, type=int, help='batch size for training')
     parser.add_argument('--test_bs', default=8, type=int, help='batch size for test')
+    parser.add_argument('--epochs', default=200, type=int, help='training epochs')
     parser.add_argument('--dataset_path', default='/', type=str, help='dataset path')
     return parser.parse_args()
     
@@ -94,7 +95,7 @@ def main(params):
                           optim_param=optim_param,
                           scheduler_param=scheduler_param,
                           **kwargs)
-    NYUmodel.train(nyuv2_train_loader, nyuv2_test_loader, 200)
+    NYUmodel.train(nyuv2_train_loader, nyuv2_test_loader, params.epochs)
     
 if __name__ == "__main__":
     params = parse_args(LibMTL_args)
