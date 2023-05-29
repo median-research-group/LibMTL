@@ -46,9 +46,17 @@ class LTB(AbsArchitecture):
 
     This method is proposed in `Learning to Branch for Multi-Task Learning (ICML 2020) <http://proceedings.mlr.press/v119/guo20e.html>`_ \
     and implemented by us. 
+
+    .. warning::
+            - :class:`LTB` does not work with multi-input problems, i.e., ``multi_input`` must be ``False``.
+            - :class:`LTB` is only supported by ResNet-based encoders.
     """
     def __init__(self, task_name, encoder_class, decoders, rep_grad, multi_input, device, **kwargs):
         super(LTB, self).__init__(task_name, encoder_class, decoders, rep_grad, multi_input, device, **kwargs)
+
+        if self.multi_input:
+            raise ValueError('No support LTB for multiple inputs MTL problem')
+            
         self.encoder = nn.ModuleList([self.encoder_class() for _ in range(self.task_num)])
         self.encoder = _transform_resnet_ltb(self.encoder, task_name, device)
 

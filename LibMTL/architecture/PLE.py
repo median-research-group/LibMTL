@@ -95,6 +95,9 @@ class PLE(AbsArchitecture):
     """
     def __init__(self, task_name, encoder_class, decoders, rep_grad, multi_input, device, **kwargs):
         super(PLE, self).__init__(task_name, encoder_class, decoders, rep_grad, multi_input, device, **kwargs)
+
+        if self.multi_input:
+            raise ValueError('No support PLE for multiple inputs MTL problem')
         
         self.img_size = self.kwargs['img_size']
         self.input_size = np.array(self.img_size, dtype=int).prod()
@@ -109,8 +112,6 @@ class PLE(AbsArchitecture):
             
     def forward(self, inputs, task_name=None):
         out = {}
-        if self.multi_input:
-            self.encoder.forward_task = task_name
         gate_rep = self.encoder(inputs)
         for tn, task in enumerate(self.task_name):
             if task_name is not None and task != task_name:
