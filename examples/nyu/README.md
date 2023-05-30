@@ -39,10 +39,10 @@ python train_nyu.py --weighting WEIGHTING --arch ARCH --dataset_path PATH/nyuv2 
 
 ### References
 
-<a id="1">[1]</a> Nathan Silberman, Derek Hoiem, Pushmeet Kohli, and Rob Fergus. Indoor segmentation and support inference from rgbd images. In *Proceedings of the 8th European Conference on Computer Vision*, 746–760. 2012.
+<a id="1">[1]</a> Nathan Silberman, Derek Hoiem, Pushmeet Kohli, and Rob Fergus. Indoor Segmentation and Support Inference from RGBD Images. In *European Conference on Computer Vision*, 2012.
 
-<a id="2">[2]</a> Shikun Liu, Edward Johns, and Andrew J. Davison. End-to-end multi-task learning with attention. In *Proceedings of IEEE Conference on Computer Vision and Pattern Recognition*, 1871–1880. 2019.
+<a id="2">[2]</a> Shikun Liu, Edward Johns, and Andrew J. Davison. End-to-End Multi-Task Learning with Attention. In *IEEE Conference on Computer Vision and Pattern Recognition*, 2019.
 
-<a id="3">[3]</a> Liang-Chieh Chen, Yukun Zhu, George Papandreou, Florian Schroff, and Hartwig Adam. Encoder-decoder with atrous separable convolution for semantic image segmentation. In *Proceedings of the 14th European Conference on Computer Vision*, volume 11211, 833–851. 2018.
+<a id="3">[3]</a> Liang-Chieh Chen, Yukun Zhu, George Papandreou, Florian Schroff, and Hartwig Adam. Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation. In *European Conference on Computer Vision*, 2018.
 
-<a id="4">[4]</a> Fisher Yu, Vladlen Koltun, and Thomas A. Funkhouser. Dilated residual networks. In *Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition*, 636–644. 2017.
+<a id="4">[4]</a> Fisher Yu, Vladlen Koltun, and Thomas A. Funkhouser. Dilated Residual Networks. In *IEEE Conference on Computer Vision and Pattern Recognition*, 2017.

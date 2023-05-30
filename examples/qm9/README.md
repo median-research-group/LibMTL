@@ -31,6 +31,6 @@ python train_qm9.py --weighting WEIGHTING --arch ARCH --dataset_path PATH --gpu_
 
 ### References
 
-<a id="1">[1]</a> Zhenqin Wu, Bharath Ramsundar, Evan N. Feinberg, Joseph Gomes, Caleb Geniesse, Aneesh S. Pappu, Karl Leswing, and Vijay Pande. MoleculeNet: A Benchmark for Molecular Machine Learning. *Chemical Science*, 2018, 9(2): 513-530.
+<a id="1">[1]</a> Zhenqin Wu, Bharath Ramsundar, Evan N. Feinberg, Joseph Gomes, Caleb Geniesse, Aneesh S. Pappu, Karl Leswing, and Vijay Pande. MoleculeNet: A Benchmark for Molecular Machine Learning. *Chemical Science*, 9(2):513-530, 2018.
 
-<a id="2">[2]</a> Aviv Navon, Aviv Shamsian, Idan Achituve, Haggai Maron, Kenji Kawaguchi, Gal Chechik, and Ethan Fetaya. Multi-task Learning as a Bargaining Game. In *Proceedings of the 39th International Conference on Machine Learning*, 2022.
+<a id="2">[2]</a> Aviv Navon, Aviv Shamsian, Idan Achituve, Haggai Maron, Kenji Kawaguchi, Gal Chechik, and Ethan Fetaya. Multi-task Learning as a Bargaining Game. In *International Conference on Machine Learning*, 2022.

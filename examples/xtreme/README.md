@@ -41,6 +41,6 @@ python train_pawsx.py --weighting WEIGHTING --arch ARCH --dataset_path PATH --gp
 
 ### References
 
-<a id="1">[1]</a> Junjie Hu, Sebastian Ruder, Aditya Siddhant, Graham Neubig, Orhan Firat, and Melvin Johnson. XTREME: A Massively Multilingual Multi-task Benchmark for Evaluating Cross-lingual Generalisation. In *Proceedings of the 37th International Conference on Machine Learning*, 2020.
+<a id="1">[1]</a> Junjie Hu, Sebastian Ruder, Aditya Siddhant, Graham Neubig, Orhan Firat, and Melvin Johnson. XTREME: A Massively Multilingual Multi-task Benchmark for Evaluating Cross-lingual Generalisation. In *International Conference on Machine Learning*, 2020.
 
 <a id="2">[2]</a> Baijiong Lin, Feiyang Ye, Yu Zhang, and Ivor Tsang. Reasonable Effectiveness of Random Weighting: A Litmus Test for Multi-task Learning. *Transactions on Machine Learning Research*, 2022.

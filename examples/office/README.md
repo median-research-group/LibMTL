@@ -37,6 +37,6 @@ python train_office.py --weighting WEIGHTING --arch ARCH --dataset_path PATH --g
 
 ### References
 
-<a id="1">[1]</a> Kate Saenko, Brian Kulis, Mario Fritz, and Trevor Darrell. Adapting visual category models to new domains. In *Proceedings of the 6th European Conference on Computer Vision*, 213–226. 2010.
+<a id="1">[1]</a> Kate Saenko, Brian Kulis, Mario Fritz, and Trevor Darrell. Adapting Visual Category Models to New Domains. In *European Conference on Computer Vision*, 2010.
 
-<a id="2">[2]</a> Hemanth Venkateswara, Jose Eusebio, Shayok Chakraborty, and Sethuraman Panchanathan. Deep hashing network for unsupervised domain adaptation. In *Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition*, 5018–5027. 2017.
+<a id="2">[2]</a> Hemanth Venkateswara, Jose Eusebio, Shayok Chakraborty, and Sethuraman Panchanathan. Deep Hashing Network for Unsupervised Domain Adaptation. In *IEEE Conference on Computer Vision and Pattern Recognition*, 2017.
