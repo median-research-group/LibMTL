@@ -50,29 +50,6 @@ class ResnetDilated(nn.Module):
         x = self.layer4(x)
         return x
 
-    
-    def forward_stage(self, x, stage):
-        assert(stage in ['conv','layer1','layer2','layer3','layer4', 'layer1_without_conv'])
-        
-        if stage == 'conv':
-            x = self.relu(self.bn1(self.conv1(x)))
-            x = self.maxpool(x)
-            return x
-
-        elif stage == 'layer1':
-            x = self.relu(self.bn1(self.conv1(x)))
-            x = self.maxpool(x)
-            x = self.layer1(x)
-            return x
-        
-        elif stage == 'layer1_without_conv':
-            x = self.layer1(x)
-            return x
-
-        else: # Stage 2, 3 or 4
-            layer = getattr(self, stage)
-            return layer(x)
-        
 def resnet_dilated(basenet, pretrained=True, dilate_scale=8):
     r"""Dilated Residual Network models from `"Dilated Residual Networks" <https://openaccess.thecvf.com/content_cvpr_2017/papers/Yu_Dilated_Residual_Networks_CVPR_2017_paper.pdf>`_
 
