@@ -40,9 +40,9 @@ class GradVac(AbsWeighting):
             task_index.remove(tn_i)
             random.shuffle(task_index)
             for tn_j in task_index:
-                rho_ij = torch.dot(pc_grads[tn_i], grads[tn_j]) / (pc_grads[tn_i].norm()*grads[tn_j].norm())
+                rho_ij = torch.dot(pc_grads[tn_i], grads[tn_j]) / (pc_grads[tn_i].norm()*grads[tn_j].norm()+1e-8)
                 if rho_ij < self.rho_T[tn_i, tn_j]:
-                    w = pc_grads[tn_i].norm()*(self.rho_T[tn_i, tn_j]*(1-rho_ij**2).sqrt()-rho_ij*(1-self.rho_T[tn_i, tn_j]**2).sqrt())/(grads[tn_j].norm()*(1-self.rho_T[tn_i, tn_j]**2).sqrt())
+                    w = pc_grads[tn_i].norm()*(self.rho_T[tn_i, tn_j]*(1-rho_ij**2).sqrt()-rho_ij*(1-self.rho_T[tn_i, tn_j]**2).sqrt())/(grads[tn_j].norm()*(1-self.rho_T[tn_i, tn_j]**2).sqrt()+1e-8)
                     pc_grads[tn_i] += grads[tn_j]*w
                     batch_weight[tn_j] += w.item()
                     self.rho_T[tn_i, tn_j] = (1-beta)*self.rho_T[tn_i, tn_j] + beta*rho_ij

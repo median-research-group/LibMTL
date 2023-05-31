@@ -32,8 +32,8 @@ class PCGrad(AbsWeighting):
             for tn_j in task_index:
                 g_ij = torch.dot(pc_grads[tn_i], grads[tn_j])
                 if g_ij < 0:
-                    pc_grads[tn_i] -= g_ij * grads[tn_j] / (grads[tn_j].norm().pow(2))
-                    batch_weight[tn_j] -= (g_ij/(grads[tn_j].norm().pow(2))).item()
+                    pc_grads[tn_i] -= g_ij * grads[tn_j] / (grads[tn_j].norm().pow(2)+1e-8)
+                    batch_weight[tn_j] -= (g_ij/(grads[tn_j].norm().pow(2)+1e-8)).item()
         new_grads = pc_grads.sum(0)
         self._reset_grad(new_grads)
         return batch_weight
