@@ -16,3 +16,7 @@ pip install coverage-badge
 rm tests/coverage.svg
 coverage-badge -o tests/coverage.svg
 ```
+
+The HTML report is [here](https://htmlpreview.github.io/?https://github.com/median-research-group/LibMTL/blob/main/tests/htmlcov/index.html).
+
+

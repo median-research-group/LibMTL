@@ -4,7 +4,7 @@ sys.path.append('./examples/qm9')
 from train_qm9 import main
 
 params = LibMTL_args.parse_args(sys.argv[2:])
-params.dataset_path = '/newdata/baijionglin/dataset/QM9'
+params.dataset_path = '/'
 params.epochs = 1
 params.bs = 2
 params.target = [0, 1, 2, 3, 5, 6, 12, 13, 14, 15, 11]

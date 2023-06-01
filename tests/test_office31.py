@@ -5,7 +5,7 @@ from train_office import main
 
 params = LibMTL_args.parse_args(sys.argv[2:])
 params.dataset = 'office-31'
-params.dataset_path = '/newdata/baijionglin/dataset/office31'
+params.dataset_path = '/'
 params.epochs = 1
 params.bs = 2
 params.multi_input = True

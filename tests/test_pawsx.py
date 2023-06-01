@@ -5,7 +5,7 @@ from train_pawsx import main
 
 params = LibMTL_args.parse_args(sys.argv[2:])
 params.dataset = 'pawsx'
-params.dataset_path = '/newdata/baijionglin/dataset/xtreme'
+params.dataset_path = '/'
 params.epochs = 1
 params.bs = 2
 params.multi_input = True

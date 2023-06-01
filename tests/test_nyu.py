@@ -4,7 +4,7 @@ sys.path.append('./examples/nyu')
 from train_nyu import main
 
 params = LibMTL_args.parse_args(sys.argv[2:])
-params.dataset_path = '/newdata/baijionglin/dataset/nyuv2'
+params.dataset_path = '/'
 params.epochs = 1
 params.train_mode = 'trainval'
 params.aug = False
