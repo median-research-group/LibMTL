@@ -31,10 +31,18 @@ The complete command-line arguments and their descriptions can be found by runni
 python train_nyu.py -h
 ```
 
-If you understand those command-line arguments, you can train an MTL model by executing the following command. 
+If you understand those command-line arguments, you can train an MTL model by executing the following command (This is based on the **DeepLabV3+** model.). 
 
 ```shell
 python train_nyu.py --weighting WEIGHTING --arch ARCH --dataset_path PATH/nyuv2 --gpu_id GPU_ID --scheduler step
+```
+
+---
+
+We also provide the **SegNet+MTAN** model, which is used in [[2]](#2), [[5]](#5) and [[6]](#6). You can train it by executing the following command. 
+
+```shell
+python train_nyu_segnet.py --weighting WEIGHTING --dataset_path PATH/nyuv2 --gpu_id GPU_ID --scheduler step --aug --weight_decay 0
 ```
 
 ### References
@@ -46,3 +54,7 @@ python train_nyu.py --weighting WEIGHTING --arch ARCH --dataset_path PATH/nyuv2 
 <a id="3">[3]</a> Liang-Chieh Chen, Yukun Zhu, George Papandreou, Florian Schroff, and Hartwig Adam. Encoder-Decoder with Atrous Separable Convolution for Semantic Image Segmentation. In *European Conference on Computer Vision*, 2018.
 
 <a id="4">[4]</a> Fisher Yu, Vladlen Koltun, and Thomas A. Funkhouser. Dilated Residual Networks. In *IEEE Conference on Computer Vision and Pattern Recognition*, 2017.
+
+<a id="5">[5]</a> Bo Liu, Xingchao Liu, Xiaojie Jin, Peter Stone, and Qiang Liu. Conflict-Averse Gradient Descent for Multi-Task Learning. In *Neural Information Processing Systems*, 2021.
+
+<a id="6">[6]</a> Aviv Navon, Aviv Shamsian, Idan Achituve, Haggai Maron, Kenji Kawaguchi, Gal Chechik, and Ethan Fetaya. Multi-Task Learning as A Bargaining Game. In *International Conference on Machine Learning*, 2022.
