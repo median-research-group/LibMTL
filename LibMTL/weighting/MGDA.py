@@ -104,6 +104,8 @@ class MGDA(AbsWeighting):
             if torch.sum(torch.abs(change)) < STOP_CRIT:
                 return sol_vec
             sol_vec = new_sol_vec
+            iter_count += 1
+        return sol_vec
     
     def _gradient_normalizers(self, grads, loss_data, ntype):
         if ntype == 'l2':
