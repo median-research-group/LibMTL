@@ -34,7 +34,9 @@ _parser.add_argument('--T', type=float, default=2.0, help='T for DWA')
 _parser.add_argument('--mgda_gn', default='none', type=str, 
                     help='type of gradient normalization for MGDA, option: l2, none, loss, loss+')
 ## GradVac
-_parser.add_argument('--beta', type=float, default=0.5, help='beta for GradVac')
+_parser.add_argument('--GradVac_beta', type=float, default=0.5, help='beta for GradVac')
+_parser.add_argument('--GradVac_group_type', type=int, default=0, 
+                    help='parameter granularity for GradVac (0: whole_model; 1: all_layer; 2: all_matrix)')
 ## GradNorm
 _parser.add_argument('--alpha', type=float, default=1.5, help='alpha for GradNorm')
 ## GradDrop
@@ -86,8 +88,9 @@ def prepare_args(params):
             else:
                 raise ValueError('MGDA needs keywaord mgda_gn')
         elif params.weighting in ['GradVac']:
-            if params.beta is not None:
-                kwargs['weight_args']['beta'] = params.beta
+            if params.GradVac_beta is not None:
+                kwargs['weight_args']['GradVac_beta'] = params.GradVac_beta
+                kwargs['weight_args']['GradVac_group_type'] = params.GradVac_group_type
             else:
                 raise ValueError('GradVac needs keywaord beta')
         elif params.weighting in ['GradDrop']:
