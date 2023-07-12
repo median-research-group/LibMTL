@@ -1,6 +1,6 @@
 # LibMTL
 
-[![Documentation Status](https://readthedocs.org/projects/libmtl/badge/?version=latest)](https://libmtl.readthedocs.io/en/latest/?badge=latest) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/median-research-group/LibMTL/blob/main/LICENSE) [![PyPI version](https://badge.fury.io/py/LibMTL.svg)](https://badge.fury.io/py/LibMTL) [![Supported Python versions](https://img.shields.io/pypi/pyversions/LibMTL.svg?logo=python&logoColor=FFE873)](https://github.com/median-research-group/LibMTL) [![CodeFactor](https://www.codefactor.io/repository/github/median-research-group/libmtl/badge/main)](https://www.codefactor.io/repository/github/median-research-group/libmtl/overview/main)  ![Total lines](https://img.shields.io/tokei/lines/github/median-research-group/libmtl?color=red) [![arXiv](https://img.shields.io/badge/arXiv-2203.14338-b31b1b.svg)](https://arxiv.org/abs/2203.14338) [![coverage](./tests/coverage.svg)](https://github.com/median-research-group/LibMTL)  ![visitors](https://visitor-badge.glitch.me/badge?page_id=median-research-group.LibMTL) [![Made With Love](https://img.shields.io/badge/Made%20With-Love-orange.svg)](https://github.com/median-research-group/LibMTL) 
+[![Documentation Status](https://readthedocs.org/projects/libmtl/badge/?version=latest)](https://libmtl.readthedocs.io/en/latest/?badge=latest) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/median-research-group/LibMTL/blob/main/LICENSE) [![PyPI version](https://badge.fury.io/py/LibMTL.svg)](https://badge.fury.io/py/LibMTL) [![Supported Python versions](https://img.shields.io/pypi/pyversions/LibMTL.svg?logo=python&logoColor=FFE873)](https://github.com/median-research-group/LibMTL) [![CodeFactor](https://www.codefactor.io/repository/github/median-research-group/libmtl/badge/main)](https://www.codefactor.io/repository/github/median-research-group/libmtl/overview/main) [![arXiv](https://img.shields.io/badge/arXiv-2203.14338-b31b1b.svg)](https://arxiv.org/abs/2203.14338) [![coverage](./tests/coverage.svg)](https://github.com/median-research-group/LibMTL) [![Made With Love](https://img.shields.io/badge/Made%20With-Love-orange.svg)](https://github.com/median-research-group/LibMTL) 
 
 ``LibMTL`` is an open-source library built on [PyTorch](https://pytorch.org/) for Multi-Task Learning (MTL). See the [latest documentation](https://libmtl.readthedocs.io/en/latest/) for detailed introductions and API instructions.
 
@@ -8,6 +8,7 @@
 
 ## News
 
+- **[Jul 11 2023]** Paper got accepted to [JMLR](https://jmlr.org/papers/v24/22-0347.html).
 - **[Jun 19 2023]** Added support for [Aligned-MTL](https://openaccess.thecvf.com/content/CVPR2023/html/Senushkin_Independent_Component_Alignment_for_Multi-Task_Learning_CVPR_2023_paper.html) (CVPR 2023).
 - **[Mar 10 2023]**: Added [QM9](https://github.com/median-research-group/LibMTL/tree/main/examples/qm9) and [PAWS-X](https://github.com/median-research-group/LibMTL/tree/main/examples/xtreme) examples.
 - **[Jul 22 2022]**: Added support for [Nash-MTL](https://proceedings.mlr.press/v162/navon22a/navon22a.pdf) (ICML 2022).
@@ -55,7 +56,7 @@ Each module is introduced in [Docs](https://libmtl.readthedocs.io/en/latest/docs
 | Dynamic Weight Average ([DWA](https://openaccess.thecvf.com/content_CVPR_2019/papers/Liu_End-To-End_Multi-Task_Learning_With_Attention_CVPR_2019_paper.pdf))                                                      | CVPR 2019          | Referenced from [official PyTorch implementation](https://github.com/lorenmt/mtan)                       |
 | Geometric Loss Strategy ([GLS](https://openaccess.thecvf.com/content_CVPRW_2019/papers/WAD/Chennupati_MultiNet_Multi-Stream_Feature_Aggregation_and_Geometric_Loss_Strategy_for_Multi-Task_CVPRW_2019_paper.pdf)) | CVPR 2019 Workshop | Implemented by us                                                                                        |
 | Projecting Conflicting Gradient ([PCGrad](https://papers.nips.cc/paper/2020/hash/3fe78a8acf5fda99de95303940a2420c-Abstract.html))                                                                                 | NeurIPS 2020       | Implemented by us                                                                                        |
-| Gradient sign Dropout ([GradDrop](https://papers.nips.cc/paper/2020/hash/16002f7a455a94aa4e91cc34ebdb9f2d-Abstract.html))                                                                                         | NeurIPS 2020       | Implemented by us                                                            |
+| Gradient sign Dropout ([GradDrop](https://papers.nips.cc/paper/2020/hash/16002f7a455a94aa4e91cc34ebdb9f2d-Abstract.html))                                                                                         | NeurIPS 2020       | Implemented by us                                                                                        |
 | Impartial Multi-Task Learning ([IMTL](https://openreview.net/forum?id=IMPnRXEWpvr))                                                                                                                               | ICLR 2021          | Implemented by us                                                                                        |
 | Gradient Vaccine ([GradVac](https://openreview.net/forum?id=F1vEjWK-lH_))                                                                                                                                         | ICLR 2021          | Implemented by us                                                                                        |
 | Conflict-Averse Gradient descent ([CAGrad](https://openreview.net/forum?id=_61Qh8tULj_))                                                                                                                          | NeurIPS 2021       | Referenced from [official PyTorch implementation](https://github.com/Cranial-XIX/CAGrad)                 |
@@ -140,8 +141,8 @@ If you find ``LibMTL`` useful for your research or development, please cite the 
 @article{LibMTL,
   title={{LibMTL}: A Python Library for Multi-Task Learning},
   author={Baijiong Lin and Yu Zhang},
-  journal={arXiv preprint arXiv:2203.14338},
-  year={2022}
+  journal={Journal of Machine Learning Research},
+  year={2023}
 }
 ```
 
