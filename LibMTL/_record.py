@@ -16,6 +16,7 @@ class _PerformanceMeter(object):
         self.weight = {task: self.task_dict[task]['weight'] for task in self.task_name}
         self.base_result = base_result
         self.best_result = {'improvement': -1e+2, 'epoch': 0, 'result': 0}
+        self.improvement = None
         
         self.losses = {task: self.task_dict[task]['loss_fn'] for task in self.task_name}
         self.metrics = {task: self.task_dict[task]['metrics_fn'] for task in self.task_name}
@@ -60,14 +61,15 @@ class _PerformanceMeter(object):
         print('TIME')
     
     def display(self, mode, epoch):
-        if epoch == 0 and self.base_result is None and mode==('val' if self.has_val else 'test'):
-            self.base_result = self.results
-        if mode == 'train':
-            print('Epoch: {:04d} | '.format(epoch), end='')
-        if not self.has_val and mode == 'test':
-            self._update_best_result(self.results, epoch)
-        if self.has_val and mode != 'train':
-            self._update_best_result_by_val(self.results, epoch, mode)
+        if epoch is not None:
+            if epoch == 0 and self.base_result is None and mode==('val' if self.has_val else 'test'):
+                self.base_result = self.results
+            if mode == 'train':
+                print('Epoch: {:04d} | '.format(epoch), end='')
+            if not self.has_val and mode == 'test':
+                self._update_best_result(self.results, epoch)
+            if self.has_val and mode != 'train':
+                self._update_best_result_by_val(self.results, epoch, mode)
         if mode == 'train':
             p_mode = 'TRAIN'
         elif mode == 'val':

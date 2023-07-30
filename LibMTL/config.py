@@ -15,6 +15,10 @@ _parser.add_argument('--rep_grad', action='store_true', default=False,
                     help='computing gradient for representation or sharing parameters')
 _parser.add_argument('--multi_input', action='store_true', default=False, 
                     help='whether each task has its own input data')
+_parser.add_argument('--save_path', type=str, default=None, 
+                    help='save path')
+_parser.add_argument('--load_path', type=str, default=None, 
+                    help='load ckpt path')
 ## optim
 _parser.add_argument('--optim', type=str, default='adam',
                     help='optimizer for training, option: adam, sgd, adagrad, rmsprop')
@@ -154,6 +158,8 @@ def _display(params, kwargs, optim_param, scheduler_param):
     print('\tRep_Grad:', params.rep_grad)
     print('\tMulti_Input:', params.multi_input)
     print('\tSeed:', params.seed)
+    print('\tSave Path:', params.save_path)
+    print('\tLoad Path:', params.load_path)
     print('\tDevice: {}'.format('cuda:'+params.gpu_id if torch.cuda.is_available() else 'cpu'))
     for wa, p in zip(['weight_args', 'arch_args'], [params.weighting, params.arch]):
         if kwargs[wa] != {}:

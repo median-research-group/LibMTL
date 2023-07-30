@@ -1,4 +1,4 @@
-import torch
+import torch, os
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
@@ -74,7 +74,8 @@ class Trainer(nn.Module):
 
     '''
     def __init__(self, task_dict, weighting, architecture, encoder_class, decoders, 
-                 rep_grad, multi_input, optim_param, scheduler_param, **kwargs):
+                 rep_grad, multi_input, optim_param, scheduler_param, 
+                 save_path=None, load_path=None, **kwargs):
         super(Trainer, self).__init__()
         
         self.device = torch.device('cuda:0')
@@ -85,6 +86,8 @@ class Trainer(nn.Module):
         self.rep_grad = rep_grad
         self.multi_input = multi_input
         self.scheduler_param = scheduler_param
+        self.save_path = save_path
+        self.load_path = load_path
 
         self._prepare_model(weighting, architecture, encoder_class, decoders)
         self._prepare_optimizer(optim_param, scheduler_param)
@@ -105,6 +108,11 @@ class Trainer(nn.Module):
                               multi_input=self.multi_input,
                               device=self.device,
                               kwargs=self.kwargs['arch_args']).to(self.device)
+        if self.load_path is not None:
+            if os.path.isdir(self.load_path):
+                self.load_path = os.path.join(self.load_path, 'best.pt')
+            self.model.load_state_dict(torch.load(self.load_path), strict=False)
+            print('Load Model from - {}'.format(self.load_path))
         count_parameters(self.model)
         
     def _prepare_optimizer(self, optim_param, scheduler_param):
@@ -239,6 +247,9 @@ class Trainer(nn.Module):
                     self.scheduler.step(val_improvement)
                 else:
                     self.scheduler.step()
+            if self.save_path is not None and self.meter.best_result['epoch'] == epoch:
+                torch.save(self.model.state_dict(), os.path.join(self.save_path, 'best.pt'))
+                print('Save Model {} to {}'.format(epoch, os.path.join(self.save_path, 'best.pt')))
         self.meter.display_best_result()
         if return_weight:
             return self.batch_weight
