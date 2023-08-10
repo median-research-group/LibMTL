@@ -91,9 +91,9 @@ def main(params):
     val_dataset = QM9Dataset(dataset[10000:20000], target)
     train_dataset = QM9Dataset(dataset[20000:], target)
 
-    test_loader = DataLoader(test_dataset, batch_size=params.bs, shuffle=False)
-    val_loader = DataLoader(val_dataset, batch_size=params.bs, shuffle=False)
-    train_loader = DataLoader(train_dataset, batch_size=params.bs, shuffle=True)
+    test_loader = DataLoader(test_dataset, batch_size=params.bs, shuffle=False, num_workers=2, pin_memory=True)
+    val_loader = DataLoader(val_dataset, batch_size=params.bs, shuffle=False, num_workers=2, pin_memory=True)
+    train_loader = DataLoader(train_dataset, batch_size=params.bs, shuffle=True, num_workers=2, pin_memory=True)
 
     # define tasks
     task_dict = {}
