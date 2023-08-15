@@ -139,9 +139,12 @@ If you find ``LibMTL`` useful for your research or development, please cite the 
 
 ```latex
 @article{LibMTL,
-  title={{LibMTL}: A Python Library for Multi-Task Learning},
+  title={{LibMTL}: A {P}ython Library for Multi-Task Learning},
   author={Baijiong Lin and Yu Zhang},
   journal={Journal of Machine Learning Research},
+  volume={24},
+  number={209},
+  pages={1--7},
   year={2023}
 }
 ```
