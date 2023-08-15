@@ -138,7 +138,7 @@ More details is represented in [Docs](https://libmtl.readthedocs.io/en/latest/do
 If you find ``LibMTL`` useful for your research or development, please cite the following:
 
 ```latex
-@article{LibMTL,
+@article{lin2023libmtl,
   title={{LibMTL}: A {P}ython Library for Multi-Task Learning},
   author={Baijiong Lin and Yu Zhang},
   journal={Journal of Machine Learning Research},
