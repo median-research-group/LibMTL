@@ -52,6 +52,12 @@ _parser.add_argument('--rescale', type=int, default=1, help='rescale for CAGrad'
 _parser.add_argument('--update_weights_every', type=int, default=1, help='update_weights_every for Nash_MTL')
 _parser.add_argument('--optim_niter', type=int, default=20, help='optim_niter for Nash_MTL')
 _parser.add_argument('--max_norm', type=float, default=1.0, help='max_norm for Nash_MTL')
+## MoCo
+_parser.add_argument('--MoCo_beta', type=float, default=0.5, help='MoCo_beta for MoCo')
+_parser.add_argument('--MoCo_beta_sigma', type=float, default=0.5, help='MoCo_beta_sigma for MoCo')
+_parser.add_argument('--MoCo_gamma', type=float, default=0.1, help='gamma for MoCo')
+_parser.add_argument('--MoCo_gamma_sigma', type=float, default=0.5, help='MoCo_gamma_sigma for MoCo')
+_parser.add_argument('--MoCo_rho', type=float, default=0, help='MoCo_rho for MoCo')
 
 # args for architecture
 ## CGC
@@ -72,7 +78,8 @@ def prepare_args(params):
     """
     kwargs = {'weight_args': {}, 'arch_args': {}}
     if params.weighting in ['EW', 'UW', 'GradNorm', 'GLS', 'RLW', 'MGDA', 'IMTL',
-                            'PCGrad', 'GradVac', 'CAGrad', 'GradDrop', 'DWA', 'Nash_MTL', 'Aligned_MTL']:
+                            'PCGrad', 'GradVac', 'CAGrad', 'GradDrop', 'DWA', 
+                            'Nash_MTL', 'MoCo', 'Aligned_MTL']:
         if params.weighting in ['DWA']:
             if params.T is not None:
                 kwargs['weight_args']['T'] = params.T
