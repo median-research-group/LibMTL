@@ -30,7 +30,8 @@ class _transform_resnet_cross(nn.Module):
                 if i == 0:
                     ss_rep[i][tn] = self.resnet_layer[str(i)][tn](s_rep[task])
                 else:
-                    cross_rep = sum([self.cross_unit[i-1][tn][j]*ss_rep[i-1][j] for j in range(self.task_num)])
+                    cross_rep = np.dot([self.cross_unit[i-1][tn][j] for j in range(self.task_num)], 
+                                       [ss_rep[i-1][j] for j in range(self.task_num)])
                     ss_rep[i][tn] = self.resnet_layer[str(i)][tn](cross_rep)
         return ss_rep[3]
 
