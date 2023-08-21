@@ -37,7 +37,8 @@ class _transform_resnet_ltb(nn.Module):
                 if i == 0:
                     ss_rep[i][tn] = self.resnet_conv[task](inputs)
                 else:
-                    child_rep = sum([alpha[i,tn,j]*ss_rep[i-1][j] for j in range(self.task_num)]) # j: module idx
+                    child_rep = np.dot([alpha[i,tn,j] for j in range(self.task_num)], 
+                                       [ss_rep[i-1][j] for j in range(self.task_num)])
                     ss_rep[i][tn] = self.resnet_layer[str(i-1)][tn](child_rep)
         return ss_rep[4]
 
