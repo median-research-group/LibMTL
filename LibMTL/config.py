@@ -122,6 +122,12 @@ def prepare_args(params):
                 kwargs['weight_args']['max_norm'] = params.max_norm
             else:
                 raise ValueError('Nash_MTL needs update_weights_every, optim_niter, and max_norm')
+        elif params.weighting in ['MoCo']:
+            kwargs['weight_args']['MoCo_beta'] = params.MoCo_beta
+            kwargs['weight_args']['MoCo_beta_sigma'] = params.MoCo_beta_sigma
+            kwargs['weight_args']['MoCo_gamma'] = params.MoCo_gamma
+            kwargs['weight_args']['MoCo_gamma_sigma'] = params.MoCo_gamma_sigma
+            kwargs['weight_args']['MoCo_rho'] = params.MoCo_rho
     else:
         raise ValueError('No support weighting method {}'.format(params.weighting)) 
         
