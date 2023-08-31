@@ -1,0 +1,1 @@
+python train_office.py --gpu_id 3 --weighting GradVac --arch HPS --multi_in

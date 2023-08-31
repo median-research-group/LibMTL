@@ -1,0 +1,1 @@
+python train_office.py --gpu_id --weighting GradVac --arch 

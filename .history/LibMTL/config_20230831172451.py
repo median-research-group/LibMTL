@@ -186,4 +186,5 @@ def _display(params, kwargs, optim_param, scheduler_param):
         print('Scheduler Configuration:')
         for k, v in scheduler_param.items():
             print('\t'+k+':', v)
-    #TODO: create log dir/file 
+    #
+    
