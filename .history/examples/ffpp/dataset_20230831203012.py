@@ -5,7 +5,7 @@ from glob import glob
 import cv2
 import torch
 import numpy as np
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset
 import json
 from PIL import Image
 import torchvision.transforms as transforms
@@ -38,7 +38,7 @@ class FFpp(Dataset):
         self._make_dataset()
         self.all_images = self.all_images[::10]
         self.all_labels = self.all_labels[::10]
-        print(f'total images {len(self.all_images)}, total labels {len(self.all_labels)}')
+        print(f'total images {len(self.all_images)}, total labels {len{self.all_}}')
         # self.all_vids = self.all_vid_id[::10]
 
     def __getitem__(self, index):
@@ -173,12 +173,7 @@ class Deeper(Dataset):
         super().__init__()
         self.data_root = '/data1/jiahe.tian/standard_crop/FF++'
         self.compression = compression
-        self.transform = transforms.Compose([
-                        transforms.Resize((224, 224)),
-                        transforms.ToTensor(),
-                        transforms.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229, 0.224, 0.225]),
-                        ])
-        # self.transform = create_transforms(input_size,aug='base', split='test')
+        self.transform = create_transforms(input_size,aug='base', split='test')
         self.input_size = input_size
         self._make_dataset()
     
@@ -345,14 +340,12 @@ if __name__ == "__main__":
     #     print(a[0].shape, a[1].shape)
     #     break
         
-    # dataset = FFpp(224, )
-    # from torch.utils.data import DataLoader
-    # data_loader = DataLoader(dataset=dataset, batch_size=2, num_workers=1)
-    # for a in data_loader:
-    #     print(a[0].shape, a[1].shape)
-    #     break
-    data_loader , iter_loader = ffpp_dataloader(batchsize=64)
-    
+    dataset = FFpp(224, )
+    from torch.utils.data import DataLoader
+    data_loader = DataLoader(dataset=dataset, batch_size=2, num_workers=1)
+    for a in data_loader:
+        print(a[0].shape, a[1].shape)
+        break
     # dataset = CDFv2(224, )
     # from torch.utils.data import DataLoader
     # data_loader = DataLoader(dataset=dataset, batch_size=2, num_workers=1)

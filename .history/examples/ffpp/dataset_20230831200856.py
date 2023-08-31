@@ -5,7 +5,7 @@ from glob import glob
 import cv2
 import torch
 import numpy as np
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import Dataset
 import json
 from PIL import Image
 import torchvision.transforms as transforms
@@ -22,7 +22,7 @@ def collate_fn_test(batch):
     return data['img'], data['label'], data['vid_id']
 
 class FFpp(Dataset):
-    def __init__(self, input_size=224, compression='c23', subset=None, mode='train'):
+    def __init__(self, input_size, compression='c23', subset=None):
         self.transform = transforms.Compose([
                         transforms.Resize((224, 224)),
                         transforms.ToTensor(),
@@ -32,20 +32,19 @@ class FFpp(Dataset):
         self.data_root = '/data5/tjh/standard_crop/FF++'
         self.compression = compression
         # self.transform = create_transforms(input_size, aug='base', split='test')
-        self.input_size = input_size #TODO, change to arg
+        self.input_size = input_size
         self.subset = subset
-        self.mode = mode
         self._make_dataset()
         self.all_images = self.all_images[::10]
         self.all_labels = self.all_labels[::10]
-        print(f'total images {len(self.all_images)}, total labels {len(self.all_labels)}')
-        # self.all_vids = self.all_vid_id[::10]
+        self.all_vids = self.all_vid_id[::10]
 
     def __getitem__(self, index):
         image = self.all_images[index]
         image = self._load_image(image)
-        image = self.transform(image)
-        image= cv2.resize(image,(self.input_size,self.input_size),interpolation=cv2.INTER_LINEAR).astype('float32')/255
+        #TODO: define transformer
+        image = self.transform(image=image)['image']
+        image=cv2.resize(image,(self.input_size,self.input_size),interpolation=cv2.INTER_LINEAR).astype('float32')/255
         image = image.transpose((2,0,1))
         label = self.all_labels[index]
         # vid_id = self.all_vid_id[index]
@@ -64,59 +63,36 @@ class FFpp(Dataset):
         self.all_labels = []
         self.all_vid_id = []
 
-        meta_data_file = f'/data3/chenpeng/data/FaceForensics++/splits/{self.mode}.json'
-        print(f"loading meta data from {meta_data_file}")
+        meta_data_file = '/data3/chenpeng/data/FaceForensics++/splits/train.json'
         with open(meta_data_file) as f:
             meta_data = json.load(f)
         from functools import reduce
         meta_data = reduce(lambda x,y:x+y, meta_data)
 
-        assert self.subset is None or self.subset in  ['original', 'Deepfakes', 'Face2Face', 'NeuralTextures', 'FaceSwap']
         if not self.subset:
             types = ['original', 'Deepfakes', 'Face2Face', 'NeuralTextures', 'FaceSwap']
-        elif self.subset in  ['original', 'Deepfakes', 'Face2Face', 'NeuralTextures', 'FaceSwap']:
-            types = self.subset
-        
+        else:
+            assert isinstance(self.subset, str)
+            types = ['original'] + [i for i in self.subset.split('_')]
         vid_id = 0
         for label, t in enumerate(types):
             t_dir = os.path.join(self.data_root, self.compression, t)
-            print(f'loading images from {t_dir}')
             for vid in os.listdir(t_dir):
+
                 if vid[:3] not in meta_data:
                     continue
 
                 all_frames = glob(os.path.join(self.data_root, self.compression, t, vid)+'/*.png')
                 if label==0:
-                    # self.all_vid_id.extend([vid_id]*(len(types)-1)*len(list(all_frames)))
+                    self.all_vid_id.extend([vid_id]*(len(types)-1)*len(list(all_frames)))
                     self.all_images.extend((len(types)-1)*list(all_frames))
                     self.all_labels.extend((len(types)-1)*len(list(all_frames))*[label])
                 else:
-                    # self.all_vid_id.extend([vid_id]*len(list(all_frames)))
+                    self.all_vid_id.extend([vid_id]*len(list(all_frames)))
                     self.all_images.extend(list(all_frames))
                     self.all_labels.extend(len(list(all_frames))*[label])
                 vid_id+=1
-        
-def ffpp_dataloader(batchsize):
-    data_loader = {}
-    iter_data_loader = {}
-    tasks = ['original', 'Deepfakes', 'Face2Face', 'NeuralTextures', 'FaceSwap']
-    for k,d in enumerate(tasks):
-        data_loader[d] = {}
-        iter_data_loader[d] = {}
-        for mode in ['train', 'val', 'test']:
-            shuffle = True if mode == 'train' else False
-            drop_last = True if mode == 'train' else False
-            txt_dataset = FFpp(subset=d, mode=mode)
-            print(d, mode, len(txt_dataset))
-            data_loader[d][mode] = DataLoader(txt_dataset, 
-                                              num_workers=2, 
-                                              pin_memory=True, 
-                                              batch_size=batchsize, 
-                                              shuffle=shuffle,
-                                              drop_last=drop_last)
-            iter_data_loader[d][mode] = iter(data_loader[d][mode])
-    return data_loader, iter_data_loader
-        
+
 class FaceShifter(Dataset):
     def __init__(self, input_size, compression='c23'):
         super().__init__()
@@ -173,12 +149,7 @@ class Deeper(Dataset):
         super().__init__()
         self.data_root = '/data1/jiahe.tian/standard_crop/FF++'
         self.compression = compression
-        self.transform = transforms.Compose([
-                        transforms.Resize((224, 224)),
-                        transforms.ToTensor(),
-                        transforms.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229, 0.224, 0.225]),
-                        ])
-        # self.transform = create_transforms(input_size,aug='base', split='test')
+        self.transform = create_transforms(input_size,aug='base', split='test')
         self.input_size = input_size
         self._make_dataset()
     
@@ -345,28 +316,26 @@ if __name__ == "__main__":
     #     print(a[0].shape, a[1].shape)
     #     break
         
-    # dataset = FFpp(224, )
-    # from torch.utils.data import DataLoader
-    # data_loader = DataLoader(dataset=dataset, batch_size=2, num_workers=1)
-    # for a in data_loader:
-    #     print(a[0].shape, a[1].shape)
-    #     break
-    data_loader , iter_loader = ffpp_dataloader(batchsize=64)
-    
-    # dataset = CDFv2(224, )
-    # from torch.utils.data import DataLoader
-    # data_loader = DataLoader(dataset=dataset, batch_size=2, num_workers=1)
-    # for a in data_loader:
-    #     print(a[0].shape, a[1].shape)
-    #     break
+    dataset = FFpp_train(224, )
+    from torch.utils.data import DataLoader
+    data_loader = DataLoader(dataset=dataset, batch_size=2, num_workers=1)
+    for a in data_loader:
+        print(a[0].shape, a[1].shape)
+        break
+    dataset = CDFv2(224, )
+    from torch.utils.data import DataLoader
+    data_loader = DataLoader(dataset=dataset, batch_size=2, num_workers=1)
+    for a in data_loader:
+        print(a[0].shape, a[1].shape)
+        break
 
 
-    # dataset = DFDC(224, )
-    # from torch.utils.data import DataLoader
-    # data_loader = DataLoader(dataset=dataset, batch_size=2, num_workers=1)
-    # for a in data_loader:
-    #     print(a[0].shape, a[1].shape)
-    #     break
+    dataset = DFDC(224, )
+    from torch.utils.data import DataLoader
+    data_loader = DataLoader(dataset=dataset, batch_size=2, num_workers=1)
+    for a in data_loader:
+        print(a[0].shape, a[1].shape)
+        break
 
 
     # dataset = Deeper(224, )

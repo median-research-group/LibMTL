@@ -173,12 +173,7 @@ class Deeper(Dataset):
         super().__init__()
         self.data_root = '/data1/jiahe.tian/standard_crop/FF++'
         self.compression = compression
-        self.transform = transforms.Compose([
-                        transforms.Resize((224, 224)),
-                        transforms.ToTensor(),
-                        transforms.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229, 0.224, 0.225]),
-                        ])
-        # self.transform = create_transforms(input_size,aug='base', split='test')
+        self.transform = create_transforms(input_size,aug='base', split='test')
         self.input_size = input_size
         self._make_dataset()
     
