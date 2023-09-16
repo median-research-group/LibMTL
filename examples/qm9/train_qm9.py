@@ -64,7 +64,7 @@ def main(params):
             return data
 
     transform = T.Compose([Complete(), T.Distance(norm=False)])
-    dataset = QM9(params.dataset_path, transform=transform).shuffle()
+    dataset = QM9(params.dataset_path, transform=transform)
 
     # Normalize targets to mean = 0 and std = 1.
     mean = dataset.data.y.mean(dim=0, keepdim=True)
@@ -87,9 +87,10 @@ def main(params):
             return data, label
 
     # Split datasets.
-    test_dataset = QM9Dataset(dataset[:10000], target)
-    val_dataset = QM9Dataset(dataset[10000:20000], target)
-    train_dataset = QM9Dataset(dataset[20000:], target)
+    split = torch.load('./random_split.t')
+    test_dataset = QM9Dataset(dataset[split][:10000], target)
+    val_dataset = QM9Dataset(dataset[split][10000:20000], target)
+    train_dataset = QM9Dataset(dataset[split][20000:], target)
 
     test_loader = DataLoader(test_dataset, batch_size=params.bs, shuffle=False, num_workers=2, pin_memory=True)
     val_loader = DataLoader(val_dataset, batch_size=params.bs, shuffle=False, num_workers=2, pin_memory=True)
