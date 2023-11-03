@@ -10,7 +10,7 @@ Following [[2]](#2), the evaluation metrics of three tasks are adopted as follow
 
 ### Run a Model
 
-The script ``train_nyu.py`` is the main file for training and evaluating an MTL model on the NYUv2 dataset. A set of command-line arguments is provided to allow users to adjust the training configuration. 
+The script ``main.py`` is the main file for training and evaluating an MTL model on the NYUv2 dataset. A set of command-line arguments is provided to allow users to adjust the training configuration. 
 
 Some important  arguments are described as follows.
 
@@ -28,13 +28,19 @@ Some important  arguments are described as follows.
 The complete command-line arguments and their descriptions can be found by running the following command.
 
 ```shell
-python train_nyu.py -h
+python main.py -h
 ```
 
 If you understand those command-line arguments, you can train an MTL model by executing the following command (This is based on the **DeepLabV3+** model.). 
 
 ```shell
-python train_nyu.py --weighting WEIGHTING --arch ARCH --dataset_path PATH/nyuv2 --gpu_id GPU_ID --scheduler step
+python main.py --weighting WEIGHTING --arch ARCH --dataset_path PATH/nyuv2 --gpu_id GPU_ID --scheduler step --mode train --save_path PATH
+```
+
+You can test the trained MTL model by running the following command.
+
+```she
+python main.py --weighting WEIGHTING --arch ARCH --dataset_path PATH/nyuv2 --gpu_id GPU_ID --scheduler step --mode test --load_path PATH
 ```
 
 ---
@@ -42,7 +48,7 @@ python train_nyu.py --weighting WEIGHTING --arch ARCH --dataset_path PATH/nyuv2 
 We also provide the **SegNet+MTAN** model, which is used in [[2]](#2), [[5]](#5) and [[6]](#6). You can train it by executing the following command. 
 
 ```shell
-python train_nyu_segnet.py --weighting WEIGHTING --dataset_path PATH/nyuv2 --gpu_id GPU_ID --scheduler step --aug --weight_decay 0
+python main_segnet.py --weighting WEIGHTING --dataset_path PATH/nyuv2 --gpu_id GPU_ID --scheduler step --aug --weight_decay 0 --mode train --save_path PATH
 ```
 
 ### References

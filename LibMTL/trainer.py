@@ -138,10 +138,10 @@ class Trainer(nn.Module):
 
     def _process_data(self, loader):
         try:
-            data, label = loader[1].next()
+            data, label = next(loader[1])
         except:
             loader[1] = iter(loader[0])
-            data, label = loader[1].next()
+            data, label = next(loader[1])
         data = data.to(self.device, non_blocking=True)
         if not self.multi_input:
             for task in self.task_name:

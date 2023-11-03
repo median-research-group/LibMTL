@@ -4,6 +4,7 @@ import torch
 
 _parser = argparse.ArgumentParser(description='Configuration for LibMTL')
 # general
+_parser.add_argument('--mode', type=str, default='train', help='train, test')
 _parser.add_argument('--seed', type=int, default=0, help='random seed')
 _parser.add_argument('--gpu_id', default='0', type=str, help='gpu_id') 
 _parser.add_argument('--weighting', type=str, default='EW',
@@ -166,6 +167,7 @@ def prepare_args(params):
 def _display(params, kwargs, optim_param, scheduler_param):
     print('='*40)
     print('General Configuration:')
+    print('\tMode:', params.mode)
     print('\tWighting:', params.weighting)
     print('\tArchitecture:', params.arch)
     print('\tRep_Grad:', params.rep_grad)

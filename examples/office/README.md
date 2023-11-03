@@ -10,7 +10,7 @@ We use the ResNet-18 network pretrained on the ImageNet dataset followed by a fu
 
 ### Run a Model
 
-The script ``train_office.py`` is the main file for training and evaluating a MTL model on the Office-31 or Office-Home dataset. A set of command-line arguments is provided to allow users to adjust the training parameter configuration. 
+The script ``main.py`` is the main file for training and evaluating a MTL model on the Office-31 or Office-Home dataset. A set of command-line arguments is provided to allow users to adjust the training parameter configuration. 
 
 Some important  arguments are described as follows.
 
@@ -26,13 +26,19 @@ Some important  arguments are described as follows.
 The complete command-line arguments and their descriptions can be found by running the following command.
 
 ```shell
-python train_office.py -h
+python main.py -h
 ```
 
-If you understand those command-line arguments, you can train a MTL model by running a command like this. 
+If you understand those command-line arguments, you can train an MTL model by running a command like this. 
 
 ```shell
-python train_office.py --weighting WEIGHTING --arch ARCH --dataset_path PATH --gpu_id GPU_ID --multi_input
+python main.py --weighting WEIGHTING --arch ARCH --dataset DATASET --dataset_path PATH --gpu_id GPU_ID --multi_input --save_path PATH --mode train
+```
+
+You can test the trained model by running the following command.
+
+```she
+python main.py --weighting WEIGHTING --arch ARCH --dataset DATASET --dataset_path PATH --gpu_id GPU_ID --multi_input --load_path PATH --mode test
 ```
 
 ### References

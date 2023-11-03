@@ -78,13 +78,13 @@ Each module is introduced in [Docs](https://libmtl.readthedocs.io/en/latest/docs
 
 ## Supported Benchmark Datasets
 
-| Datasets                                                                                 | Problems                      | Task Number  | Tasks                                                                      | multi-input | Backbone            |
-|:---------------------------------------------------------------------------------------- |:-----------------------------:|:------------:|:--------------------------------------------------------------------------:|:-----------:|:-------------------:|
+| Datasets                                                                                 | Problems                      | Task Number  | Tasks                                                                      | multi-input | Backbone             |
+|:---------------------------------------------------------------------------------------- |:-----------------------------:|:------------:|:--------------------------------------------------------------------------:|:-----------:|:--------------------:|
 | [NYUv2](https://github.com/median-research-group/LibMTL/tree/main/examples/nyu)          | Scene Understanding           | 3            | Semantic Segmentation+<br/>Depth Estimation+<br/>Surface Normal Prediction | ✘           | ResNet50/<br/>SegNet |
-| [Office-31](https://github.com/median-research-group/LibMTL/tree/main/examples/office)   | Image Recognition             | 3            | Classification                                                             | ✓           | ResNet18            |
-| [Office-Home](https://github.com/median-research-group/LibMTL/tree/main/examples/office) | Image Recognition             | 4            | Classification                                                             | ✓           | ResNet18            |
-| [QM9](https://github.com/median-research-group/LibMTL/tree/main/examples/qm9)            | Molecular Property Prediction | 11 (default) | Regression                                                                 | ✘           | GNN                 |
-| [PAWS-X](https://github.com/median-research-group/LibMTL/tree/main/examples/xtreme)      | Paraphrase Identification     | 4 (default)  | Classification                                                             | ✓           | Bert                |
+| [Office-31](https://github.com/median-research-group/LibMTL/tree/main/examples/office)   | Image Recognition             | 3            | Classification                                                             | ✓           | ResNet18             |
+| [Office-Home](https://github.com/median-research-group/LibMTL/tree/main/examples/office) | Image Recognition             | 4            | Classification                                                             | ✓           | ResNet18             |
+| [QM9](https://github.com/median-research-group/LibMTL/tree/main/examples/qm9)            | Molecular Property Prediction | 11 (default) | Regression                                                                 | ✘           | GNN                  |
+| [PAWS-X](https://github.com/median-research-group/LibMTL/tree/main/examples/xtreme)      | Paraphrase Identification     | 4 (default)  | Classification                                                             | ✓           | Bert                 |
 
 ## Installation
 
@@ -93,7 +93,7 @@ Each module is introduced in [Docs](https://libmtl.readthedocs.io/en/latest/docs
    ```shell
    conda create -n libmtl python=3.8
    conda activate libmtl
-   pip install torch==1.8.0 torchvision==0.9.0 numpy==1.20
+   pip install torch==1.8.1+cu111 torchvision==0.9.1+cu111 -f https://download.pytorch.org/whl/torch_stable.html
    ```
 
 2. Clone the repository
@@ -119,18 +119,18 @@ The NYUv2 dataset we used is pre-processed by [mtan](https://github.com/lorenmt/
 
 ### Run a Model
 
-The complete training code for the NYUv2 dataset is provided in [examples/nyu](./examples/nyu). The file [train_nyu.py](./examples/nyu/train_nyu.py) is the main file for training on the NYUv2 dataset.
+The complete training code for the NYUv2 dataset is provided in [examples/nyu](./examples/nyu). The file [main.py](./examples/nyu/main.py) is the main file for training on the NYUv2 dataset.
 
 You can find the command-line arguments by running the following command.
 
 ```shell
-python train_nyu.py -h
+python main.py -h
 ```
 
-For instance, running the following command will train a MTL model with EW and HPS on NYUv2 dataset.
+For instance, running the following command will train an MTL model with EW and HPS on NYUv2 dataset.
 
 ```shell
-python train_nyu.py --weighting EW --arch HPS --dataset_path /path/to/nyuv2 --gpu_id 0 --scheduler step
+python main.py --weighting EW --arch HPS --dataset_path /path/to/nyuv2 --gpu_id 0 --scheduler step --mode train --save_path PATH
 ```
 
 More details is represented in [Docs](https://libmtl.readthedocs.io/en/latest/docs/getting_started/quick_start.html).

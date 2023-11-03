@@ -165,7 +165,12 @@ def main(params):
                           save_path=params.save_path,
                           load_path=params.load_path,
                           **kwargs)
-    QM9model.train(train_loader, test_loader, params.epochs, val_dataloaders=val_loader)
+    if params.mode == 'train':
+        QM9model.train(train_loader, test_loader, params.epochs, val_dataloaders=val_loader)
+    elif params.mode == 'test':
+        QM9model.test(test_loader)
+    else:
+        raise ValueError
     
 if __name__ == "__main__":
     params = parse_args(LibMTL_args)
