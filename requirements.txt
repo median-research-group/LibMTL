@@ -1,0 +1,13 @@
+clarabel==0.6.0
+cvxpy==1.4.1
+ecos==2.0.12
+numpy==1.24.4
+osqp==0.6.3
+Pillow==10.1.0
+pybind11==2.11.1
+qdldl==0.1.7.post0
+scipy==1.10.1
+scs==3.2.3
+torch==1.8.1+cu111
+torchvision==0.9.1+cu111
+typing_extensions==4.8.0
