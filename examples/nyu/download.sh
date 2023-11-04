@@ -23,5 +23,5 @@ wget -O "${data_dir}/dropbox_content.zip" "$download_link" || curl -L "$download
 # Extract the contents of the downloaded file
 unzip -o "${data_dir}/dropbox_content.zip" -d "$data_dir"
 
-# List the contents of the 'data' directory
-ls -l "$data_dir"
+# Remove the downloaded zip file
+rm "${data_dir}/dropbox_content.zip"

@@ -35,11 +35,11 @@ If you understand those command-line arguments, you can train an MTL model by ex
 
 **Simple Run**
 ```shell
-python main.py --weighting Nash_MTL --arch Cross_stitch --dataset_path data/nyuv2 --gpu_id 0 --scheduler step --mode train
+python main.py --weighting Nash_MTL --arch Cross_stitch --dataset_path data/ --gpu_id 0 --scheduler step  --mode train --train_bs 2 --test_bs 2 --epochs 1
 ```
 
 ```shell
-python main.py --weighting WEIGHTING --arch ARCH --dataset_path PATH/nyuv2 --gpu_id GPU_ID --scheduler step --mode train --save_path PATH
+python main.py --weighting WEIGHTING --arch ARCH --dataset_path data/ --gpu_id GPU_ID --scheduler step --mode train --save_path PATH
 ```
 
 You can test the trained MTL model by running the following command.

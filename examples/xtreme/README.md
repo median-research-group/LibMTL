@@ -33,7 +33,7 @@ The complete command-line arguments and their descriptions can be found by runni
 
 **Simple Run**
 ```shell
-python main.py --weighting Nash_MTL --arch HPS --dataset_path data/ --gpu_id 0 --multi_input --mode train --save_path result/ 
+python LibMTL/examples/xtreme/main.py --weighting Nash_MTL --arch HPS --dataset_path LibMTL/examples/xtreme/data/ --gpu_id 0 --multi_input --mode train --bs 2 --epochs 1 
 ```
 
 ```shell
