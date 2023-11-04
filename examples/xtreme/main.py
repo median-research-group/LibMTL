@@ -75,7 +75,7 @@ def main(params):
             
         def _process_data(self, loader):
             try:
-                data_batch = loader[1].next()
+                data_batch = next(loader[1])
             except:
                 loader[1] = iter(loader[0])
                 data_batch = loader[1].next()
