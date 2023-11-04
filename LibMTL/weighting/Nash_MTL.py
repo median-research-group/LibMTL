@@ -74,7 +74,7 @@ class Nash_MTL(AbsWeighting):
         
     def _calc_phi_alpha_linearization(self):
         G_prvs_alpha = self.G_param @ self.prvs_alpha_param
-        prvs_phi_tag = 1 / self.prvs_alpha_param + (1 / G_prvs_alpha) @ self.G_param
+        prvs_phi_tag = 1 / self.prvs_alpha_param + (1 / G_prvs_alpha) * self.G_param
         phi_alpha = prvs_phi_tag @ (self.alpha_param - self.prvs_alpha_param)
         return phi_alpha
 
