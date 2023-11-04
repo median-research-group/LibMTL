@@ -31,7 +31,12 @@ The complete command-line arguments and their descriptions can be found by runni
 python main.py -h
 ```
 
-If you understand those command-line arguments, you can train an MTL model by executing the following command (This is based on the **DeepLabV3+** model.). 
+If you understand those command-line arguments, you can train an MTL model by executing the following command (This is based on the **DeepLabV3+** model.).
+
+**Simple Run**
+```shell
+python main.py --weighting Nash_MTL --arch Cross_stitch --dataset_path data/nyuv2 --gpu_id 0 --scheduler step --mode train
+```
 
 ```shell
 python main.py --weighting WEIGHTING --arch ARCH --dataset_path PATH/nyuv2 --gpu_id GPU_ID --scheduler step --mode train --save_path PATH
