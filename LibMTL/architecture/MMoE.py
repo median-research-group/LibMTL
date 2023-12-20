@@ -42,4 +42,4 @@ class MMoE(AbsArchitecture):
         return self.experts_shared.parameters()
 
     def zero_grad_share_params(self):
-        self.experts_shared.zero_grad()
+        self.experts_shared.zero_grad(set_to_none=False)

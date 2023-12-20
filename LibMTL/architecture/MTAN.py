@@ -151,6 +151,6 @@ class MTAN(AbsArchitecture):
             r = self.encoder
             for n, m in self.encoder.named_modules():
                 if 'resnet_network' not in n:
-                    m.zero_grad()
-        r.shared_conv.zero_grad()
-        r.shared_layer.zero_grad()
+                    m.zero_grad(set_to_none=False)
+        r.shared_conv.zero_grad(set_to_none=False)
+        r.shared_layer.zero_grad(set_to_none=False)

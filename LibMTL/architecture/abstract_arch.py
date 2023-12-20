@@ -62,7 +62,7 @@ class AbsArchitecture(nn.Module):
     def zero_grad_share_params(self):
         r"""Set gradients of the shared parameters to zero.
         """
-        self.encoder.zero_grad()
+        self.encoder.zero_grad(set_to_none=False)
         
     def _prepare_rep(self, rep, task, same_rep=None):
         if self.rep_grad:

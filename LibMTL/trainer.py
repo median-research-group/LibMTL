@@ -226,7 +226,7 @@ class Trainer(nn.Module):
                         train_losses[tn] = self._compute_loss(train_pred, train_gt, task)
                         self.meter.update(train_pred, train_gt, task)
 
-                self.optimizer.zero_grad()
+                self.optimizer.zero_grad(set_to_none=False)
                 w = self.model.backward(train_losses, **self.kwargs['weight_args'])
                 if w is not None:
                     self.batch_weight[:, epoch, batch_index] = w
