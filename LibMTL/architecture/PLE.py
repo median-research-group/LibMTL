@@ -125,4 +125,4 @@ class PLE(AbsArchitecture):
         return self.encoder.shared_layer.parameters()
 
     def zero_grad_share_params(self):
-        self.encoder.shared_layer.zero_grad()
+        self.encoder.shared_layer.zero_grad(set_to_none=False)

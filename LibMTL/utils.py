@@ -50,7 +50,7 @@ def count_improvement(base_result, new_result, weight):
 
     .. math::
         \Delta_{\mathrm{p}}=100\%\times \frac{1}{T}\sum_{t=1}^T 
-        \frac{1}{M_t}\sum_{m=1}^{M_t}\frac{(-1)^{w_{t,m}}(B_{t,m}-N_{t,m})}{N_{t,m}}.
+        \frac{1}{M_t}\sum_{m=1}^{M_t}\frac{(-1)^{w_{t,m}}(B_{t,m}-N_{t,m})}{B_{t,m}}.
 
     Args:
         base_result (dict): A dictionary of scores of all metrics of all tasks.

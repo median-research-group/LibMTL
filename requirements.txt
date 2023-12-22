@@ -11,3 +11,6 @@ scs==3.2.3
 torch==2.1.0
 torchvision==0.16.0
 typing_extensions==4.8.0
+torch_geometric==2.2.0
+torch_sparse==0.6.10
+torch_scatter==2.0.8
