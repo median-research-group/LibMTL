@@ -8,6 +8,7 @@
 
 ## News
 
+- **[Feb 08 2024]** Added support for [DB-MTL](https://arxiv.org/abs/2308.12029).
 - **[Aug 16 2023]**: Added support for [MoCo](https://openreview.net/forum?id=dLAYGdKTi2) (ICLR 2023). Many thanks to the author's help [@heshandevaka](https://github.com/heshandevaka).
 - **[Jul 11 2023]** Paper got accepted to [JMLR](https://jmlr.org/papers/v24/22-0347.html).
 - **[Jun 19 2023]** Added support for [Aligned-MTL](https://openaccess.thecvf.com/content/CVPR2023/html/Senushkin_Independent_Component_Alignment_for_Multi-Task_Learning_CVPR_2023_paper.html) (CVPR 2023).
@@ -65,6 +66,7 @@ Each module is introduced in [Docs](https://libmtl.readthedocs.io/en/latest/docs
 | Random Loss Weighting ([RLW](https://openreview.net/forum?id=jjtFD8A1Wx))                                                                                                                                         | TMLR 2022          | Implemented by us                                                                                                |
 | [MoCo](https://openreview.net/forum?id=dLAYGdKTi2)                                                                                                                                                                | ICLR 2023          | Implemented based on the author's sharing code (many thanks to [@heshandevaka](https://github.com/heshandevaka)) |
 | [Aligned-MTL](https://openaccess.thecvf.com/content/CVPR2023/html/Senushkin_Independent_Component_Alignment_for_Multi-Task_Learning_CVPR_2023_paper.html)                                                         | CVPR 2023          | Referenced from [official PyTorch implementation](https://github.com/SamsungLabs/MTL)                            |
+| [DB-MTL](https://arxiv.org/abs/2308.12029)                                                                                                                                                                        | arXiv              | Implemented by us                                                                                                |
 
 | Architectures                                                                                                                                                           | Venues          | Comments                                                                                                                           |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
