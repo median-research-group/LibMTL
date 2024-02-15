@@ -70,7 +70,7 @@ class GradVac(AbsWeighting):
                         w = pc_grads[tn_i,beg:end].norm()*(self.rho_T[tn_i,tn_j,k]*(1-rho_ijk**2).sqrt()-rho_ijk*(1-self.rho_T[tn_i,tn_j,k]**2).sqrt())/(grads[tn_j,beg:end].norm()*(1-self.rho_T[tn_i,tn_j,k]**2).sqrt()+1e-8)
                         pc_grads[tn_i,beg:end] += grads[tn_j,beg:end]*w
                         # batch_weight[tn_j] += w.item()
-                        self.rho_T[tn_i,tn_j,k] = (1-beta)*self.rho_T[tn_i,tn_j,k] + beta*rho_ijk
+                    self.rho_T[tn_i,tn_j,k] = (1-beta)*self.rho_T[tn_i,tn_j,k] + beta*rho_ijk
         new_grads = pc_grads.sum(0)
         self._reset_grad(new_grads)
         self.step += 1
