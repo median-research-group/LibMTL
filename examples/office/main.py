@@ -8,8 +8,6 @@ from LibMTL import Trainer
 from LibMTL.model import resnet18
 from LibMTL.utils import set_random_seed, set_device
 from LibMTL.config import LibMTL_args, prepare_args
-import LibMTL.weighting as weighting_method
-import LibMTL.architecture as architecture_method
 from LibMTL.loss import CELoss
 from LibMTL.metrics import AccMetric
 
@@ -68,8 +66,8 @@ def main(params):
     decoders = nn.ModuleDict({task: nn.Linear(512, class_num) for task in list(task_dict.keys())})
     
     officeModel = Trainer(task_dict=task_dict, 
-                          weighting=weighting_method.__dict__[params.weighting], 
-                          architecture=architecture_method.__dict__[params.arch], 
+                          weighting=params.weighting, 
+                          architecture=params.arch, 
                           encoder_class=Encoder, 
                           decoders=decoders,
                           rep_grad=params.rep_grad,

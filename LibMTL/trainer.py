@@ -5,6 +5,8 @@ import numpy as np
 
 from LibMTL._record import _PerformanceMeter
 from LibMTL.utils import count_parameters
+import LibMTL.weighting as weighting_method
+import LibMTL.architecture as architecture_method
 
 class Trainer(nn.Module):
     r'''A Multi-Task Learning Trainer.
@@ -95,6 +97,9 @@ class Trainer(nn.Module):
         self.meter = _PerformanceMeter(self.task_dict, self.multi_input)
         
     def _prepare_model(self, weighting, architecture, encoder_class, decoders):
+
+        weighting = weighting_method.__dict__[weighting] 
+        architecture = architecture_method.__dict__[architecture]
         
         class MTLmodel(architecture, weighting):
             def __init__(self, task_name, encoder_class, decoders, rep_grad, multi_input, device, kwargs):

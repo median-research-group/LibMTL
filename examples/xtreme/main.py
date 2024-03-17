@@ -11,8 +11,6 @@ from utils import *
 from LibMTL import Trainer
 from LibMTL.utils import set_random_seed, set_device
 from LibMTL.config import LibMTL_args, prepare_args
-import LibMTL.weighting as weighting_method
-import LibMTL.architecture as architecture_method
 from LibMTL.metrics import AccMetric
 
 def parse_args(parser):
@@ -63,8 +61,8 @@ def main(params):
         def __init__(self, task_dict, weighting, architecture, encoder_class, 
                      decoders, rep_grad, multi_input, optim_param, scheduler_param, **kwargs):
             super(SCtrainer, self).__init__(task_dict=task_dict, 
-                                            weighting=weighting_method.__dict__[weighting], 
-                                            architecture=architecture_method.__dict__[architecture], 
+                                            weighting=weighting, 
+                                            architecture=architecture, 
                                             encoder_class=encoder_class, 
                                             decoders=decoders,
                                             rep_grad=rep_grad,
