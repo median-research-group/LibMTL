@@ -13,7 +13,6 @@ from LibMTL.config import LibMTL_args, prepare_args
 
 def parse_args(parser):
     parser.add_argument('--aug', action='store_true', default=False, help='data augmentation')
-    parser.add_argument('--train_mode', default='trainval', type=str, help='trainval, train')
     parser.add_argument('--train_bs', default=2, type=int, help='batch size for training')
     parser.add_argument('--test_bs', default=2, type=int, help='batch size for test')
     parser.add_argument('--epochs', default=200, type=int, help='training epochs')
@@ -24,7 +23,7 @@ def main(params):
     kwargs, optim_param, scheduler_param = prepare_args(params)
 
     # prepare dataloaders
-    nyuv2_train_set = NYUv2(root=params.dataset_path, mode=params.train_mode, augmentation=params.aug)
+    nyuv2_train_set = NYUv2(root=params.dataset_path, mode='train', augmentation=params.aug)
     nyuv2_test_set = NYUv2(root=params.dataset_path, mode='test', augmentation=False)
     
     nyuv2_train_loader = torch.utils.data.DataLoader(

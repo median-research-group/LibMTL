@@ -6,8 +6,6 @@ import torch.nn.functional as F
 import fnmatch
 import numpy as np
 import random
-import json
-from LibMTL.utils import get_root_dir
 
 
 class RandomScaleCrop(object):
@@ -47,26 +45,14 @@ class NYUv2(Dataset):
         self.root = os.path.expanduser(root)
         self.augmentation = augmentation
         
-        with open(os.path.join(get_root_dir(), 'examples/nyu', 'data_split.json'), 'r') as f:
-            data_split = json.load(f)
-        train_index, val_index = data_split['train'], data_split['val']
-        # read the data file
         if self.mode == 'train':
-            self.index_list = train_index
+            data_len = len(fnmatch.filter(os.listdir(self.root + '/train/image'), '*.npy'))
+            self.index_list = data_len
             self.data_path = self.root + '/train'
-        elif self.mode == 'val':
-            self.index_list = val_index
-            self.data_path = self.root + '/train'
-        elif self.mode == 'trainval':
-            self.index_list = train_index + val_index
-            self.data_path = self.root + '/train'
-        elif self.mode == 'test':
+        else:
             data_len = len(fnmatch.filter(os.listdir(self.root + '/val/image'), '*.npy'))
             self.index_list = list(range(data_len))
             self.data_path = self.root + '/val'
-
-        # calculate data length
-#         self.data_len = len(fnmatch.filter(os.listdir(self.data_path + '/image'), '*.npy'))
 
     def __getitem__(self, i):
         index = self.index_list[i]
