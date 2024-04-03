@@ -2,12 +2,11 @@
 
 ### Dependencies
 
-To install ``LibMTL``, you need to setup the following libraries:
+To install ``LibMTL``, we recommend to use the following libraries:
 
-- Python >= 3.7
-- torch >= 1.8.0
-- torchvision >= 0.9.0
-- numpy >= 1.20
+- Python == 3.8
+- torch == 1.8.1+cu111
+- torchvision == 0.9.1+cu111
 
 ### User Installation
 
@@ -16,7 +15,7 @@ To install ``LibMTL``, you need to setup the following libraries:
   ```shell
   conda create -n libmtl python=3.8
   conda activate libmtl
-  pip install torch==1.8.0 torchvision==0.9.0 numpy==1.20
+  pip install torch==1.8.1+cu111 torchvision==0.9.1+cu111 -f https://download.pytorch.org/whl/torch_stable.html
   ```
 
 * Clone the repository
@@ -28,5 +27,7 @@ To install ``LibMTL``, you need to setup the following libraries:
 * Install `LibMTL`
   
   ```shell
+  cd LibMTL
+  pip install -r requirements.txt
   pip install -e .
   ```
