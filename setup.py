@@ -8,7 +8,7 @@ setup(
         version='1.1.5',   
         description='A PyTorch Library for Multi-Task Learning',   
         author='Baijiong Lin',  
-        author_email='linbj@mail.sustech.edu.cn',  
+        author_email='bj.lin.email@gmail.com',  
         url='https://github.com/median-research-group/LibMTL',      
         packages=find_packages(),   
         license='MIT',
