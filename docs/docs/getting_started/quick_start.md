@@ -31,7 +31,7 @@ The complete training code for the NYUv2 dataset is provided in [examples/nyu](h
 You can find the command-line arguments by running the following command.
 
 ```shell
-python train_nyu.py -h
+python main.py -h
 ```
 
 ```eval_rst
@@ -39,7 +39,7 @@ For instance, running the following command will train a MTL model with :class:`
 ```
 
 ```shell
-python train_nyu.py --weighting EW --arch HPS --dataset_path /path/to/nyuv2 --gpu_id 0 --scheduler step
+python main.py --weighting EW --arch HPS --dataset_path /path/to/nyuv2 --gpu_id 0 --scheduler step
 ```
 
 If everything works fine, you will see the following outputs which includes the training configurations and the number of model parameters.
@@ -47,20 +47,20 @@ If everything works fine, you will see the following outputs which includes the 
 ```
 ========================================
 General Configuration:
-	Wighting: EW
-	Architecture: HPS
-	Rep_Grad: False
-	Multi_Input: False
-	Seed: 0
-	Device: cuda:0
+    Wighting: EW
+    Architecture: HPS
+    Rep_Grad: False
+    Multi_Input: False
+    Seed: 0
+    Device: cuda:0
 Optimizer Configuration:
-	optim: adam
-	lr: 0.0001
-	weight_decay: 1e-05
+    optim: adam
+    lr: 0.0001
+    weight_decay: 1e-05
 Scheduler Configuration:
-	scheduler: step
-	step_size: 100
-	gamma: 0.5
+    scheduler: step
+    step_size: 100
+    gamma: 0.5
 ========================================
 Total Params: 71888721
 Trainable Params: 71888721
@@ -82,11 +82,10 @@ If the training process ends, the best result on ``val`` will be printed as foll
 Best Result: Epoch 65, result {'segmentation': [0.5377492904663086, 0.7544658184051514], 'depth': [0.38453552363844823, 0.1605487049810748], 'normal': [23.573742, 17.04381, 0.35038458555943763, 0.609274380451927, 0.7207172795833373]}
 ```
 
- ### References
+### References
 
 ```eval_rst
 .. bibliography::
    :style: unsrt
    :filter: docname in docnames
 ```
-

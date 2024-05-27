@@ -32,13 +32,13 @@ Some important  arguments are described as follows.
 The complete command-line arguments and their descriptions can be found by running the following command.
 
 ```shell
-python train_nyu.py -h
+python main.py -h
 ```
 
 If you understand those command-line arguments, you can train an MTL model by executing the following command. 
 
 ```shell
-python train_nyu.py --weighting WEIGHTING --arch ARCH --dataset_path PATH/nyuv2 --gpu_id GPU_ID --scheduler step
+python main.py --weighting WEIGHTING --arch ARCH --dataset_path PATH/nyuv2 --gpu_id GPU_ID --scheduler step
 ```
 
 ### References
@@ -48,4 +48,3 @@ python train_nyu.py --weighting WEIGHTING --arch ARCH --dataset_path PATH/nyuv2 
    :style: unsrt
    :filter: docname in docnames
 ```
-

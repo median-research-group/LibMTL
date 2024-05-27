@@ -30,13 +30,13 @@ Some important  arguments are described as follows.
 The complete command-line arguments and their descriptions can be found by running the following command.
 
 ```shell
-python train_office.py -h
+python main.py -h
 ```
 
 If you understand those command-line arguments, you can train a MTL model by running a command like this. 
 
 ```shell
-python train_office.py --weighting WEIGHTING --arch ARCH --dataset_path PATH --gpu_id GPU_ID --multi_input
+python main.py --weighting WEIGHTING --arch ARCH --dataset_path PATH --gpu_id GPU_ID --multi_input
 ```
 
 ### References
@@ -46,4 +46,3 @@ python train_office.py --weighting WEIGHTING --arch ARCH --dataset_path PATH --g
    :style: unsrt
    :filter: docname in docnames
 ```
-

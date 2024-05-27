@@ -35,8 +35,8 @@ add_module_names = False
 # this_year = datetime.datetime.now().year
 
 project = 'LibMTL'
-copyright = '2021, Baijiong Lin and Yu Zhang'
-author = 'Baijiong Lin and Yu Zhang'
+copyright = '2021, Baijiong Lin'
+author = 'Baijiong Lin'
 
 # The short X.Y version.
 # version = version_
