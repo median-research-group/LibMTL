@@ -1,9 +1,9 @@
-Sphinx==5.1.1
+Sphinx==7.1.2
 recommonmark==0.7.1
-sphinx-autoapi==1.8.4
+sphinx-autoapi==3.1.1
 sphinx-autobuild==2021.3.14
 sphinx-markdown-tables==0.0.17
-sphinx-rtd-theme==1.0.0
+sphinx-rtd-theme==2.0.0
 sphinxcontrib-applehelp==1.0.2
 sphinxcontrib-bibtex==2.4.1
 sphinxcontrib-devhelp==1.0.2
