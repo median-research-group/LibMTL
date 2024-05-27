@@ -15,7 +15,7 @@ In the design of network architectures, the simplest and most popular method is 
 ```
 
 ```eval_rst
-There are usually two types of MTL problems: the single-input problem and the multi-input problem. The single-input problem, as shown in the left of :numref:`my-fig-1`, means an input data has an output for each task or equivalently all tasks share the input data. `The NYUv2 dataset <../benchmark/nyuv2.html>`_ is an example of this problem. The multi-input problem, as shown in the right of :numref:`my-fig-1`, indicates each task has its own input data. `The Office-31 and Office-Home datasets <../benchmark/office.html>`_ belong to such problem. ``LibMTL`` has unified these two cases in a training framework and you just need to set the command-line argument ``multi_input`` correctly.
+There are usually two types of MTL problems: the single-input problem and the multi-input problem. The single-input problem, as shown in the left of :numref:`my-fig-1`, means an input data has an output for each task or equivalently all tasks share the input data. `The NYUv2 dataset <./benchmark/nyuv2.html>`_ is an example of this problem. The multi-input problem, as shown in the right of :numref:`my-fig-1`, indicates each task has its own input data. `The Office-31 and Office-Home datasets <./benchmark/office.html>`_ belong to such problem. ``LibMTL`` has unified these two cases in a training framework and you just need to set the command-line argument ``multi_input`` correctly.
 ```
 
 ```eval_rst
