@@ -62,6 +62,9 @@ _parser.add_argument('--MoCo_rho', type=float, default=0, help='MoCo_rho for MoC
 ## DB_MTL
 _parser.add_argument('--DB_beta', type=float, default=0.9, help=' ')
 _parser.add_argument('--DB_beta_sigma', type=float, default=0, help=' ')
+## STCH
+_parser.add_argument('--STCH_mu', type=float, default=1.0, help=' ')
+_parser.add_argument('--STCH_warmup_epoch', type=int, default=4, help=' ')
 
 # args for architecture
 ## CGC
@@ -83,7 +86,7 @@ def prepare_args(params):
     kwargs = {'weight_args': {}, 'arch_args': {}}
     if params.weighting in ['EW', 'UW', 'GradNorm', 'GLS', 'RLW', 'MGDA', 'IMTL',
                             'PCGrad', 'GradVac', 'CAGrad', 'GradDrop', 'DWA', 
-                            'Nash_MTL', 'MoCo', 'Aligned_MTL', 'DB_MTL']:
+                            'Nash_MTL', 'MoCo', 'Aligned_MTL', 'DB_MTL', 'STCH']:
         if params.weighting in ['DWA']:
             if params.T is not None:
                 kwargs['weight_args']['T'] = params.T
@@ -135,6 +138,9 @@ def prepare_args(params):
         elif params.weighting in ['DB_MTL']:
             kwargs['weight_args']['DB_beta'] = params.DB_beta
             kwargs['weight_args']['DB_beta_sigma'] = params.DB_beta_sigma
+        elif params.weighting in ['STCH']:
+            kwargs['weight_args']['STCH_mu'] = params.STCH_mu
+            kwargs['weight_args']['STCH_warmup_epoch'] = params.STCH_warmup_epoch
     else:
         raise ValueError('No support weighting method {}'.format(params.weighting)) 
         
