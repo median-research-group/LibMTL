@@ -16,6 +16,7 @@ from LibMTL.weighting.MoCo import MoCo
 from LibMTL.weighting.Aligned_MTL import Aligned_MTL
 from LibMTL.weighting.DB_MTL import DB_MTL
 from LibMTL.weighting.STCH import STCH
+from LibMTL.weighting.ExcessMTL import ExcessMTL
 
 __all__ = ['AbsWeighting',
            'EW', 
@@ -34,4 +35,5 @@ __all__ = ['AbsWeighting',
            'MoCo',
            'Aligned_MTL',
            'DB_MTL',
-           'STCH']
+           'STCH',
+           'ExcessMTL']

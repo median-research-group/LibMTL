@@ -8,6 +8,7 @@
 
 ## News
 
+- **[Aug 31 2024]** Added support for [ExcessMTL](https://openreview.net/forum?id=JzWFmMySpn) (ICML 2024).
 - **[Jul 24 2024]** Added support for [STCH](https://openreview.net/forum?id=m4dO5L6eCp) (ICML 2024).
 - **[Feb 08 2024]** Added support for [DB-MTL](https://arxiv.org/abs/2308.12029).
 - **[Aug 16 2023]**: Added support for [MoCo](https://openreview.net/forum?id=dLAYGdKTi2) (ICLR 2023). Many thanks to the author's help [@heshandevaka](https://github.com/heshandevaka).
@@ -68,6 +69,7 @@ Each module is introduced in [Docs](https://libmtl.readthedocs.io/en/latest/docs
 | [MoCo](https://openreview.net/forum?id=dLAYGdKTi2)                                                                                                                                                                | ICLR 2023          | ``--weighting MoCo``        |
 | [Aligned-MTL](https://openaccess.thecvf.com/content/CVPR2023/html/Senushkin_Independent_Component_Alignment_for_Multi-Task_Learning_CVPR_2023_paper.html) ([official code](https://github.com/SamsungLabs/MTL))   | CVPR 2023          | ``--weighting Aligned_MTL`` |
 | [STCH](https://openreview.net/forum?id=m4dO5L6eCp) ([official code](https://github.com/Xi-L/STCH/tree/main/STCH_MTL))                                                                                             | ICML 2024          | ``--weighting STCH``        |
+| [ExcessMTL](https://openreview.net/forum?id=JzWFmMySpn) ([official code](https://github.com/yifei-he/ExcessMTL/blob/main/LibMTL/LibMTL/weighting/ExcessMTL.py))                                                   | ICML 2024          | ``--weighting ExcessMTL``   |
 | [DB-MTL](https://arxiv.org/abs/2308.12029)                                                                                                                                                                        | arXiv              | ``--weighting DB_MTL``      |
 
 | Architectures                                                                                                                                                                                                          | Venues          | Arguments                      |
