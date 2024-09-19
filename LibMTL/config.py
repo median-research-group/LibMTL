@@ -67,6 +67,8 @@ _parser.add_argument('--STCH_mu', type=float, default=1.0, help=' ')
 _parser.add_argument('--STCH_warmup_epoch', type=int, default=4, help=' ')
 ## ExcessMTL
 _parser.add_argument('--robust_step_size', default=1e-2, type=float, help='step size')
+## FairGrad
+_parser.add_argument('--FairGrad_alpha', type=float, default=1.0, help=' ')
 
 # args for architecture
 ## CGC
@@ -88,7 +90,8 @@ def prepare_args(params):
     kwargs = {'weight_args': {}, 'arch_args': {}}
     if params.weighting in ['EW', 'UW', 'GradNorm', 'GLS', 'RLW', 'MGDA', 'IMTL',
                             'PCGrad', 'GradVac', 'CAGrad', 'GradDrop', 'DWA', 
-                            'Nash_MTL', 'MoCo', 'Aligned_MTL', 'DB_MTL', 'STCH', 'ExcessMTL']:
+                            'Nash_MTL', 'MoCo', 'Aligned_MTL', 'DB_MTL', 'STCH', 
+                            'ExcessMTL', 'FairGrad']:
         if params.weighting in ['DWA']:
             if params.T is not None:
                 kwargs['weight_args']['T'] = params.T
@@ -145,6 +148,8 @@ def prepare_args(params):
             kwargs['weight_args']['STCH_warmup_epoch'] = params.STCH_warmup_epoch
         elif params.weighting in ['ExcessMTL']:
             kwargs['weight_args']['robust_step_size'] = params.robust_step_size
+        elif params.weighting in ['FairGrad']:
+            kwargs['weight_args']['FairGrad_alpha'] = params.FairGrad_alpha
     else:
         raise ValueError('No support weighting method {}'.format(params.weighting)) 
         
