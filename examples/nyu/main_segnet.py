@@ -43,7 +43,7 @@ def main(params):
     
     # define tasks
     task_dict = {'segmentation': {'metrics':['mIoU', 'pixAcc'], 
-                              'metrics_fn': SegMetric(),
+                              'metrics_fn': SegMetric(num_classes=13),
                               'loss_fn': SegLoss(),
                               'weight': [1, 1]}, 
                  'depth': {'metrics':['abs_err', 'rel_err'], 

@@ -8,10 +8,10 @@ from LibMTL.loss import AbsLoss
 
 # seg
 class SegMetric(AbsMetric):
-    def __init__(self):
+    def __init__(self, num_classes):
         super(SegMetric, self).__init__()
         
-        self.num_classes = 13
+        self.num_classes = num_classes
         self.record = torch.zeros((self.num_classes, self.num_classes), dtype=torch.int64)
         
     def update_fun(self, pred, gt):
