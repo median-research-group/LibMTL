@@ -86,14 +86,14 @@ Each module is introduced in [Docs](https://libmtl.readthedocs.io/en/latest/docs
 
 ## Supported Benchmark Datasets
 
-| Datasets                                                                                    | Problems                      | Task Number  | Tasks                                                                      | multi-input | Supported Backbone           |
-|:------------------------------------------------------------------------------------------- |:-----------------------------:|:------------:|:--------------------------------------------------------------------------:|:-----------:|:----------------------------:|
-| [NYUv2](https://github.com/median-research-group/LibMTL/tree/main/examples/nyu)             | Scene Understanding           | 3            | Semantic Segmentation+<br/>Depth Estimation+<br/>Surface Normal Prediction | ✘           | ResNet50/<br/>SegNet         |
-| [Cityscapes](https://github.com/median-research-group/LibMTL/tree/main/examples/cityscapes) | Scene Understanding           | 2            | Semantic Segmentation+<br/>Depth Estimation                                | ✘           |  |
-| [Office-31](https://github.com/median-research-group/LibMTL/tree/main/examples/office)      | Image Recognition             | 3            | Classification                                                             | ✓           | ResNet18                     |
-| [Office-Home](https://github.com/median-research-group/LibMTL/tree/main/examples/office)    | Image Recognition             | 4            | Classification                                                             | ✓           | ResNet18                     |
-| [QM9](https://github.com/median-research-group/LibMTL/tree/main/examples/qm9)               | Molecular Property Prediction | 11 (default) | Regression                                                                 | ✘           | GNN                          |
-| [PAWS-X](https://github.com/median-research-group/LibMTL/tree/main/examples/xtreme)         | Paraphrase Identification     | 4 (default)  | Classification                                                             | ✓           | Bert                         |
+| Datasets                                                                                    | Problems                      | Task Number  | Tasks                                                                      | multi-input | Supported Backbone   |
+|:------------------------------------------------------------------------------------------- |:-----------------------------:|:------------:|:--------------------------------------------------------------------------:|:-----------:|:--------------------:|
+| [NYUv2](https://github.com/median-research-group/LibMTL/tree/main/examples/nyu)             | Scene Understanding           | 3            | Semantic Segmentation+<br/>Depth Estimation+<br/>Surface Normal Prediction | ✘           | ResNet50/<br/>SegNet |
+| [Cityscapes](https://github.com/median-research-group/LibMTL/tree/main/examples/cityscapes) | Scene Understanding           | 2            | Semantic Segmentation+<br/>Depth Estimation                                | ✘           | ResNet50             |
+| [Office-31](https://github.com/median-research-group/LibMTL/tree/main/examples/office)      | Image Recognition             | 3            | Classification                                                             | ✓           | ResNet18             |
+| [Office-Home](https://github.com/median-research-group/LibMTL/tree/main/examples/office)    | Image Recognition             | 4            | Classification                                                             | ✓           | ResNet18             |
+| [QM9](https://github.com/median-research-group/LibMTL/tree/main/examples/qm9)               | Molecular Property Prediction | 11 (default) | Regression                                                                 | ✘           | GNN                  |
+| [PAWS-X](https://github.com/median-research-group/LibMTL/tree/main/examples/xtreme)         | Paraphrase Identification     | 4 (default)  | Classification                                                             | ✓           | Bert                 |
 
 ## Installation
 
