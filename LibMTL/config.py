@@ -31,6 +31,11 @@ _parser.add_argument('--scheduler', type=str, #default='step',
                     help='learning rate scheduler for training, option: step, cos, exp')
 _parser.add_argument('--step_size', type=int, default=100, help='step size for StepLR')
 _parser.add_argument('--gamma', type=float, default=0.5, help='gamma for StepLR')
+## bilevel methods
+_parser.add_argument('--bilevel_method', type=str, default=None, help='FORUM, MOML')
+_parser.add_argument('--UL_lr', type=float, default=1e-3, help='UL lr')
+_parser.add_argument('--LL_lr', type=float, default=0.1, help='LL lr')
+_parser.add_argument('--LL_step', type=int, default=5, help=' ')
 
 # args for weighting
 ## DWA
@@ -69,6 +74,9 @@ _parser.add_argument('--STCH_warmup_epoch', type=int, default=4, help=' ')
 _parser.add_argument('--robust_step_size', default=1e-2, type=float, help='step size')
 ## FairGrad
 _parser.add_argument('--FairGrad_alpha', type=float, default=1.0, help=' ')
+
+## FORUM
+_parser.add_argument('--FORUM_rho', type=float, default=0.1, help=' ') # FORUM
 
 # args for architecture
 ## CGC
@@ -180,12 +188,21 @@ def prepare_args(params):
             raise ValueError('No support scheduler method {}'.format(params.scheduler))
     else:
         scheduler_param = None
-    
-    _display(params, kwargs, optim_param, scheduler_param)
-    
-    return kwargs, optim_param, scheduler_param
 
-def _display(params, kwargs, optim_param, scheduler_param):
+    if params.bilevel_method is not None:
+        if params.bilevel_method not in ['FORUM', 'MOML']:
+            raise NotImplementedError
+        bilevel_param = {'bilevel_method': params.bilevel_method, 'UL_lr': params.UL_lr, 'LL_lr': params.LL_lr, 'LL_step': params.LL_step}
+        if params.bilevel_method == 'FORUM':
+            bilevel_param['FORUM_rho'] = params.FORUM_rho
+    else:
+        bilevel_param = None
+    
+    _display(params, kwargs, optim_param, scheduler_param, bilevel_param)
+    
+    return kwargs, optim_param, scheduler_param, bilevel_param
+
+def _display(params, kwargs, optim_param, scheduler_param, bilevel_param):
     print('='*40)
     print('General Configuration:')
     print('\tMode:', params.mode)
@@ -208,4 +225,9 @@ def _display(params, kwargs, optim_param, scheduler_param):
     if scheduler_param is not None:
         print('Scheduler Configuration:')
         for k, v in scheduler_param.items():
+            print('\t'+k+':', v)
+
+    if bilevel_param is not None:
+        print('bilevel method Configuration:')
+        for k, v in bilevel_param.items():
             print('\t'+k+':', v)

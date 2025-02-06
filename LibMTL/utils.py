@@ -76,3 +76,20 @@ def count_improvement(base_result, new_result, weight):
                          np.array(base_result[task])).mean()
         count += 1
     return improvement/count
+
+def set_param(curr_mod, name, param=None, mode='update'):
+    if '.' in name:
+        n = name.split('.')
+        module_name = n[0]
+        rest = '.'.join(n[1:])
+        for name, mod in curr_mod.named_children():
+            if module_name == name:
+                return set_param(mod, rest, param, mode=mode)
+    else:
+        if mode == 'update':
+            delattr(curr_mod, name)
+            setattr(curr_mod, name, param)
+        elif mode == 'get':
+            if hasattr(curr_mod, name):
+                p = getattr(curr_mod, name)
+                return p

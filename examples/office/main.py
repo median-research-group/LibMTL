@@ -19,7 +19,7 @@ def parse_args(parser):
     return parser.parse_args()
 
 def main(params):
-    kwargs, optim_param, scheduler_param = prepare_args(params)
+    kwargs, optim_param, scheduler_param, bilevel_param = prepare_args(params)
 
     if params.dataset == 'office-31':
         task_name = ['amazon', 'dslr', 'webcam']
@@ -37,7 +37,9 @@ def main(params):
                        'weight': [1]} for task in task_name}
     
     # prepare dataloaders
-    data_loader, _ = office_dataloader(dataset=params.dataset, batchsize=params.bs, root_path=params.dataset_path)
+    data_loader, _ = office_dataloader(dataset=params.dataset, 
+                        batchsize=params.bs if params.bilevel_method is None else int(params.bs/2), 
+                        root_path=params.dataset_path)
     train_dataloaders = {task: data_loader[task]['train'] for task in task_name}
     val_dataloaders = {task: data_loader[task]['val'] for task in task_name}
     test_dataloaders = {task: data_loader[task]['test'] for task in task_name}
@@ -76,6 +78,7 @@ def main(params):
                           scheduler_param=scheduler_param,
                           save_path=params.save_path,
                           load_path=params.load_path,
+                          bilevel_param=bilevel_param,
                           **kwargs)
     if params.mode == 'train':
         officeModel.train(train_dataloaders=train_dataloaders, 

@@ -21,7 +21,7 @@ def parse_args(parser):
     return parser.parse_args()
     
 def main(params):
-    kwargs, optim_param, scheduler_param = prepare_args(params)
+    kwargs, optim_param, scheduler_param, bilevel_param = prepare_args(params)
 
     # prepare dataloaders
     city_train_set = CityScapes(root=params.dataset_path, mode=params.train_mode)
@@ -29,7 +29,7 @@ def main(params):
     
     city_train_loader = torch.utils.data.DataLoader(
         dataset=city_train_set,
-        batch_size=params.train_bs,
+        batch_size=params.train_bs if params.bilevel_method is None else int(params.train_bs/2),
         shuffle=True,
         num_workers=2,
         pin_memory=True,
@@ -61,7 +61,8 @@ def main(params):
     
     class Citytrainer(Trainer):
         def __init__(self, task_dict, weighting, architecture, encoder_class, 
-                     decoders, rep_grad, multi_input, optim_param, scheduler_param, **kwargs):
+                     decoders, rep_grad, multi_input, optim_param, 
+                     scheduler_param, bilevel_param, **kwargs):
             super(Citytrainer, self).__init__(task_dict=task_dict, 
                                             weighting=weighting, 
                                             architecture=architecture, 
@@ -71,6 +72,7 @@ def main(params):
                                             multi_input=multi_input,
                                             optim_param=optim_param,
                                             scheduler_param=scheduler_param,
+                                            bilevel_param=bilevel_param,
                                             **kwargs)
 
         def process_preds(self, preds):
@@ -90,6 +92,7 @@ def main(params):
                           scheduler_param=scheduler_param,
                           save_path=params.save_path,
                           load_path=params.load_path,
+                          bilevel_param=bilevel_param,
                           **kwargs)
     if params.mode == 'train':
         Citymodel.train(city_train_loader, city_test_loader, params.epochs)

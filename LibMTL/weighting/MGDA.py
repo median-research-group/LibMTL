@@ -134,3 +134,12 @@ class MGDA(AbsWeighting):
         else:
             self._backward_new_grads(sol, grads=grads)
         return sol.detach().cpu().numpy()
+
+    def aggregated_grad(self, grads, loss_data, **kwargs):
+        mgda_gn = kwargs['mgda_gn']
+
+        grads = self._gradient_normalizers(grads, loss_data, ntype=mgda_gn) # l2, loss, loss+, none
+        sol = self._find_min_norm_element(grads)
+
+        new_grad = sum([sol[tn] * grads[tn] for tn in range(self.task_num)])
+        return new_grad

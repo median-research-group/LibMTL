@@ -20,7 +20,7 @@ def parse_args(parser):
     return parser.parse_args()
     
 def main(params):
-    kwargs, optim_param, scheduler_param = prepare_args(params)
+    kwargs, optim_param, scheduler_param, bilevel_param = prepare_args(params)
 
     # prepare dataloaders
     nyuv2_train_set = NYUv2(root=params.dataset_path, mode='train', augmentation=params.aug)
@@ -28,7 +28,7 @@ def main(params):
     
     nyuv2_train_loader = torch.utils.data.DataLoader(
         dataset=nyuv2_train_set,
-        batch_size=params.train_bs,
+        batch_size=params.train_bs if params.bilevel_method is None else int(params.train_bs/2),
         shuffle=True,
         num_workers=2,
         pin_memory=True,
@@ -64,7 +64,8 @@ def main(params):
     
     class NYUtrainer(Trainer):
         def __init__(self, task_dict, weighting, architecture, encoder_class, 
-                     decoders, rep_grad, multi_input, optim_param, scheduler_param, **kwargs):
+                     decoders, rep_grad, multi_input, optim_param, 
+                     scheduler_param, bilevel_param, **kwargs):
             super(NYUtrainer, self).__init__(task_dict=task_dict, 
                                             weighting=weighting, 
                                             architecture=architecture, 
@@ -74,6 +75,7 @@ def main(params):
                                             multi_input=multi_input,
                                             optim_param=optim_param,
                                             scheduler_param=scheduler_param,
+                                            bilevel_param=bilevel_param,
                                             **kwargs)
 
         def process_preds(self, preds):
@@ -93,6 +95,7 @@ def main(params):
                           scheduler_param=scheduler_param,
                           save_path=params.save_path,
                           load_path=params.load_path,
+                          bilevel_param=bilevel_param,
                           **kwargs)
     if params.mode == 'train':
         NYUmodel.train(nyuv2_train_loader, nyuv2_test_loader, params.epochs)
