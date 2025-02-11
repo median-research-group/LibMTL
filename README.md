@@ -6,6 +6,8 @@
 
 :star: Star us on GitHub — it motivates us a lot!
 
+:bangbang: A comprehensive survey on **Gradient-based Multi-Objective Deep Learning** is now available on [arXiv](https://arxiv.org/abs/2501.10945), along with an [awesome list](https://github.com/Baijiong-Lin/Awesome-Multi-Objective-Deep-Learning). Check it out!
+
 ## News
 
 - **[Feb 06 2025]** Added support for two bilevel methods: [MOML](https://proceedings.neurips.cc/paper/2021/hash/b23975176653284f1f7356ba5539cfcb-Abstract.html) (NeurIPS 2021; AIJ 2024), [FORUM](https://ebooks.iospress.nl/doi/10.3233/FAIA240793) (ECAI 2024).
