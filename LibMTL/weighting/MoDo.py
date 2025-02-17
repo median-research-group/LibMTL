@@ -7,7 +7,7 @@ from LibMTL.weighting.abstract_weighting import AbsWeighting
 
 
 class MoDo(AbsWeighting):
-    r"""Multi-objective gradient with Double sampling (FAMO).
+    r"""Multi-objective gradient with Double sampling (MoDo).
     
     This method is proposed in `Three-Way Trade-Off in Multi-Objective Learning: Optimization, Generalization and Conflict-Avoidance (NeurIPS 2023; JMLR 2024) <https://openreview.net/forum?id=yPkbdJxQ0o>`_ \
     and implemented by modifying from the `official PyTorch implementation <https://github.com/heshandevaka/Trade-Off-MOL>`_. 
