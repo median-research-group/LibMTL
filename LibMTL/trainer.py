@@ -104,10 +104,10 @@ class Trainer(nn.Module):
         
     def _prepare_model(self, weighting, architecture, encoder_class, decoders):
 
-        weighting = weighting_method.__dict__[weighting] 
-        architecture = architecture_method.__dict__[architecture]
+        weighting_class = weighting_method.__dict__[weighting] 
+        architecture_class = architecture_method.__dict__[architecture]
         
-        class MTLmodel(architecture, weighting):
+        class MTLmodel(architecture_class, weighting_class):
             def __init__(self, task_name, encoder_class, decoders, rep_grad, multi_input, device, kwargs):
                 super(MTLmodel, self).__init__(task_name, encoder_class, decoders, rep_grad, multi_input, device, **kwargs)
                 self.init_param()
@@ -195,6 +195,27 @@ class Trainer(nn.Module):
                 batch_num.append(len(dataloaders[task]))
             return loader, batch_num
 
+    def forward4loss(self, model, inputs, gts, return_preds=False):
+        if not self.multi_input:
+            preds = model(inputs)
+            preds = self.process_preds(preds)
+            losses = self._compute_loss(preds, gts)
+        else:
+            losses = torch.zeros(self.task_num).to(self.device)
+            preds = {}
+            for tn, task in enumerate(self.task_name):
+                inputs_t, gts_t = inputs[task], gts[task]
+                preds_t = model(inputs_t, task)
+                preds_t = preds_t[task]
+                preds_t = self.process_preds(preds_t, task)
+                losses[tn] = self._compute_loss(preds_t, gts_t, task)
+                if return_preds:
+                    preds[task] = preds_t
+        if return_preds:
+            return losses, preds
+        else:
+            return losses
+
     def train(self, train_dataloaders, test_dataloaders, epochs, 
               val_dataloaders=None, return_weight=False, **kwargs):
         if self.bilevel_param is None:
@@ -230,27 +251,36 @@ class Trainer(nn.Module):
             self.model.train()
             self.meter.record_time('begin')
             for batch_index in range(train_batch):
+                train_losses = []
+                for sample_num in range(3 if self.weighting in ['MoDo', 'SDMGrad'] else 1):
+                    if not self.multi_input:
+                        train_inputs, train_gts = self._process_data(train_loader)
+                    else:
+                        train_inputs, train_gts = {}, {}
+                        for tn, task in enumerate(self.task_name):
+                            train_input, train_gt = self._process_data(train_loader[task])
+                            train_inputs[task], train_gts[task] = train_input, train_gt
+
+                    train_losses_, train_preds = self.forward4loss(self.model, train_inputs, train_gts, return_preds=True)
+                    train_losses.append(train_losses_)
+                train_losses = torch.stack(train_losses).squeeze(0)
+
                 if not self.multi_input:
-                    train_inputs, train_gts = self._process_data(train_loader)
-                    train_preds = self.model(train_inputs)
-                    train_preds = self.process_preds(train_preds)
-                    train_losses = self._compute_loss(train_preds, train_gts)
                     self.meter.update(train_preds, train_gts)
                 else:
-                    train_losses = torch.zeros(self.task_num).to(self.device)
                     for tn, task in enumerate(self.task_name):
-                        train_input, train_gt = self._process_data(train_loader[task])
-                        train_pred = self.model(train_input, task)
-                        train_pred = train_pred[task]
-                        train_pred = self.process_preds(train_pred, task)
-                        train_losses[tn] = self._compute_loss(train_pred, train_gt, task)
-                        self.meter.update(train_pred, train_gt, task)
+                        self.meter.update(train_preds[task], train_gts[task], task)
 
                 self.optimizer.zero_grad(set_to_none=False)
                 w = self.model.backward(train_losses, **self.kwargs['weight_args'])
                 if w is not None:
                     self.batch_weight[:, epoch, batch_index] = w
                 self.optimizer.step()
+
+                if self.weighting == 'FAMO':
+                    with torch.no_grad():
+                        new_train_losses = self.forward4loss(self.model, train_inputs, train_gts, return_preds=False)
+                        self.model.update_w(new_train_losses.detach())
             
             self.meter.record_time('end')
             self.meter.get_score()
@@ -330,27 +360,7 @@ class Trainer(nn.Module):
         self.ul_alpha = UL_alpha(self.task_num).to(self.device)
 
         self.ul_alpha_optimizer = torch.optim.Adam(self.ul_alpha.parameters(), lr=UL_lr)
-        
-    def forward4loss(self, model, inputs, gts, return_preds=False):
-        if not self.multi_input:
-            preds = model(inputs)
-            preds = self.process_preds(preds)
-            losses = self._compute_loss(preds, gts)
-        else:
-            losses = torch.zeros(self.task_num).to(self.device)
-            preds = {}
-            for tn, task in enumerate(self.task_name):
-                inputs_t, gts_t = inputs[task], gts[task]
-                preds_t = model(inputs_t, task)
-                preds_t = preds_t[task]
-                preds_t = self.process_preds(preds_t, task)
-                losses[tn] = self._compute_loss(preds_t, gts_t, task)
-                if return_preds:
-                    preds[task] = preds_t
-        if return_preds:
-            return losses, preds
-        else:
-            return losses
+
 
     def train_MOML(self, train_dataloaders, test_dataloaders, epochs, val_dataloaders=None, return_weight=False, org_train_dataloaders=None):
         r"""MOML

@@ -74,6 +74,15 @@ _parser.add_argument('--STCH_warmup_epoch', type=int, default=4, help=' ')
 _parser.add_argument('--robust_step_size', default=1e-2, type=float, help='step size')
 ## FairGrad
 _parser.add_argument('--FairGrad_alpha', type=float, default=1.0, help=' ')
+## FAMO
+_parser.add_argument('--FAMO_w_lr', type=float, default=0.025, help=' ')
+_parser.add_argument('--FAMO_w_gamma', type=float, default=1e-3, help=' ')
+## MoDo
+_parser.add_argument('--MoDo_gamma', type=float, default=1e-3, help=' ')
+_parser.add_argument('--MoDo_rho', type=float, default=0.1, help=' ')
+## SDMGrad
+_parser.add_argument('--SDMGrad_lamda', type=float, default=0.3, help=' ')
+_parser.add_argument('--SDMGrad_niter', type=int, default=20, help=' ')
 
 ## FORUM
 _parser.add_argument('--FORUM_rho', type=float, default=0.1, help=' ') # FORUM
@@ -99,7 +108,7 @@ def prepare_args(params):
     if params.weighting in ['EW', 'UW', 'GradNorm', 'GLS', 'RLW', 'MGDA', 'IMTL',
                             'PCGrad', 'GradVac', 'CAGrad', 'GradDrop', 'DWA', 
                             'Nash_MTL', 'MoCo', 'Aligned_MTL', 'DB_MTL', 'STCH', 
-                            'ExcessMTL', 'FairGrad']:
+                            'ExcessMTL', 'FairGrad', 'FAMO', 'MoDo', 'SDMGrad']:
         if params.weighting in ['DWA']:
             if params.T is not None:
                 kwargs['weight_args']['T'] = params.T
@@ -158,6 +167,15 @@ def prepare_args(params):
             kwargs['weight_args']['robust_step_size'] = params.robust_step_size
         elif params.weighting in ['FairGrad']:
             kwargs['weight_args']['FairGrad_alpha'] = params.FairGrad_alpha
+        elif params.weighting in ['FAMO']:
+            kwargs['weight_args']['FAMO_w_lr'] = params.FAMO_w_lr
+            kwargs['weight_args']['FAMO_w_gamma'] = params.FAMO_w_gamma
+        elif params.weighting in ['MoDo']:
+            kwargs['weight_args']['MoDo_gamma'] = params.MoDo_gamma
+            kwargs['weight_args']['MoDo_rho'] = params.MoDo_rho
+        elif params.weighting in ['SDMGrad']:
+            kwargs['weight_args']['SDMGrad_lamda'] = params.SDMGrad_lamda
+            kwargs['weight_args']['SDMGrad_niter'] = params.SDMGrad_niter
     else:
         raise ValueError('No support weighting method {}'.format(params.weighting)) 
         

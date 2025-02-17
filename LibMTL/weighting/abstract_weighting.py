@@ -3,7 +3,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
 
-
 class AbsWeighting(nn.Module):
     r"""An abstract class for weighting strategies.
     """
@@ -16,10 +15,13 @@ class AbsWeighting(nn.Module):
         pass
 
     def _compute_grad_dim(self):
-        self.grad_index = []
-        for param in self.get_share_params():
-            self.grad_index.append(param.data.numel())
-        self.grad_dim = sum(self.grad_index)
+        if hasattr(self, "grad_index"):
+            pass
+        else:
+            self.grad_index = []
+            for param in self.get_share_params():
+                self.grad_index.append(param.data.numel())
+            self.grad_dim = sum(self.grad_index)
 
     def _grad2vec(self):
         grad = torch.zeros(self.grad_dim)
@@ -40,7 +42,10 @@ class AbsWeighting(nn.Module):
             grads = torch.zeros(self.task_num, self.grad_dim).to(self.device)
             for tn in range(self.task_num):
                 if mode == 'backward':
-                    losses[tn].backward(retain_graph=True) if (tn+1)!=self.task_num else losses[tn].backward()
+                    if 'MoDo' in [base.__name__ for base in self.__class__.__bases__] or 'SDMGrad' in [base.__name__ for base in self.__class__.__bases__]:
+                        losses[tn].backward(retain_graph=True)
+                    else:
+                        losses[tn].backward(retain_graph=True) if (tn+1)!=self.task_num else losses[tn].backward()
                     grads[tn] = self._grad2vec()
                 elif mode == 'autograd':
                     grad = list(torch.autograd.grad(losses[tn], self.get_share_params(), retain_graph=True))
