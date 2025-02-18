@@ -31,11 +31,6 @@ _parser.add_argument('--scheduler', type=str, #default='step',
                     help='learning rate scheduler for training, option: step, cos, exp')
 _parser.add_argument('--step_size', type=int, default=100, help='step size for StepLR')
 _parser.add_argument('--gamma', type=float, default=0.5, help='gamma for StepLR')
-## bilevel methods
-_parser.add_argument('--bilevel_method', type=str, default=None, help='FORUM, MOML')
-_parser.add_argument('--UL_lr', type=float, default=1e-3, help='UL lr')
-_parser.add_argument('--LL_lr', type=float, default=0.1, help='LL lr')
-_parser.add_argument('--LL_step', type=int, default=5, help=' ')
 
 # args for weighting
 ## DWA
@@ -84,8 +79,12 @@ _parser.add_argument('--MoDo_rho', type=float, default=0.1, help=' ')
 _parser.add_argument('--SDMGrad_lamda', type=float, default=0.3, help=' ')
 _parser.add_argument('--SDMGrad_niter', type=int, default=20, help=' ')
 
+#### bilevel methods
+_parser.add_argument('--outer_lr', type=float, default=1e-3, help='outer lr')
+_parser.add_argument('--inner_lr', type=float, default=0.1, help='inner lr')
+_parser.add_argument('--inner_step', type=int, default=5, help=' ')
 ## FORUM
-_parser.add_argument('--FORUM_rho', type=float, default=0.1, help=' ') # FORUM
+_parser.add_argument('--FORUM_phi', type=float, default=0.1, help=' ') # FORUM
 
 # args for architecture
 ## CGC
@@ -176,6 +175,14 @@ def prepare_args(params):
         elif params.weighting in ['SDMGrad']:
             kwargs['weight_args']['SDMGrad_lamda'] = params.SDMGrad_lamda
             kwargs['weight_args']['SDMGrad_niter'] = params.SDMGrad_niter
+    elif params.weighting in ['MOML', 'FORUM', 'AutoLambda']:
+        kwargs['weight_args']['outer_lr'] = params.outer_lr
+        kwargs['weight_args']['inner_step'] = params.inner_step
+        if params.weighting in ['FORUM']:
+            kwargs['weight_args']['FORUM_phi'] = params.FORUM_phi
+            kwargs['weight_args']['inner_lr'] = params.inner_lr
+        elif params.weighting in ['MOML']:
+            kwargs['weight_args']['inner_lr'] = params.inner_lr
     else:
         raise ValueError('No support weighting method {}'.format(params.weighting)) 
         
@@ -206,21 +213,12 @@ def prepare_args(params):
             raise ValueError('No support scheduler method {}'.format(params.scheduler))
     else:
         scheduler_param = None
-
-    if params.bilevel_method is not None:
-        if params.bilevel_method not in ['FORUM', 'MOML']:
-            raise NotImplementedError
-        bilevel_param = {'bilevel_method': params.bilevel_method, 'UL_lr': params.UL_lr, 'LL_lr': params.LL_lr, 'LL_step': params.LL_step}
-        if params.bilevel_method == 'FORUM':
-            bilevel_param['FORUM_rho'] = params.FORUM_rho
-    else:
-        bilevel_param = None
     
-    _display(params, kwargs, optim_param, scheduler_param, bilevel_param)
+    _display(params, kwargs, optim_param, scheduler_param)
     
-    return kwargs, optim_param, scheduler_param, bilevel_param
+    return kwargs, optim_param, scheduler_param
 
-def _display(params, kwargs, optim_param, scheduler_param, bilevel_param):
+def _display(params, kwargs, optim_param, scheduler_param):
     print('='*40)
     print('General Configuration:')
     print('\tMode:', params.mode)
@@ -243,9 +241,4 @@ def _display(params, kwargs, optim_param, scheduler_param, bilevel_param):
     if scheduler_param is not None:
         print('Scheduler Configuration:')
         for k, v in scheduler_param.items():
-            print('\t'+k+':', v)
-
-    if bilevel_param is not None:
-        print('bilevel method Configuration:')
-        for k, v in bilevel_param.items():
             print('\t'+k+':', v)

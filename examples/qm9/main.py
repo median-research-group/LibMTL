@@ -26,7 +26,7 @@ def parse_args(parser):
     return parser.parse_args()
     
 def main(params):
-    kwargs, optim_param, scheduler_param, bilevel_param = prepare_args(params)
+    kwargs, optim_param, scheduler_param = prepare_args(params)
 
     scheduler_param = {'scheduler': 'reduce',
                    'mode': 'max',
@@ -92,13 +92,7 @@ def main(params):
 
     test_loader = DataLoader(test_dataset, batch_size=params.bs, shuffle=False, num_workers=2, pin_memory=True)
     val_loader = DataLoader(val_dataset, batch_size=params.bs, shuffle=False, num_workers=2, pin_memory=True)
-    train_loader = DataLoader(train_dataset, 
-        batch_size=params.bs if params.bilevel_method is None else int(params.bs/2), 
-        shuffle=True, num_workers=2, pin_memory=True)
-
-    if params.bilevel_method in ['MOML']:
-        org_train_dataset = QM9Dataset(dataset[split][20000:], target)
-        org_train_loader = DataLoader(org_train_dataset, batch_size=params.bs, shuffle=True, num_workers=2, pin_memory=True)
+    train_loader = DataLoader(train_dataset, batch_size=params.bs, shuffle=True, num_workers=2, pin_memory=True)
 
     # define tasks
     task_dict = {}
@@ -146,7 +140,7 @@ def main(params):
     class QM9trainer(Trainer):
         def __init__(self, task_dict, weighting, architecture, encoder_class, 
                      decoders, rep_grad, multi_input, optim_param, 
-                     scheduler_param, bilevel_param, **kwargs):
+                     scheduler_param, **kwargs):
             super(QM9trainer, self).__init__(task_dict=task_dict, 
                                             weighting=weighting, 
                                             architecture=architecture, 
@@ -156,7 +150,6 @@ def main(params):
                                             multi_input=multi_input,
                                             optim_param=optim_param,
                                             scheduler_param=scheduler_param,
-                                            bilevel_param=bilevel_param,
                                             **kwargs)
     
     QM9model = QM9trainer(task_dict=task_dict, 
@@ -170,14 +163,9 @@ def main(params):
                           scheduler_param=scheduler_param,
                           save_path=params.save_path,
                           load_path=params.load_path,
-                          bilevel_param=bilevel_param,
                           **kwargs)
     if params.mode == 'train':
-        if params.bilevel_method == 'MOML':
-            QM9model.train(train_loader, test_loader, params.epochs, 
-                val_dataloaders=val_loader, org_train_dataloaders=org_train_loader)
-        else:
-            QM9model.train(train_loader, test_loader, params.epochs, val_dataloaders=val_loader)
+        QM9model.train(train_loader, test_loader, params.epochs, val_dataloaders=val_loader)
     elif params.mode == 'test':
         QM9model.test(test_loader)
     else:

@@ -21,7 +21,7 @@ def parse_args(parser):
     return parser.parse_args()
 
 def main(params):
-    kwargs, optim_param, scheduler_param, bilevel_param = prepare_args(params)
+    kwargs, optim_param, scheduler_param = prepare_args(params)
     
     lang_list = ['en', 'zh', 'de', 'es']
     
@@ -32,7 +32,7 @@ def main(params):
                                       mode_list=['train', 'dev', 'test'],
                                       data_dir=data_dir,
                                       max_seq_length=128,
-                                      batch_size=params.bs if params.bilevel_method is None else int(params.bs/2)
+                                      batch_size=params.bs,
                             )
     train_dataloaders = {task: dataloader[task]['train'] for task in lang_list}
     val_dataloaders = {task: dataloader[task]['dev'] for task in lang_list}
@@ -61,7 +61,7 @@ def main(params):
     class SCtrainer(Trainer):
         def __init__(self, task_dict, weighting, architecture, encoder_class, 
                      decoders, rep_grad, multi_input, optim_param, 
-                     scheduler_param, bilevel_param, **kwargs):
+                     scheduler_param, **kwargs):
             super(SCtrainer, self).__init__(task_dict=task_dict, 
                                             weighting=weighting, 
                                             architecture=architecture, 
@@ -71,7 +71,6 @@ def main(params):
                                             multi_input=multi_input,
                                             optim_param=optim_param,
                                             scheduler_param=scheduler_param,
-                                            bilevel_param=bilevel_param,
                                             **kwargs)
             
         def _process_data(self, loader):
@@ -102,7 +101,6 @@ def main(params):
                       scheduler_param=scheduler_param,
                       save_path=params.save_path,
                       load_path=params.load_path,
-                      bilevel_param=bilevel_param,
                       **kwargs)
     if params.mode == 'train':
         SCModel.train(train_dataloaders=train_dataloaders, 
