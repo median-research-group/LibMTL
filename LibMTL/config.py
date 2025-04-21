@@ -78,6 +78,11 @@ _parser.add_argument('--MoDo_rho', type=float, default=0.1, help=' ')
 ## SDMGrad
 _parser.add_argument('--SDMGrad_lamda', type=float, default=0.3, help=' ')
 _parser.add_argument('--SDMGrad_niter', type=int, default=20, help=' ')
+## UPGrad
+_parser.add_argument('--UPGrad_norm_eps', type=float, default=0.0001,
+                     help='A small value to avoid division by zero when normalizing.')
+_parser.add_argument('--UPGrad_reg_eps', type=float, default=0.0001,
+                     help='A small value to add to the diagonal of the gramian to make it positive definite.')
 
 #### bilevel methods
 _parser.add_argument('--outer_lr', type=float, default=1e-3, help='outer lr')
@@ -107,7 +112,7 @@ def prepare_args(params):
     if params.weighting in ['EW', 'UW', 'GradNorm', 'GLS', 'RLW', 'MGDA', 'IMTL',
                             'PCGrad', 'GradVac', 'CAGrad', 'GradDrop', 'DWA', 
                             'Nash_MTL', 'MoCo', 'Aligned_MTL', 'DB_MTL', 'STCH', 
-                            'ExcessMTL', 'FairGrad', 'FAMO', 'MoDo', 'SDMGrad']:
+                            'ExcessMTL', 'FairGrad', 'FAMO', 'MoDo', 'SDMGrad', 'UPGrad']:
         if params.weighting in ['DWA']:
             if params.T is not None:
                 kwargs['weight_args']['T'] = params.T
@@ -175,6 +180,9 @@ def prepare_args(params):
         elif params.weighting in ['SDMGrad']:
             kwargs['weight_args']['SDMGrad_lamda'] = params.SDMGrad_lamda
             kwargs['weight_args']['SDMGrad_niter'] = params.SDMGrad_niter
+        elif params.weighting in ['UPGrad']:
+            kwargs['weight_args']['UPGrad_norm_eps'] = params.UPGrad_norm_eps
+            kwargs['weight_args']['UPGrad_reg_eps'] = params.UPGrad_reg_eps
     elif params.weighting in ['MOML', 'FORUM', 'AutoLambda']:
         kwargs['weight_args']['outer_lr'] = params.outer_lr
         kwargs['weight_args']['inner_step'] = params.inner_step
