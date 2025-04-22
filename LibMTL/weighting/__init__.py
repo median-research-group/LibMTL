@@ -21,6 +21,7 @@ from LibMTL.weighting.FairGrad import FairGrad
 from LibMTL.weighting.FAMO import FAMO
 from LibMTL.weighting.MoDo import MoDo
 from LibMTL.weighting.SDMGrad import SDMGrad
+from LibMTL.weighting.UPGrad import UPGrad
 
 __all__ = ['AbsWeighting',
            'EW', 
@@ -44,4 +45,5 @@ __all__ = ['AbsWeighting',
            'FairGrad',
            'FAMO',
            'MoDo',
-           'SDMGrad']
+           'SDMGrad',
+           'UPGrad']

@@ -10,6 +10,7 @@
 
 ## News
 
+- **[Apr 21 2025]** Added support for [UPGrad](https://arxiv.org/pdf/2406.16232).
 - **[Feb 18 2025]** Added support for a bilevel method [Auto-Lambda](https://openreview.net/forum?id=KKeCMim5VN) (TMLR 2022).
 - **[Feb 17 2025]** Added support for [FAMO](https://openreview.net/forum?id=zMeemcUeXL) (NeurIPS 2023), [SDMGrad](https://openreview.net/forum?id=4Ks8RPcXd9) (NeurIPS 2023), and [MoDo](https://openreview.net/forum?id=yPkbdJxQ0o) (NeurIPS 2023; JMLR 2024).
 - **[Feb 06 2025]** Added support for two bilevel methods: [MOML](https://proceedings.neurips.cc/paper/2021/hash/b23975176653284f1f7356ba5539cfcb-Abstract.html) (NeurIPS 2021; AIJ 2024), [FORUM](https://ebooks.iospress.nl/doi/10.3233/FAIA240793) (ECAI 2024).
@@ -84,6 +85,7 @@ Each module is introduced in [Docs](https://libmtl.readthedocs.io/en/latest/docs
 | [ExcessMTL](https://openreview.net/forum?id=JzWFmMySpn) ([official code](https://github.com/yifei-he/ExcessMTL/blob/main/LibMTL/LibMTL/weighting/ExcessMTL.py))                                                   | ICML 2024          | ``--weighting ExcessMTL``   |
 | [FairGrad](https://openreview.net/forum?id=KLmWRMg6nL) ([official code](https://github.com/OptMN-Lab/fairgrad))                                                                                                   | ICML 2024          | ``--weighting FairGrad``    |
 | [DB-MTL](https://arxiv.org/abs/2308.12029)                                                                                                                                                                        | arXiv              | ``--weighting DB_MTL``      |
+| [UPGrad](https://arxiv.org/pdf/2406.16232) ([official code](https://github.com/TorchJD/torchjd))                                                                                                                  | arXiv              | ``--weighting UPGrad``      |
 
 | Architectures                                                                                                                                                                                                          | Venues          | Arguments                      |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- | ------------------------------ |
