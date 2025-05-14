@@ -79,7 +79,7 @@ Each module is introduced in [Docs](https://libmtl.readthedocs.io/en/latest/docs
 | [Aligned-MTL](https://openaccess.thecvf.com/content/CVPR2023/html/Senushkin_Independent_Component_Alignment_for_Multi-Task_Learning_CVPR_2023_paper.html) ([official code](https://github.com/SamsungLabs/MTL))   | CVPR 2023          | ``--weighting Aligned_MTL`` |
 | [FAMO](https://openreview.net/forum?id=zMeemcUeXL) ([official code](https://github.com/Cranial-XIX/FAMO))                                                                                                         | NeurIPS 2023       | ``--weighting FAMO``        |
 | [SDMGrad](https://openreview.net/forum?id=4Ks8RPcXd9) ([official code](https://github.com/OptMN-Lab/sdmgrad))                                                                                                     | NeurIPS 2023       | ``--weighting SDMGrad``     |
-| [MoDo](https://openreview.net/forum?id=yPkbdJxQ0o) ([official code](https://github.com/heshandevaka/Trade-Off-MOL))                                                                   | NeurIPS 2023       | ``--weighting MoDo``        |
+| [MoDo](https://openreview.net/forum?id=yPkbdJxQ0o) ([official code](https://github.com/heshandevaka/Trade-Off-MOL))                                                                                               | NeurIPS 2023       | ``--weighting MoDo``        |
 | [FORUM](https://ebooks.iospress.nl/doi/10.3233/FAIA240793)                                                                                                                                                        | ECAI 2024          | ``--weighting FORUM``       |
 | [STCH](https://openreview.net/forum?id=m4dO5L6eCp) ([official code](https://github.com/Xi-L/STCH/tree/main/STCH_MTL))                                                                                             | ICML 2024          | ``--weighting STCH``        |
 | [ExcessMTL](https://openreview.net/forum?id=JzWFmMySpn) ([official code](https://github.com/yifei-he/ExcessMTL/blob/main/LibMTL/LibMTL/weighting/ExcessMTL.py))                                                   | ICML 2024          | ``--weighting ExcessMTL``   |
@@ -113,9 +113,9 @@ Each module is introduced in [Docs](https://libmtl.readthedocs.io/en/latest/docs
 1. Create a virtual environment
    
    ```shell
-   conda create -n libmtl python=3.8
+   conda create -n libmtl python=3.9
    conda activate libmtl
-   pip install torch==1.8.1+cu111 torchvision==0.9.1+cu111 -f https://download.pytorch.org/whl/torch_stable.html
+   pip install torch==2.3.0+cu121 torchvision==0.18.0+cu121 -f https://download.pytorch.org/whl/torch_stable.html
    ```
 
 2. Clone the repository

@@ -2,14 +2,6 @@
 
 The QM9 dataset [[1]](#1) consists of about 130K molecules with 19 regression targets. The training codes are mainly followed [[2]](#2) and modified from [pytorch_geometric](https://github.com/pyg-team/pytorch_geometric/blob/master/examples/qm9_nn_conv.py). 
 
-### Install PyG
-
-```shell
-pip install torch-scatter==2.0.8 -f https://pytorch-geometric.com/whl/torch-1.8.1+cu111.html
-pip install torch_sparse==0.6.10 -f https://pytorch-geometric.com/whl/torch-1.8.1+cu111.html
-pip install torch_geometric==2.2.0
-```
-
 ### Run a Model
 
 The script ``main.py`` is the main file for training and evaluating a MTL model on the QM9 dataset. A set of command-line arguments is provided to allow users to adjust the training parameter configuration. 

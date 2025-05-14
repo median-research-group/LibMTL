@@ -2,15 +2,9 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
+import cvxpy as cp
 
 from LibMTL.weighting.abstract_weighting import AbsWeighting
-
-try:
-    import cvxpy as cp
-except ModuleNotFoundError:
-    from pip._internal import main as pip
-    pip(['install', '--user', 'cvxpy'])
-    import cvxpy as cp
 
 class Nash_MTL(AbsWeighting):
     r"""Nash-MTL.
