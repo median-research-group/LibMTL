@@ -4,6 +4,6 @@ qpsolvers==4.7.0
 scipy==1.13.1
 torch==2.3.0+cu121
 torchvision==0.18.0+cu121
-torch-scatter==2.1.2+pt23cu121 -f https://pytorch-geometric.com/whl/torch-2.3.0+cu121.html
-torch_sparse==0.6.18+pt23cu121 -f https://pytorch-geometric.com/whl/torch-2.3.0+cu121.html
+torch-scatter==2.1.2+pt23cu121
+torch_sparse==0.6.18+pt23cu121
 torch_geometric==2.6.1

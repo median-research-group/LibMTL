@@ -17,8 +17,6 @@ setup(
                      'Intended Audience :: Education',
                      'Intended Audience :: Science/Research',
                      'License :: OSI Approved :: MIT License',
-                     'Programming Language :: Python :: 3.7',
-                     'Programming Language :: Python :: 3.8',
                      'Programming Language :: Python :: 3.9',
                      'Programming Language :: Python :: 3.10',
                      'Topic :: Scientific/Engineering :: Artificial Intelligence',
@@ -26,8 +24,8 @@ setup(
                      'Topic :: Software Development :: Libraries',],
         long_description=long_description,
         long_description_content_type='text/markdown',
-        install_requires=['torch>=1.8.0',
-                          'torchvision>=0.9.0',
-                          'numpy>=1.20']
+        install_requires=['torch>=2.3.0',
+                          'torchvision>=0.18.0',
+                          'numpy>=1.26']
 )
 

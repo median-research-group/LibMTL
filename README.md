@@ -113,9 +113,8 @@ Each module is introduced in [Docs](https://libmtl.readthedocs.io/en/latest/docs
 1. Create a virtual environment
    
    ```shell
-   conda create -n libmtl python=3.9
+   conda create -n libmtl python=3.10
    conda activate libmtl
-   pip install torch==2.3.0+cu121 torchvision==0.18.0+cu121 -f https://download.pytorch.org/whl/torch_stable.html
    ```
 
 2. Clone the repository
@@ -127,6 +126,10 @@ Each module is introduced in [Docs](https://libmtl.readthedocs.io/en/latest/docs
 3. Install `LibMTL`
    
    ```shell
+   pip install torch==2.3.0+cu121 torchvision==0.18.0+cu121 -f https://download.pytorch.org/whl/torch_stable.html
+   pip torch-scatter==2.1.2+pt23cu121 -f https://pytorch-geometric.com/whl/torch-2.3.0+cu121.html
+   pip torch_sparse==0.6.18+pt23cu121 -f https://pytorch-geometric.com/whl/torch-2.3.0+cu121.html
+   
    cd LibMTL
    pip install -r requirements.txt
    pip install -e .
