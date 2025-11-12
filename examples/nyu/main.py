@@ -18,7 +18,7 @@ def parse_args(parser):
     parser.add_argument('--epochs', default=200, type=int, help='training epochs')
     parser.add_argument('--dataset_path', default='/', type=str, help='dataset path')
     return parser.parse_args()
-    
+
 def main(params):
     kwargs, optim_param, scheduler_param = prepare_args(params)
 
@@ -59,7 +59,7 @@ def main(params):
     def encoder_class(): 
         return resnet_dilated('resnet50')
     num_out_channels = {'segmentation': 13, 'depth': 1, 'normal': 3}
-    decoders = nn.ModuleDict({task: DeepLabHead(2048, 
+    decoders = nn.ModuleDict({task: DeepLabHead(128, 
                                                 num_out_channels[task]) for task in list(task_dict.keys())})
     
     class NYUtrainer(Trainer):

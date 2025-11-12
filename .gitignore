@@ -1,0 +1,8 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Ignore test files or temp logs
+*.log
+*.tmp
+*.DS_Store

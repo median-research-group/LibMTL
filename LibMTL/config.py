@@ -194,8 +194,8 @@ def prepare_args(params):
     else:
         raise ValueError('No support weighting method {}'.format(params.weighting)) 
         
-    if params.arch in ['HPS', 'Cross_stitch', 'MTAN', 'CGC', 'PLE', 'MMoE', 'DSelect_k', 'DIY', 'LTB']:
-        if params.arch in ['CGC', 'PLE', 'MMoE', 'DSelect_k']:
+    if params.arch in ['HPS', 'Cross_stitch', 'MTAN', 'CGC', 'PLE', 'MMoE', 'DSelect_k', 'DIY', 'LTB', 'AOEMTL']:
+        if params.arch in ['CGC', 'PLE', 'MMoE', 'DSelect_k', 'AOEMTL']:
             kwargs['arch_args']['img_size'] = tuple(params.img_size)#np.array(params.img_size, dtype=int).prod()
             kwargs['arch_args']['num_experts'] = [int(num) for num in params.num_experts]
         if params.arch in ['DSelect_k']:
