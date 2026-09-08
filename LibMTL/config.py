@@ -60,24 +60,35 @@ _parser.add_argument('--MoCo_gamma', type=float, default=0.1, help='gamma for Mo
 _parser.add_argument('--MoCo_gamma_sigma', type=float, default=0.5, help='MoCo_gamma_sigma for MoCo')
 _parser.add_argument('--MoCo_rho', type=float, default=0, help='MoCo_rho for MoCo')
 ## DB_MTL
-_parser.add_argument('--DB_beta', type=float, default=0.9, help=' ')
-_parser.add_argument('--DB_beta_sigma', type=float, default=0, help=' ')
+_parser.add_argument('--DB_beta', type=float, default=0.9,
+                     help='decay factor for the DB_MTL gradient moving average')
+_parser.add_argument('--DB_beta_sigma', type=float, default=0,
+                     help='decay exponent for the DB_MTL gradient moving average')
 ## STCH
-_parser.add_argument('--STCH_mu', type=float, default=1.0, help=' ')
-_parser.add_argument('--STCH_warmup_epoch', type=int, default=4, help=' ')
+_parser.add_argument('--STCH_mu', type=float, default=1.0,
+                     help='smoothing parameter for STCH')
+_parser.add_argument('--STCH_warmup_epoch', type=int, default=4,
+                     help='number of warm-up epochs for STCH')
 ## ExcessMTL
 _parser.add_argument('--robust_step_size', default=1e-2, type=float, help='step size')
 ## FairGrad
-_parser.add_argument('--FairGrad_alpha', type=float, default=1.0, help=' ')
+_parser.add_argument('--FairGrad_alpha', type=float, default=1.0,
+                     help='alpha parameter for FairGrad')
 ## FAMO
-_parser.add_argument('--FAMO_w_lr', type=float, default=0.025, help=' ')
-_parser.add_argument('--FAMO_w_gamma', type=float, default=1e-3, help=' ')
+_parser.add_argument('--FAMO_w_lr', type=float, default=0.025,
+                     help='learning rate for FAMO loss weights')
+_parser.add_argument('--FAMO_w_gamma', type=float, default=1e-3,
+                     help='weight decay for FAMO loss weights')
 ## MoDo
-_parser.add_argument('--MoDo_gamma', type=float, default=1e-3, help=' ')
-_parser.add_argument('--MoDo_rho', type=float, default=0.1, help=' ')
+_parser.add_argument('--MoDo_gamma', type=float, default=1e-3,
+                     help='learning rate for MoDo task weights')
+_parser.add_argument('--MoDo_rho', type=float, default=0.1,
+                     help='L2 regularization for MoDo task weights')
 ## SDMGrad
-_parser.add_argument('--SDMGrad_lamda', type=float, default=0.3, help=' ')
-_parser.add_argument('--SDMGrad_niter', type=int, default=20, help=' ')
+_parser.add_argument('--SDMGrad_lamda', type=float, default=0.3,
+                     help='regularization parameter for SDMGrad')
+_parser.add_argument('--SDMGrad_niter', type=int, default=20,
+                     help='number of loss-weight update iterations for SDMGrad')
 ## UPGrad
 _parser.add_argument('--UPGrad_norm_eps', type=float, default=0.0001,
                      help='A small value to avoid division by zero when normalizing.')
@@ -87,9 +98,11 @@ _parser.add_argument('--UPGrad_reg_eps', type=float, default=0.0001,
 #### bilevel methods
 _parser.add_argument('--outer_lr', type=float, default=1e-3, help='outer lr')
 _parser.add_argument('--inner_lr', type=float, default=0.1, help='inner lr')
-_parser.add_argument('--inner_step', type=int, default=5, help=' ')
+_parser.add_argument('--inner_step', type=int, default=5,
+                     help='number of inner-loop optimization steps for bilevel methods')
 ## FORUM
-_parser.add_argument('--FORUM_phi', type=float, default=0.1, help=' ') # FORUM
+_parser.add_argument('--FORUM_phi', type=float, default=0.1,
+                     help='phi parameter for FORUM')
 
 # args for architecture
 ## CGC
