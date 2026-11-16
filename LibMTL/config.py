@@ -31,6 +31,10 @@ _parser.add_argument('--scheduler', type=str, #default='step',
                     help='learning rate scheduler for training, option: step, cos, exp')
 _parser.add_argument('--step_size', type=int, default=100, help='step size for StepLR')
 _parser.add_argument('--gamma', type=float, default=0.5, help='gamma for StepLR')
+_parser.add_argument('--T_max', type=int, default=100,
+                    help='maximum number of iterations for CosineAnnealingLR')
+_parser.add_argument('--eta_min', type=float, default=0.0,
+                    help='minimum learning rate for CosineAnnealingLR')
 
 # args for weighting
 ## DWA
@@ -214,9 +218,12 @@ def prepare_args(params):
         raise ValueError('No support optim method {}'.format(params.optim))
         
     if params.scheduler is not None:
-        if params.scheduler in ['step', 'cos', 'exp']:
-            if params.scheduler == 'step':
-                scheduler_param = {'scheduler': 'step', 'step_size': params.step_size, 'gamma': params.gamma}
+        if params.scheduler == 'step':
+            scheduler_param = {'scheduler': 'step', 'step_size': params.step_size, 'gamma': params.gamma}
+        elif params.scheduler == 'cos':
+            scheduler_param = {'scheduler': 'cos', 'T_max': params.T_max, 'eta_min': params.eta_min}
+        elif params.scheduler == 'exp':
+            scheduler_param = {'scheduler': 'exp', 'gamma': params.gamma}
         else:
             raise ValueError('No support scheduler method {}'.format(params.scheduler))
     else:
