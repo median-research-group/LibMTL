@@ -141,7 +141,10 @@ class Trainer(nn.Module):
                 'reduce': torch.optim.lr_scheduler.ReduceLROnPlateau,
             }
         optim_arg = {k: v for k, v in optim_param.items() if k != 'optim'}
-        self.optimizer = optim_dict[optim_param['optim']](self.model.parameters(), **optim_arg)
+        # an architecture can define its own parameter groups, e.g. learning rates that its method prescribes
+        params = self.model.get_param_groups(optim_arg['lr']) if hasattr(self.model, 'get_param_groups') \
+            else self.model.parameters()
+        self.optimizer = optim_dict[optim_param['optim']](params, **optim_arg)
         if scheduler_param is not None:
             scheduler_arg = {k: v for k, v in scheduler_param.items() if k != 'scheduler'}
             self.scheduler = scheduler_dict[scheduler_param['scheduler']](self.optimizer, **scheduler_arg)
