@@ -191,3 +191,9 @@ def test_DSelect_k():
     params.img_size = [3, 224, 224]
     params.num_experts = [2]
     main(params)
+
+def test_TSsNorm():
+    params.rep_grad = False
+    params.weighting = 'EW'
+    params.arch = 'TSsNorm'
+    main(params)

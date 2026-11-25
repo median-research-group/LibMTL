@@ -10,6 +10,7 @@
 
 ## News
 
+- **[Nov 25 2026]** Added support for [TSσNorm](https://openreview.net/forum?id=QNO893OXrS) (TMLR 2026).
 - **[Apr 21 2025]** Added support for [UPGrad](https://arxiv.org/pdf/2406.16232).
 - **[Feb 18 2025]** Added support for a bilevel method [Auto-Lambda](https://openreview.net/forum?id=KKeCMim5VN) (TMLR 2022).
 - **[Feb 17 2025]** Added support for [FAMO](https://openreview.net/forum?id=zMeemcUeXL) (NeurIPS 2023), [SDMGrad](https://openreview.net/forum?id=4Ks8RPcXd9) (NeurIPS 2023), and [MoDo](https://openreview.net/forum?id=yPkbdJxQ0o) (NeurIPS 2023; JMLR 2024).
