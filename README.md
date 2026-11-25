@@ -10,6 +10,7 @@
 
 ## News
 
+- **[Nov 25 2026]** Added support for [TSσNorm](https://openreview.net/forum?id=QNO893OXrS) (TMLR 2026).
 - **[Apr 21 2025]** Added support for [UPGrad](https://arxiv.org/pdf/2406.16232).
 - **[Feb 18 2025]** Added support for a bilevel method [Auto-Lambda](https://openreview.net/forum?id=KKeCMim5VN) (TMLR 2022).
 - **[Feb 17 2025]** Added support for [FAMO](https://openreview.net/forum?id=zMeemcUeXL) (NeurIPS 2023), [SDMGrad](https://openreview.net/forum?id=4Ks8RPcXd9) (NeurIPS 2023), and [MoDo](https://openreview.net/forum?id=yPkbdJxQ0o) (NeurIPS 2023; JMLR 2024).
@@ -45,7 +46,7 @@
 ## Features
 
 - **Unified**:  ``LibMTL`` provides a unified code base to implement and a consistent evaluation procedure including data processing, metric objectives, and hyper-parameters on several representative MTL benchmark datasets, which allows quantitative, fair, and consistent comparisons between different MTL algorithms.
-- **Comprehensive**: ``LibMTL`` supports many state-of-the-art MTL methods including 8 architectures and 16 optimization strategies. Meanwhile, ``LibMTL`` provides a fair comparison of several benchmark datasets covering different fields.
+- **Comprehensive**: ``LibMTL`` supports many state-of-the-art MTL methods including 9 architectures and 16 optimization strategies. Meanwhile, ``LibMTL`` provides a fair comparison of several benchmark datasets covering different fields.
 - **Extensible**:  ``LibMTL`` follows the modular design principles, which allows users to flexibly and conveniently add customized components or make personalized modifications. Therefore, users can easily and fast develop novel optimization strategies and architectures or apply the existing MTL algorithms to new application scenarios with the support of ``LibMTL``.
 
 ## Overall Framework
@@ -96,6 +97,7 @@ Each module is introduced in [Docs](https://libmtl.readthedocs.io/en/latest/docs
 | Customized Gate Control ([CGC](https://dl.acm.org/doi/10.1145/3383313.3412236)), Progressive Layered Extraction ([PLE](https://dl.acm.org/doi/10.1145/3383313.3412236))                                                | ACM RecSys 2020 | ``--arch CGC``, ``--arch PLE`` |
 | Learning to Branch ([LTB](http://proceedings.mlr.press/v119/guo20e/guo20e.pdf))                                                                                                                                        | ICML 2020       | ``--arch LTB``                 |
 | [DSelect-k](https://proceedings.neurips.cc/paper/2021/hash/f5ac21cd0ef1b88e9848571aeb53551a-Abstract.html) ([official code](https://github.com/google-research/google-research/tree/master/dselect_k_moe))             | NeurIPS 2021    | ``--arch DSelect_k``           |
+| Task-Specific Sigmoid Normalization ([TSσNorm](https://openreview.net/forum?id=QNO893OXrS)) ([official code](https://github.com/xapharius/TSsNorm))                                                                    | TMLR 2026       | ``--arch TSsNorm``             |
 
 ## Supported Benchmark Datasets
 

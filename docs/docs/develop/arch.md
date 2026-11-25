@@ -27,6 +27,8 @@ There are four important functions in :class:`LibMTL.architecture.AbsArchitectur
 - :func:`get_share_params`: This function is used to return the shared parameters of the model. It returns all the parameters of the encoder by default. You can rewrite it if necessary.
 - :func:`zero_grad_share_params`: This function is used to set gradients of the shared parameters to zero. It will set the gradients of all the encoder parameters to zero by default. You can rewrite it if necessary.
 - :func:`_prepare_rep`: This function is used to compute the gradients for representations. More details can be found `here <../../_modules/LibMTL/architecture/abstract_arch.html#AbsArchitecture>`_.
+
+An architecture can also define an optional function ``get_param_groups(lr)``, which is not part of :class:`LibMTL.architecture.AbsArchitecture`. If it exists, the trainer builds the optimizer from the parameter groups it returns instead of from all parameters. Use it if your method prescribes its own learning rate or weight decay for some parameters, as :class:`LibMTL.architecture.TSsNorm` does.
 ```
 
 

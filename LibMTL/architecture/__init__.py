@@ -7,6 +7,7 @@ from LibMTL.architecture.CGC import CGC
 from LibMTL.architecture.PLE import PLE
 from LibMTL.architecture.DSelect_k import DSelect_k
 from LibMTL.architecture.LTB import LTB
+from LibMTL.architecture.TSsNorm import TSsNorm
 
 __all__ = ['AbsArchitecture',
            'HPS',
@@ -16,4 +17,5 @@ __all__ = ['AbsArchitecture',
            'CGC',
            'PLE',
            'DSelect_k',
-           'LTB']
+           'LTB',
+           'TSsNorm']
